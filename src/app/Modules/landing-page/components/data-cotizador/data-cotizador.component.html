@@ -45,11 +45,11 @@
         <div class="fields travel">
             <div class="input-field">
                 <label  for="fechaSalida" >Fecha de salida</label>
-                <input type="date" [min]="minDate" [(ngModel)]="formData.initialDate" name="initialDate" placeholder="Ingresar la fecha de salida" id="fechaSalida"  (change)="comparar()">
+                <input type="date" [min]="minDate" [max]="maxDate" [(ngModel)]="formData.initialDate" name="initialDate" placeholder="Ingresar la fecha de salida" id="fechaSalida"  (change)="comparar()">
             </div>
             <div class="input-field">
                 <label for="fechaLlegada">Fecha de llegada</label>
-                <input type="date" [min]="minDate" [(ngModel)]="formData.finalDate" name="finalDate" placeholder="Ingresar la fecha de llegada" id="fechaLlegada"  (change)="comparar()">
+                <input type="date" [min]="firstDate"  [(ngModel)]="formData.finalDate" name="finalDate" placeholder="Ingresar la fecha de llegada" id="fechaLlegada"  (change)="comparar()">
             </div>
             <div *ngIf="diffDays>=0">
                 <span>La cantidad de dias es: {{diffDays}} </span>

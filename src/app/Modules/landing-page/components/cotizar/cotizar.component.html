@@ -189,7 +189,7 @@
         <div class="row desktop" >
             <div class="column">
                 <div class="row top" #rowTop [class.sticky]="isSticky">
-                    <div class="column sticky" >
+                    <div class="column sticky " >
                     
                         <h2 *ngIf="!isSticky" >NUESTROS PLANES</h2>
         
@@ -261,7 +261,7 @@
                 <!-- sticky -->
                 <div class="row " [class.pt-20]="isSticky">
 
-                    <div class="column sticky">
+                    <div class="column sticky bg-white">
                         <div  class="type-beneficio" *ngFor="let typeBeneficio of listBeneficiosCat ">
                             <span class="title-cat">
                                 {{typeBeneficio.tipo_beneficio.etiqueta}}

@@ -27,14 +27,11 @@ const routes : Routes = [
     path: 'dashboard',
     redirectTo : 'dashboard/polizas/listado-polizas',
   },
-  { path: 'dashboard', loadChildren: () => import('./Modules/CRM/crm.module').then(m => m.CrmModule) },
 
   
   { path: 'home' , loadChildren: () => import('./Modules/landing-page/landing-page.module').then(m => m.LandingPageModule) },
 
-  { 
-    path: 'login' , loadChildren : () => import('./Modules/auth/auth.module').then(m => m.AuthModule),
-  },
+  
   
 
   

@@ -30,7 +30,6 @@
     width: fit-content;
     min-width: 800px;
     display: grid;
-    background: var(--body-bg);
     transition: all 0.5s ease;
 }
 
@@ -421,7 +420,6 @@ h2{
 
 .cotizacionMain {
   width: 100%;
-  background: var(--body-bg);
   height: fit-content;
   transition: all 0.5s ease;
   overflow-y: auto;
@@ -450,8 +448,7 @@ h2{
 
 .row.top{
   margin-top: 17vh;
-  background-color: var(--body-bg);
-  padding-top: 40px;
+  padding-top: 10vh;
   height: 50%;
   transition: all 0.5s ease;
 }
@@ -482,15 +479,19 @@ h2{
   justify-content: space-between;
 }
 
+.column.sticky.bg-white{
+  background-color: white;
+}
+
 .title-cat{
-  font-size: 20px;
+  font-size: 15px;
   font-weight: bold;
   color: var(--main-color);
 
 }
 
 .sub-cat{
-  font-size: 15px;
+  font-size: 13px;
   font-weight: bold;
   color: var(--main-color);
   margin: 10px 30px 10px 0px;
@@ -499,7 +500,7 @@ h2{
   flex-direction: row;
   align-items: flex-end;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  height: 20px;
+  height: 10px;
 
 }
 
@@ -512,7 +513,7 @@ h2{
   flex-direction: row;
   align-items: flex-end;
   justify-content: flex-end;
-  padding-left: 20px;
+  padding-left: 12px;
 }
 
 .sub-cat hr{
@@ -550,7 +551,6 @@ h2{
 .cotizacionMain .row .column { 
   display: flex;
     flex-direction: column;
-    background-color: var(--body-bg);
 }
 
 .row .container{
@@ -943,7 +943,7 @@ hr{
     /* align-items: center; */
     justify-content: center;
     /* padding-left: 20px; */
-    padding: 10px 20px 20px 30px;
+    padding: 10px 20px 0px 30px;
 }
 
 @media (max-width: 768px){
@@ -1126,3 +1126,5 @@ hr{
   }
 
 }
+
+

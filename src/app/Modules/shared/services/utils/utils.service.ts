@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { cotizacionDataForm } from '../../models/Pages/cotizacionDataForm.model';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Servicio } from '../../models/Data/Servicio';
 import { Precio } from '../../models/Data/Precio';
 
@@ -99,11 +99,10 @@ export class UtilsService {
   }
 
 
-   //Crear un nuevo item para las edades
-   createItemForm(): FormGroup{
+  createItemForm(): FormGroup {
     return new FormGroup({
-      age: new FormControl(''),
-      
+      age: new FormControl(null, [Validators.required, Validators.pattern('^[0-9]*$')]),
+
     });
   }
 

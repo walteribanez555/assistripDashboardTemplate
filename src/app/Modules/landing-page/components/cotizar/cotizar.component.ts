@@ -118,45 +118,52 @@ export class CotizarComponent implements OnInit, AfterViewInit{
   stickyRowTop: number | undefined;
 
   
-
   ngAfterViewInit() {
-
-    //Elementos de la vista que se van cambiando
     const cotizacionMain = document.getElementsByClassName('cotizacionMain');
     const rowTop = document.querySelector('.cotizacionMain .row.top');
     const alert = document.querySelector('.alert'); 
     const btn_age = document.querySelector('.btn-age');
-    
-
-
-    //Tamaño de la parte superior de el listado de los elementos
-  let stickyRowTop: number;
-
-  window.addEventListener('resize', () => {
-    if(btn_age && alert){
-      stickyRowTop = btn_age.getBoundingClientRect().top + alert.getBoundingClientRect().top  + window.pageYOffset;
+  
+    let stickyRowTop: number;
+  
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (rowTop && !rowTop.classList.contains('sticky')) {
+            rowTop.classList.add('sticky');
+            this.isSticky = true;
+          }
+        } else {
+          if (rowTop && rowTop.classList.contains('sticky')) {
+            rowTop.classList.remove('sticky');
+            this.isSticky = false;
+          }
+        }
+      });
+    });
+  
+    if (btn_age && alert) {
+      observer.observe(btn_age);
+      observer.observe(alert);
+    } else if (btn_age && !alert) {
+      observer.observe(btn_age);
     }
+  
+    cotizacionMain[0]?.addEventListener('scroll', () => {
 
-    if(btn_age  && !alert){
-      stickyRowTop = btn_age.getBoundingClientRect().top + window.pageYOffset;
-    }
-  });
-
-
-  cotizacionMain[0]?.addEventListener('scroll', () => {
-
-    if (cotizacionMain[0].scrollTop >= stickyRowTop) {
-      rowTop?.classList.add('sticky');
-      this.isSticky = true;
-    } else {
-      rowTop?.classList.remove('sticky');
-      this.isSticky = false;
-    }
-  });
-
-
-  window.dispatchEvent(new Event('resize'));
-
+      stickyRowTop = rowTop!.getBoundingClientRect().top + window.pageYOffset;
+      if (cotizacionMain[0].scrollTop > stickyRowTop) {
+        if (rowTop && !rowTop.classList.contains('sticky')) {
+          rowTop.classList.add('sticky');
+          this.isSticky = true;
+        }
+      } else {
+        if (rowTop && cotizacionMain[0].scrollTop<100  && rowTop.classList.contains('sticky')) {
+          rowTop.classList.remove('sticky');
+          this.isSticky = false;
+        }
+      }
+    });
   }
 
   stateBottom : 1| 2 | 3 = 1;

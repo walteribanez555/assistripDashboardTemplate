@@ -20,7 +20,7 @@ export class DataCotizadorComponent implements OnInit {
   paises : Catalogo[] =[];
   inputValue: string ="";
   listCotizaciones : cotizacionDataForm[] = [];
-  seeAges: boolean = false;
+  seeAges: boolean = true;
   
 
   nextId : number = 0;
@@ -47,6 +47,9 @@ export class DataCotizadorComponent implements OnInit {
   
   diffDays = -1;
   minDate: string = "";
+  maxDate : string = "";
+  firstDate : string = "";
+
 
 
   constructor(
@@ -57,6 +60,7 @@ export class DataCotizadorComponent implements OnInit {
   ){
     const today = new Date();
     this.minDate = today.toISOString().split('T')[0];
+    this.firstDate = this.minDate;
   }
   
 
@@ -71,6 +75,11 @@ export class DataCotizadorComponent implements OnInit {
       this.receivedData = this.dataService.sharedData;
 
       this.remplazarData(this.receivedData);
+
+
+      if(this.listCotizaciones.length === 0){
+        this.addItem();
+      }
       
       
 
@@ -93,6 +102,16 @@ export class DataCotizadorComponent implements OnInit {
   comparar(){
     const date1: Date = new Date(this.formData.initialDate);
     const date2: Date = new Date(this.formData.finalDate);
+
+
+    console.log(this.formData.initialDate);
+    if( !(this.formData.finalDate === "") ){
+      this.maxDate = this.formData.finalDate;
+    }
+    if( !(this.formData.initialDate === "") ){
+      this.firstDate = this.formData.initialDate;
+    }
+    
 
 
     
@@ -174,7 +193,7 @@ export class DataCotizadorComponent implements OnInit {
       
       const cotizacionfrm : cotizacionDataForm ={ 
         id :this.nextId++,
-        age: 0,
+        age: null,
         item : this.utils.createItemForm()
       }
 
@@ -187,7 +206,6 @@ export class DataCotizadorComponent implements OnInit {
 
     agregar(event : any){
 
-      console.log("Realizar");
       const cotizarForm : FormCotizarModel = {
         initialDate: this.formData.initialDate,
         finalDate: this.formData.finalDate,

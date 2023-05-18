@@ -24,6 +24,9 @@ const routes: Routes = [
         
         
       },
+      { 
+        path: 'auth' , loadChildren : () => import('../../Modules/auth/auth.module').then(m => m.AuthModule),
+      },
       {
         path: 'datos-polizas',
         component : DatosPolizasComponent

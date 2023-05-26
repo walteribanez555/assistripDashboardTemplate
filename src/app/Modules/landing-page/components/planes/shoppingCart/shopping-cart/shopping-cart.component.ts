@@ -1,0 +1,153 @@
+import { Component, ElementRef, EventEmitter, Input, Output, TemplateRef, OnInit } from '@angular/core';
+import { Expand } from 'src/app/Modules/shared/animations/expand.animation';
+import { Cupon, CuponAplicado } from 'src/app/Modules/shared/models/Data/Cupon';
+import { planbeneficio } from 'src/app/Modules/shared/models/Pages/planbeneficio.model';
+import { CuponesService } from 'src/app/Modules/shared/services/requests/cupones.service';
+
+@Component({
+  selector: 'shopping-cart',
+  templateUrl: './shopping-cart.component.html',
+  styleUrls: ['./shopping-cart.component.css'],
+  animations: [
+    Expand
+  ]
+})
+export class ShoppingCartComponent implements OnInit {
+  @Input() size? = 'sm';
+  @Output() closeEvent = new EventEmitter();
+  @Output() submitEvent = new EventEmitter();
+  @Input() planMenores : planbeneficio | null = null;
+  @Input() planMayores : planbeneficio | null = null;
+  @Input() cotizacionesMenores : number = 0;
+  @Input() cotizacionesMayores : number = 0;
+  @Input() dias : number = 0;
+  listCupones : Cupon[] = [];
+  listDescuentos : CuponAplicado[] =[] ;
+  loading : boolean = false;
+  totalBruto = 0 ;
+  total = 0;
+
+
+
+  precioMayores = {
+    precio : 0,
+    precioTotal : 0,
+    cantidadPolizas : 0,
+    servicio : this.planMayores?.serv
+  }
+
+  precioMenores = {
+    precio : 0,
+    precioTotal : 0,
+    cantidadPolizas : 0,
+    servicio: this.planMenores?.serv
+  }
+
+
+
+
+  @Input()
+  public listTemplate!: TemplateRef<any>;
+
+
+
+  empty : boolean = true;
+
+
+
+
+
+
+  constructor(
+    private elementRef: ElementRef,
+    private cuponesService : CuponesService  ) {}
+
+
+    ngOnInit(): void {
+
+      this.loading = true;
+
+    if(this.planMenores || this.planMayores){
+      this.empty = false;
+    }
+
+    this.cuponesService.getCupones().subscribe((cupones) => {
+      this.listCupones = cupones.filter(cupon => cupon.status===1);
+      console.log(this.listCupones);
+      if(this.planMayores){
+
+        this.precioMayores={
+          precio : this.planMayores.precio ,
+          precioTotal : this.planMayores.precio  * this.cotizacionesMayores ,
+          cantidadPolizas : this.cotizacionesMayores,
+          servicio : this.planMayores.serv,
+        }
+      }
+
+      if(this.planMenores){
+
+
+        this.precioMenores = {
+          precio : this.planMenores.precio,
+          precioTotal : this.planMenores.precio * this.cotizacionesMenores,
+          cantidadPolizas : this.cotizacionesMenores,
+          servicio: this.planMenores.serv
+        }
+      }
+
+
+
+      this.realizarDescuentos();
+
+      this.totalBruto = this.precioMayores.precioTotal + this.precioMenores.precioTotal;
+      this.total = this.totalBruto  - this.listDescuentos.reduce((a,b) => a + b.montoTotal,0);
+
+      this.loading = false;
+    }
+    );
+
+
+
+
+
+  }
+
+  close(): void {
+    this.elementRef.nativeElement.remove();
+    this.closeEvent.emit();
+  }
+
+  submit(): void {
+    this.elementRef.nativeElement.remove();
+    this.submitEvent.emit();
+  }
+
+
+  realizarDescuentos(){
+    this.listDescuentos = this.listCupones.filter(cupon => cupon.servicio_id === this.planMayores?.serv?.servicio_id || cupon.servicio_id === this.planMenores?.serv?.servicio_id)
+                            .map(cupon => {
+                              const servicioDesc = this.precioMayores.servicio?.servicio_id === cupon.servicio_id ? this.precioMayores : this.precioMenores;
+                              switch (cupon.tipo_valor) {
+                                case 1:
+                                  return {
+                                    cupon : cupon,
+                                    monto : servicioDesc.precio * (cupon.valor/100),
+                                    montoTotal : servicioDesc.precioTotal * (cupon.valor/100),
+                                  }
+                                case 2:
+                                  return {
+                                    cupon : cupon,
+                                    monto : cupon.valor,
+                                    montoTotal : cupon.valor* servicioDesc.cantidadPolizas,
+                                  }
+                                default:
+                                  return {
+                                    cupon : cupon,
+                                    monto : servicioDesc.precioTotal * (cupon.valor/100),
+                                    montoTotal : cupon.valor* servicioDesc.cantidadPolizas,
+
+                                  }
+                              }})
+
+}
+}

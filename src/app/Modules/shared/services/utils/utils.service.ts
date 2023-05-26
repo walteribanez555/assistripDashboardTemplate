@@ -19,18 +19,20 @@ export class UtilsService {
 
 
     listCotizaciones.forEach(cotizacion => {
-      if(cotizacion.age<75){
+
+      if(cotizacion.age*1 < 75*1){
         cotizaciones.push(cotizacion);
       }else{
+        console.log(cotizacion.age);
         cotizacionesMayores.push(cotizacion);
       }
     });
 
-    if(cotizacionesMayores.length> 0) { 
+    if(cotizacionesMayores.length> 0) {
       minPlanes++;
     }
 
-    return { 
+    return {
       cotizacionesMenores : cotizaciones,
       cotizacionesMayores : cotizacionesMayores,
       minPlanes : minPlanes
@@ -43,17 +45,17 @@ export class UtilsService {
     const date2: Date = new Date(finalDate);
 
 
-    
-  
+
+
       // Get the difference in milliseconds
       const diffInMs = Math.abs(date2.getTime() - date1.getTime());
-  
+
       // Convert the difference to days
       const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
-  
+
       if(!isNaN(diffInDays)){
         return diffInDays+1;
-        
+
       }
       return -1;
    }
@@ -61,16 +63,16 @@ export class UtilsService {
 
    //Si el plan tiene los requisitos que en este caso son los paises destinos
    haveRequirements( plan : Servicio, tags : string[]){
-    
+
     if(!plan.disponibilidad){
       return false;
     }
 
     const countries : string [] = plan.disponibilidad.split(",");
 
-    
-    
-  
+
+
+
     return   tags.every((string) => countries.includes(string));
   }
 
@@ -78,23 +80,27 @@ export class UtilsService {
   //Si el plan tiene los requisitos que en este caso son los dias necesarios
   haveRange(servicio : Servicio, diffDays: number, precios : Precio[] ):Boolean{
     const dias : number = diffDays;
+
       const haveArange : Precio[] =  precios.filter(precio => {
+
+
+
           if(this.betweenTheRange(precio.limite_inferior, precio.limite_superior ,dias)  && precio.servicio_id*1 === servicio.servicio_id*1){
             return true;
           }
           return false;
 
-      }); 
+      });
 
 
       if(haveArange.length>0){
-        
+
         return true
-        
+
 
       }
-      
-  
+
+
       return false;
   }
 
@@ -108,7 +114,8 @@ export class UtilsService {
 
    //Comprobar de que este en el rango un numero
   betweenTheRange( liInf: number, liSup: number, diffd : number ) : boolean{
-    return diffd >= liInf && diffd <= liSup;
+
+    return diffd*1 >= liInf*1 && diffd*1 <= liSup*1;
   }
 
 
@@ -117,7 +124,7 @@ export class UtilsService {
     const year = date.getFullYear();
     const month = date.getMonth() + 1;
     const day = date.getDate();
-    return `${year}/${month}/${day}`; 
+    return `${year}/${month}/${day}`;
   }
 
   getDateDto(fechaDto : string){
@@ -129,6 +136,63 @@ export class UtilsService {
     const fecha = new Date(anio, mes, dia);
 
     return fecha;
+
+  }
+
+  obtenerCostoPlan( precios : Precio[], servicio_id : number, diffd : number){
+
+
+    const rangoPrecio =  precios.find(precio => {
+
+
+      if((+precio.servicio_id === +servicio_id)  && this.betweenTheRange(precio.limite_inferior, precio.limite_superior, diffd)){
+        return true;
+      }
+
+
+      return false;
+    });
+
+
+    if(rangoPrecio){
+      const costo= this.realizarCalculo(rangoPrecio, diffd) ;
+      return costo;
+    }
+
+
+    return -1;
+
+  }
+
+  realizarCalculo(rangoPrecio : Precio, diffDays : number){
+    let precio :number = 0;
+    if(rangoPrecio.tipo_ecuacion*1 ===1){
+      precio=this.ecuacionCurva(rangoPrecio, diffDays)*1 * diffDays*1;
+    }
+    if(rangoPrecio.tipo_ecuacion*1 ===2){
+      precio = this.ecuacionRecta(rangoPrecio, diffDays)*1 *diffDays*1;
+    }
+
+    return precio;
+
+  }
+
+
+
+  ecuacionCurva(rangoPrecio : Precio, dias : number){
+    const valor = Math.pow(dias, rangoPrecio.intercepto)
+    return valor*1*rangoPrecio.pendiente*1;
+
+  }
+
+
+  ecuacionRecta( rangoPrecio : Precio, dias: number){
+
+
+
+      const valor = (rangoPrecio.pendiente*dias)*1 + rangoPrecio.intercepto*1;
+
+      return valor;
 
   }
 

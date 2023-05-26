@@ -6,12 +6,12 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
-    
-  }
-  
-  
 
-li{ 
+  }
+
+
+
+li{
     list-style: none;
   }
 
@@ -25,7 +25,7 @@ li{
     scale: 1.05;
   }
 
-  
+
 
 
   header {
@@ -35,28 +35,28 @@ li{
     width: 100%;
     z-index: 20;
     box-shadow: 0px 0px 10px 0px rgba(0.4,0,0,0.2);
-    
-    
-   
-    
+
+
+
+
   }
 
   main{
     overflow-y: auto;
-    position: absolute;
+    /* position: absolute; */
     margin-top: 10vh;
     height: 90vh;
   }
 
- 
+
 
   .navbar{
     padding: 0 30px;
     width: 100%;
     height: 100%;
-    
-    
-    
+
+
+
     display: flex;
     align-items: center;
     justify-content:space-between;
@@ -65,7 +65,7 @@ li{
   }
 
 
-  .navbar .logo a { 
+  .navbar .logo a {
     font-size: 1.5rem;
     font-weight: bold;
   }
@@ -75,7 +75,7 @@ li{
 
   }
 
-  .navbar .logo:hover { 
+  .navbar .logo:hover {
     scale: 1.15;
   }
 
@@ -93,11 +93,11 @@ li{
     font-size: 20px;
   }
 
-  
 
-  .navbar .routes { 
+
+  .navbar .routes {
     display: flex;
-    
+
     gap: 2rem;
     flex-direction: row;
     align-items: center;
@@ -116,11 +116,11 @@ li{
     transition: scale 0.3s ease;
   }
 
-  .navbar .links li:hover  { 
+  .navbar .links li:hover  {
     scale: 1.15;
   }
 
-  .navbar .toggle_btn { 
+  .navbar .toggle_btn {
     align-items: center;
     display: flex;
     flex-direction: row;
@@ -132,7 +132,7 @@ li{
     cursor: pointer;
     display: none;
   }
-  .cotizar_btn { 
+  .cotizar_btn {
     display: flex;
     flex-direction: row;
     fill: #fff;
@@ -152,7 +152,7 @@ li{
   }
 
 
-  .assistrip_btn { 
+  .assistrip_btn {
     color: #5918B4;
     padding: 0.5rem 1rem;
 
@@ -162,7 +162,7 @@ li{
     align-items: center;
     justify-content: center;
 
-    
+
     font-size: 0.8rem;
     font-weight: bold;
 
@@ -170,14 +170,14 @@ li{
     transition: scale 0.3s ease;
   }
 
-  .assistrip_btn svg { 
+  .assistrip_btn svg {
     fill: #5918B4 ;
   }
 
 
-  .assistrip_btn:hover { 
+  .assistrip_btn:hover {
     scale: 1.05;
-    
+
   }
 
   .assistrip_btn:active{
@@ -201,7 +201,7 @@ li{
     transition: opacity 0.5s ease-in-out;
   }
 
-  .dropdown_menu.open { 
+  .dropdown_menu.open {
    display: block;
     height: fit-content;
     padding-bottom: 10px;
@@ -210,7 +210,7 @@ li{
     opacity: 1;
   }
 
-  
+
 
 
   .dropdown_menu li {
@@ -221,28 +221,28 @@ li{
   }
 
 
-  .dropdown_menu .assistrip_btn { 
+  .dropdown_menu .assistrip_btn {
     width: 100%;
     display: flex;
     text-align: center;
   }
 
 
-  
+
 
 
   @media ( max-width:992px){
 
-   
-    
+
+
 
     .navbar .links,
-    .navbar .assistrip_btn { 
+    .navbar .assistrip_btn {
         display: none;
     }
 
 
-    .navbar .routes { 
+    .navbar .routes {
         display: flex;
         gap: 0.5rem;
         flex-direction: row;
@@ -251,19 +251,19 @@ li{
     }
 
 
-    .navbar .toggle_btn { 
+    .navbar .toggle_btn {
       display: flex;
     }
 
 
-    
+
 
     .cotizar_btn {
         width: 80px;
         font-size: small;
     }
 
-    .navbar .logo  a  { 
+    .navbar .logo  a  {
         width: 100px;
     }
 
@@ -274,15 +274,15 @@ li{
       font-weight: bold;
       font-size: 25px;
       margin-left: -5px;
-  
+
     }
     h1 .com{
       color: #DF085A;
       font-size: 15px;
     }
-  
 
-    .routes .assistrip_btn { 
+
+    .routes .assistrip_btn {
         display: none;
     }
 
@@ -291,4 +291,3 @@ li{
   /* Responsive flex */
 
 
-  

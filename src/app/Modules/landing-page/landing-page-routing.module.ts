@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LandingPageComponent } from './landing-page.component';
-import { HomeComponent } from './components/home/home.component';
-import { CotizarComponent } from './components/cotizar/cotizar.component';
-import { DatosPolizasComponent } from './components/datos-polizas/datos-polizas.component';
-import { ListPolizasComponent } from './components/list-polizas/list-polizas.component';
-import { PolizasDetallesComponent } from './components/polizas-detalles/polizas-detalles.component';
-import { PolizaComponent } from './components/poliza/poliza.component';
+import { HomeComponent } from './pages/home/home.component';
+import { CotizarComponent } from './pages/cotizar/cotizar.component';
+import { DatosPolizasComponent } from './pages/datos-polizas/datos-polizas.component';
+import { ListPolizasComponent } from './pages/list-polizas/list-polizas.component';
+import { PolizasDetallesComponent } from './pages/polizas-detalles/polizas-detalles.component';
+import { PolizaComponent } from './pages/poliza/poliza.component';
+import { CotizacionComponent } from './pages/cotizacion/cotizacion.component';
 
 const routes: Routes = [
   {
@@ -17,14 +18,18 @@ const routes: Routes = [
         path : 'inicio',
         component : HomeComponent,
       },
-      
+
+      // {
+      //   path: 'cotizar',
+      //   component: CotizarComponent,
+
+
+      // },
       {
         path: 'cotizar',
-        component: CotizarComponent,
-        
-        
+        component : CotizacionComponent,
       },
-      { 
+      {
         path: 'auth' , loadChildren : () => import('../../Modules/auth/auth.module').then(m => m.AuthModule),
       },
       {
@@ -38,19 +43,19 @@ const routes: Routes = [
           {
             path: 'listado-polizas',
             component : PolizasDetallesComponent,
-           
+
           },
-          
+
           {
             path: 'poliza/:id',
             component : PolizaComponent,
           }
-          
+
 
 
         ]
       }
-      
+
     ]
   }
 

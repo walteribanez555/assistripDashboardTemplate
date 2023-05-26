@@ -6,7 +6,8 @@ export interface planbeneficio {
     serv : Servicio | null,
     beneficios : catalogoBeneficio[],
     isDropdownOpen : boolean,
-    
+    precio : number,
+
 
 }
 

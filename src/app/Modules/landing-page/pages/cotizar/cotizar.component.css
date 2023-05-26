@@ -15,15 +15,15 @@
   background-color: #555;
 }
 
-.container { 
+.container {
     width: 100%;
     height: 100%;
     display: grid;
     background: var(--body-bg);
     overflow-y: auto;
     transition: all 0.5s ease;
-    
-} 
+
+}
 
 .container-cards{
   height: 100%;
@@ -83,7 +83,7 @@
   padding: 15px;
 }
 
-.item-space.center { 
+.item-space.center {
   justify-content: center;
   padding-top: 25px;
   height: 100%;
@@ -140,7 +140,7 @@
     height: 100%;
 }
 
-button span { 
+button span {
   padding-left: 5px;
 }
 
@@ -189,7 +189,7 @@ h2{
   font-size: 15px;
 }
 
-.container-data{ 
+.container-data{
     width: 100%;
     height: 100%;
 }
@@ -265,7 +265,7 @@ h2{
     font-size: 12px;
   }
 
-  .options { 
+  .options {
     display: flex;
     height: fit-content;
     flex-direction: row;
@@ -277,7 +277,7 @@ h2{
     transition: 0.3 all ease-in-out;
   }
 
-  .options svg{ 
+  .options svg{
     fill: white;
   }
 
@@ -298,11 +298,11 @@ h2{
     height: 10vh;
   }
 
-  option { 
+  option {
     color: black;
     background-color: white;
   }
-  
+
 .flex-row{
     display: flex;
     flex-direction: row;
@@ -334,14 +334,14 @@ h2{
     gap: 10px;
 }
 
-.listExtras { 
+.listExtras {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 16px;
 }
 
-.cardContainer {       
+.cardContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -548,7 +548,7 @@ h2{
   transition: 0.3 all ease-in-out;
 }
 
-.cotizacionMain .row .column { 
+.cotizacionMain .row .column {
   display: flex;
     flex-direction: column;
 }
@@ -557,7 +557,7 @@ h2{
   width: 100%;
   overflow-x: auto;
   height: fit-content;
-} 
+}
 
 .block{
   padding: 0px;
@@ -617,7 +617,7 @@ h2{
   fill: red;
 }
 
-.card svg.green { 
+.card svg.green {
   fill: green;
 }
 
@@ -737,11 +737,11 @@ h2{
   border-radius: 10px;
   background-color: var(--body-bg);
   color: var(--main-color);
-  
+
 }
 
 .contain-pagar button.active{
-  
+
   background-color: var(--main-color);
   color: white;
   border: none;
@@ -753,14 +753,14 @@ h2{
 }
 
 .expandir .btn_expandir svg{
-    
+
     fill: var(--main-color);
-    
+
 }
 
 hr{
     border-color: coral;
-    
+
     width: 100%;
 
 }
@@ -770,7 +770,7 @@ hr{
 }
 
 
-.cotizacionMain .row.desktop{ 
+.cotizacionMain .row.desktop{
   display: flex;
   height: fit-content;
 }
@@ -779,7 +779,7 @@ hr{
   display: none;
 }
 
-.btn-age{ 
+.btn-age{
   display: flex;
   padding-left: 50px;
   padding-right: 50px;
@@ -805,7 +805,7 @@ hr{
 
 }
 
- hr { 
+ hr {
   width: 100%;
   border-color: var(--main-color);
   margin-top: 10px;
@@ -834,20 +834,20 @@ hr{
   padding-top: 0px;
 }
 
-.alert { 
+.alert {
   display: flex;
   padding: 10px;
   margin: 10px;
   background-color:  #CCF4F9;
   border: 1px solid var(--main-color);
   color:  var(--main-color);
-  
+
 }
 
 .btn-age.sticky {
   display: none;
   }
-  
+
   .alert.sticky {
   display: none;
   }
@@ -917,11 +917,11 @@ hr{
   background-color: var(--body-bg);
   color: var(--main-color);
   border: 1px solid var(--main-color);
-  
+
 }
 
 .btn-pay.active{
-  
+
   background-color: var(--main-color);
   color: white;
   border: none;
@@ -965,9 +965,9 @@ hr{
         height: calc(68vh - 10px);
         overflow-y: auto;
         overflow-x: hidden;
-        
+
     }
-    
+
     .cotizacionBottom{
         display: flex;
     }
@@ -977,13 +977,13 @@ hr{
         background-color: var(--main-color);
         display: flex;
         flex-direction: column;
-        
-        
-        
+
+
+
     }
 
    .header-title{
-        
+
         display: none;
     }
 
@@ -1004,7 +1004,7 @@ hr{
 
     .list-row{
       display: none;
-      
+
     }
 
     .listCards{
@@ -1023,12 +1023,12 @@ hr{
       border-radius: 5px;
       margin-bottom: 10px;
     }
-    
+
     .item-list-second{
       display: flex;
       flex-direction: row;
       align-items: flex-start;
-      
+
       margin-bottom: 10px;
       width: 100%;
       height: 60%;
@@ -1065,7 +1065,7 @@ hr{
       color: red;
     }
 
-    .btn-editar{ 
+    .btn-editar{
       display: flex;
       flex-direction: row;
       justify-content: center;
@@ -1078,7 +1078,7 @@ hr{
       align-items: center;
     }
 
-    .cotizacionMain .row.desktop{ 
+    .cotizacionMain .row.desktop{
       display: none;
     }
 

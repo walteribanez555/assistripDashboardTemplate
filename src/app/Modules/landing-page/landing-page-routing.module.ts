@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LandingPageComponent } from './landing-page.component';
 import { HomeComponent } from './pages/home/home.component';
-import { CotizarComponent } from './pages/cotizar/cotizar.component';
 import { DatosPolizasComponent } from './pages/datos-polizas/datos-polizas.component';
 import { ListPolizasComponent } from './pages/list-polizas/list-polizas.component';
 import { PolizasDetallesComponent } from './pages/polizas-detalles/polizas-detalles.component';
@@ -19,12 +18,7 @@ const routes: Routes = [
         component : HomeComponent,
       },
 
-      // {
-      //   path: 'cotizar',
-      //   component: CotizarComponent,
 
-
-      // },
       {
         path: 'cotizar',
         component : CotizacionComponent,

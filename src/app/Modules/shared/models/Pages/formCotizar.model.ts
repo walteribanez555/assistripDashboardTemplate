@@ -7,6 +7,6 @@ export interface FormCotizarModel{
     origen: string;
     listCotizaciones : cotizacionDataForm[];
     email: string;
-    telefono: string;
+    telefono?: string;
 
 }

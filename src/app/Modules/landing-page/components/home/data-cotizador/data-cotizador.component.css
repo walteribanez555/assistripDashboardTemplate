@@ -24,7 +24,7 @@
   }
   header::before{
     content: "";
-    
+
     left: 0;
     bottom: -2px;
     height: 3px;
@@ -36,16 +36,16 @@
     margin: 20px;
     margin-top: 16px;
     background: none;
-      
+
   }
 
-  select { 
+  select {
     width: 100%;
     border: 1px solid var(--main-color);
-    
+
   }
 
-  span { 
+  span {
     color: var(--main-color);
     font-size: 12px;
   }
@@ -59,15 +59,15 @@
     margin-left: 8px;
     transition: 0.3s ease;
   }
-  
+
   form.secActive .form.second{
     opacity: 1;
     pointer-events: auto;
     transform: translateX(0);
-    
+
   }
-  
-  
+
+
   form.secActive .form.first{
     opacity: 0;
     pointer-events: none;
@@ -84,7 +84,7 @@
    form .fields{
     padding: 15px;
     margin-right: 15px;
-    
+
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -102,6 +102,9 @@
     flex-direction: column;
     margin: 0px 0;
   }
+
+
+
   .wrapper{
     margin-bottom: 5px;
     background: none;
@@ -128,14 +131,14 @@
     margin: 5px 0;
   }
 
-  
-  
+
+
 
   .wrapper .input-field input{
     width: 100%;
     color: var(--main-color);
   }
-  
+
 
   .wrapper .listado{
     appearance: none;
@@ -151,7 +154,7 @@
 
   }
 
-  .wrapper .listado:focus { 
+  .wrapper .listado:focus {
     outline: none;
   }
   .wrapper .listado option{
@@ -161,10 +164,10 @@
   .input-field select:focus{
     box-shadow: 0 3px 6px rgba(0,0,0,0.13);
   }
-  
+
   .input-field input[type="date"]:valid{
     color: var(--main-color);
-    
+
   }
 
   .input-field input[type="date"]::-webkit-calendar-picker-indicator {
@@ -187,13 +190,13 @@
     background-color: var(--body-bg);
     transition: all 0.3s linear;
     cursor: pointer;
-    
+
   }
    form .btnText{
     font-size: 14px;
     font-weight: 400;
   }
-  
+
 
   form .btn_add_cliente{
     display: flex;
@@ -209,11 +212,11 @@
   form .btn_add_cliente:hover{
     scale: 1.1;
   }
-  
- 
-.cotizar_btn { 
+
+
+.cotizar_btn {
     display: flex;
-    
+
     flex-direction: row;
     fill: #fff;
     color: #fff;
@@ -221,7 +224,7 @@
     justify-content: center;
     background-image: linear-gradient(to right, #1D0F9F, #DF085A);
     height: 40px;
-    
+
     color: white;
     cursor: pointer;
     font-size: 20px;
@@ -229,14 +232,14 @@
     text-align: center;
     text-decoration: none;
     border: none;
-    
+
     margin-top: 10px;
     width: 100%;
   }
-  .cotizar_btn:hover{ 
+  .cotizar_btn:hover{
     scale: 1.05;
    }
-  
+
   ::selection{
     color: var(--text-color);
     background: var(--logo-color);
@@ -254,14 +257,14 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    
+
   }
 
   .wrapper ul li{
     padding-top: 10px;
   }
 
-  .wrapper ul li svg { 
+  .wrapper ul li svg {
     cursor: pointer;
   }
   .wrapper ul li svg:hover{
@@ -269,7 +272,7 @@
     fill: red;
   }
 
-  li input{ 
+  li input{
     padding: 0px 0px 0px 10px ;
     font-size: 14px;
     height: 30px;
@@ -284,7 +287,7 @@
   .title img{
     max-width: 21px;
   }
-  
+
   .wrapper .content{
     margin: 5px 0;
     border: none;
@@ -302,7 +305,7 @@
 
   }
 
-  .tagList { 
+  .tagList {
     border: none;
   }
 
@@ -336,7 +339,7 @@
     font-size: 12px;
     cursor: pointer;
     border-radius: 50%;
-    
+
     justify-content: center;
   }
 
@@ -349,7 +352,7 @@
     background-color: var(--body-bg);
   }
 
-  .options { 
+  .options {
     width: fit-content;
     margin: 0px;
   }
@@ -364,7 +367,7 @@
     background: var(--main-color);
     border-radius: 10px;
   }
-  
+
   .options.w-100{
     width: 100%;
   }
@@ -385,7 +388,7 @@
     align-items: center;
     justify-content: center;
     background: var(--main-color);
-    color: white;  
+    color: white;
     width: 100%;
     height: fit-content;
   }
@@ -414,11 +417,11 @@
     background-position: right center;
     padding-right: 20px;
   }
-  
+
   option[value="pais"] {
     background-image: url('../../../../../assets/svg/add.svg');
   }
-  
+
   .buttonSpace{
     display: flex;
     justify-content: center;
@@ -427,10 +430,10 @@
 
   @media (max-width: 980px){
     .options .listado{
-        width: 100%; 
+        width: 100%;
       }
   }
-  
+
   .nextBtn:hover,
   .nextBtn:focus{
     background-color: var(--main-color);
@@ -438,7 +441,7 @@
     cursor: pointer;
     border: 2px solid var(--main-color);
   }
-   
+
   .wrapper .details{
     justify-content: space-between;
   }
@@ -455,7 +458,7 @@
     margin-top: 10px;
     margin-bottom: 30px;
   }
-   
+
   @media (max-width: 1150px) {
     form{
        overflow-y: scroll;
@@ -476,11 +479,11 @@
    h2{
        font-size: 12px;
    }
-   label { 
+   label {
     font-size: 12px;
    }
  }
-  
+
   @media (max-width: 870px) {
     form{
        margin-left: 0px;
@@ -503,5 +506,4 @@
    }
 
  }
- 
- 
+

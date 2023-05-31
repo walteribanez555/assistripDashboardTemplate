@@ -1,0 +1,84 @@
+
+.container-procedimiento{
+  display: flex;
+  width: 100%;
+  height: 50vh;
+  padding: 10px 20px 10px 20px;
+  flex-direction: row;
+
+}
+
+.container-procedimiento .container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.container .title{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  padding: 0px 0px 20px 0px;
+}
+
+.container .lista-procedimiento{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: aliceblue;
+  height: 50vh;
+  border-radius: 20px;
+}
+
+.lista-procedimiento .procedimiento{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  color: var(--main-color);
+  padding: 20px 20px 20px 20px
+
+}
+
+.lista-procedimiento .procedimiento .title h3{
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  padding: 0px 0px 20px 0px;
+}
+
+.lista-procedimiento .procedimiento .description p{
+  font-size: 15px;
+  color: var(--text-color);
+  font-weight: bold;
+  text-align: center;
+  padding: 0px 0px 20px 0px;
+}
+
+@media (max-width:768px) {
+
+  .container-procedimiento{
+    height: fit-content;
+  }
+
+
+  .container .lista-procedimiento{
+    flex-direction: column;
+    height: fit-content;
+  }
+
+  .lista-procedimiento .procedimiento{
+    flex-direction: column;
+  }
+}

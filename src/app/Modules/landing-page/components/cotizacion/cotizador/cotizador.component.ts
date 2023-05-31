@@ -3,7 +3,17 @@ import { Router } from '@angular/router';
 import { cotizacionDataForm } from 'src/app/Modules/shared/models/Pages/cotizacionDataForm.model';
 import { FormCotizarModel } from 'src/app/Modules/shared/models/Pages/formCotizar.model';
 import { cotizacionIntefaceService } from 'src/app/Modules/shared/services/interfaces/cotizacioninterface.service';
+import { EventService } from 'src/app/Modules/shared/services/interfaces/event.service';
 import { UtilsService } from 'src/app/Modules/shared/services/utils/utils.service';
+
+export enum typeCotizacion{
+  menor = 1,
+  mayor = 2,
+  restarMenor =3,
+  restarMayor =4,
+}
+
+
 
 @Component({
   selector: 'cotizador',
@@ -21,6 +31,8 @@ export class CotizadorComponent implements OnInit {
   private router : Router,
 //Servicios consumidos, para obtener los datos de la base de datos
   private utils : UtilsService,
+
+  private eventService  : EventService,
   ){
 
   }
@@ -59,6 +71,14 @@ export class CotizadorComponent implements OnInit {
 
   ageListShow = false;
 
+  cantMenores= 0;
+  cantMayores= 0;
+
+  minDate: string = "";
+  maxDate : string = "";
+  firstDate : string = "";
+  limitDate : string = "";
+
 
 
 
@@ -71,6 +91,8 @@ export class CotizadorComponent implements OnInit {
 
     //reemplaza los datos para los usos en este componente
     this.remplazarData(this.receivedData);
+
+    this.comparar();
 
   }
 
@@ -90,7 +112,7 @@ export class CotizadorComponent implements OnInit {
     this.dataService.sharedData = cotizarForm;
 
 
-    this.reloadEvent.emit();
+    this.eventService.reloadPage();
 
 
 
@@ -103,15 +125,73 @@ export class CotizadorComponent implements OnInit {
     this.formData.finalDate = data.finalDate;
     this.formData.origen = data.origen;
     this.formData.email = data.email;
-    this.formData.telefono = data.telefono;
+    this.formData.telefono = data.telefono ? data.telefono : '';
     this.tags = data.tags;
     this.listCotizaciones = data.listCotizaciones;
+    this.obtenerListados(data.listCotizaciones);
+
     this.listTags = this.tags.join(', ');
+    if (this.listTags.length > 28) {
+      this.listTags = this.listTags.substring(0, 28) + '...';
+    }
+
     this.diffDays =this.utils.compararFechas(data.initialDate, data.finalDate);
     this.nextId = this.listCotizaciones.length;
   }
 
 
+  obtenerListados(listado : cotizacionDataForm[]){
+
+    this.cantMenores = listado.filter(cotizacion => cotizacion.age && cotizacion.age<75).length
+    this.cantMayores = listado.filter(cotizacion => cotizacion.age && cotizacion.age>=75).length
+
+   }
+
+  agregarCotizado( type : number){
+
+    switch (type) {
+
+      case typeCotizacion.mayor:
+          this.addItem(75);
+          this.cantMayores++
+        break;
+
+      case typeCotizacion.menor:
+          this.addItem(25);
+          this.cantMenores++
+        break;
+      case typeCotizacion.restarMayor:
+          this.deleteItemByAge(75)
+        break;
+      case typeCotizacion.restarMenor:
+          this.deleteItemByAge(25);
+        break
+
+    }
+
+
+
+ }
+
+
+ deleteItemByAge( age : number){
+  const index = this.listCotizaciones.findIndex(i => i.age=== age)
+
+  if(index !== -1){
+    this.listCotizaciones.splice(index, 1);
+
+    if(age < 75){
+      this.cantMenores --
+    }
+
+    if(age >= 75){
+      this.cantMayores --
+    }
+
+  }
+
+
+ }
 
   remove(tag: string) {
     let index = this.tags.indexOf(tag);
@@ -172,13 +252,16 @@ export class CotizadorComponent implements OnInit {
   }
 
 
-  addItem(){
+  addItem( edad = 10 ){
 
     const cotizacionfrm : cotizacionDataForm ={
       id :this.nextId++,
-      age: 0,
+      age: edad,
       item : this.utils.createItemForm()
     }
+
+
+
 
     this.listCotizaciones.push(cotizacionfrm);
 
@@ -194,7 +277,98 @@ export class CotizadorComponent implements OnInit {
 
   onChangeInputDates(){
     this.diffDays = this.utils.compararFechas(this.formData.initialDate, this.formData.finalDate);
+
+    const date1: Date = new Date(this.formData.initialDate);
+    const date2: Date = new Date(this.formData.finalDate);
+
+
+    const inputDate = new Date(this.firstDate);
+
+      // Add 365 days to the input date
+      const resultDate = new Date(inputDate.getTime());
+      resultDate.setDate(resultDate.getDate() + 365);
+
+
+
+      // Convert the result back to a string in the "yyyy-mm-dd" format
+      const options: Intl.DateTimeFormatOptions = { year: "numeric", month: "2-digit", day: "2-digit" };
+      const resultDateString = resultDate.toLocaleDateString("en-GB", options).split('/').reverse().join('-');
+
+      this.limitDate = resultDateString;
+
+
+
+
+
+      // Get the difference in milliseconds
+      const diffInMs = Math.abs(date2.getTime() - date1.getTime());
+
+      // Convert the difference to days
+      const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+
+      if(!isNaN(diffInDays)){
+        this.diffDays= diffInDays+1;
+      }
+
+
+      if(diffInDays>365){
+        this.formData.finalDate = "";
+        this.diffDays = 0;
+      }
   }
+
+  comparar(){
+    const date1: Date = new Date(this.formData.initialDate);
+    const date2: Date = new Date(this.formData.finalDate);
+
+
+    if( !(this.formData.finalDate === "") ){
+      this.maxDate = this.formData.finalDate;
+    }
+    if( !(this.formData.initialDate === "") ){
+
+
+
+      this.firstDate = this.formData.initialDate;
+
+
+    }
+
+
+    const inputDate = new Date(this.firstDate);
+
+      // Add 365 days to the input date
+      const resultDate = new Date(inputDate.getTime());
+      resultDate.setDate(resultDate.getDate() + 365);
+
+
+
+      // Convert the result back to a string in the "yyyy-mm-dd" format
+      const options: Intl.DateTimeFormatOptions = { year: "numeric", month: "2-digit", day: "2-digit" };
+      const resultDateString = resultDate.toLocaleDateString("en-GB", options).split('/').reverse().join('-');
+
+      this.limitDate = resultDateString;
+
+
+
+
+
+      // Get the difference in milliseconds
+      const diffInMs = Math.abs(date2.getTime() - date1.getTime());
+
+      // Convert the difference to days
+      const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+
+      if(!isNaN(diffInDays)){
+        this.diffDays= diffInDays+1;
+      }
+
+
+      if(diffInDays>365){
+        this.formData.finalDate = "";
+        this.diffDays = 0;
+      }
+   }
 
   changeAgeInpt(event: any, item: cotizacionDataForm) {
 

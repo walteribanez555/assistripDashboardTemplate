@@ -336,7 +336,7 @@ shopping-cart{
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-around;
-    background-color: white;
+    background-color: var(--main-color);
     border-top: 1px solid #dedddc;
     z-index: 24;
   }

@@ -1,6 +1,6 @@
-import { Component,  ElementRef, ViewChild, HostListener, AfterViewInit, OnInit } from '@angular/core';
+import { Component,  ElementRef, ViewChild, HostListener, AfterViewInit, OnInit , Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { forkJoin, map, switchMap } from 'rxjs';
+import { forkJoin, map, switchMap, Observable, Subscription } from 'rxjs';
 import { ModalService } from 'src/app/Modules/shared/Components/modal/modal.service';
 import { Beneficio } from 'src/app/Modules/shared/models/Data/Beneficio';
 import { Catalogo } from 'src/app/Modules/shared/models/Data/Catalogo';
@@ -17,6 +17,7 @@ import { planDataForm } from 'src/app/Modules/shared/models/Pages/planDataForm.m
 import { planbeneficio } from 'src/app/Modules/shared/models/Pages/planbeneficio.model';
 import { tipoBeneficio } from 'src/app/Modules/shared/models/Pages/tipoBeneficio.model';
 import { cotizacionIntefaceService } from 'src/app/Modules/shared/services/interfaces/cotizacioninterface.service';
+import { EventService } from 'src/app/Modules/shared/services/interfaces/event.service';
 import { BeneficiosService } from 'src/app/Modules/shared/services/requests/beneficios.service';
 import { CatalogosService } from 'src/app/Modules/shared/services/requests/catalogos.service';
 import { ExtrasService } from 'src/app/Modules/shared/services/requests/extras.service';
@@ -98,6 +99,10 @@ export class PlanesComponent implements AfterViewInit,OnInit  {
   detailsPlan : boolean = true;
   planMostrar : planbeneficio | null = null;
 
+  private eventsSubscription?: Subscription;
+
+  @Input() events?: Observable<void>;
+
 
 
 
@@ -116,13 +121,20 @@ export class PlanesComponent implements AfterViewInit,OnInit  {
     private extraService  : ExtrasService,
     private utils : UtilsService,
     private router : Router,
+    private eventService : EventService,
 
     ) {}
 
   ngOnInit(): void {
     this.loading = false;
 
-    //Si hay informacion en la interfaz significa que se esta siguiendo un procedimiento
+
+    this.eventService.reloadPage$.subscribe(() => {
+      // Realiza cualquier acción necesaria para recargar el componente "planes" aquí
+      this.ngOnInit();
+    });
+
+    // Si hay informacion en la interfaz significa que se esta siguiendo un procedimiento
     if(this.dataService.sharedData.listCotizaciones.length === 0){
       Swal.close();
       this.router.navigate(['../../home]']);

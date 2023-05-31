@@ -25,12 +25,11 @@
               "src/assets"
             ],
             "styles": [
-             
-              "src/styles.css"
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "src/styles.css",
+              "node_modules/intl-tel-input/build/css/intlTelInput.css"
             ],
-            "scripts": [
-              
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -54,10 +53,7 @@
               ],
               "outputHashing": "all"
             },
-            
             "development": {
-              
-              
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
@@ -73,13 +69,11 @@
           "configurations": {
             "production": {
               "browserTarget": "assistrip:build:production"
-              
             },
             "development": {
               "browserTarget": "assistrip:build:development",
               "proxyConfig": "proxy.conf.json"
             }
-            
           },
           "defaultConfiguration": "development"
         },
@@ -104,9 +98,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [
-              
-             ]
+            "scripts": []
           }
         }
       }

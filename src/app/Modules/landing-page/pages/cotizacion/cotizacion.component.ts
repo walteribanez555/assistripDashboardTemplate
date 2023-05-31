@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef , AfterViewInit} from '@angular/core';
 import { Router } from '@angular/router';
-import { switchMap } from 'rxjs';
+import { switchMap, Subject } from 'rxjs';
 
 import { forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -19,6 +19,7 @@ import { planDataForm } from 'src/app/Modules/shared/models/Pages/planDataForm.m
 import { planbeneficio } from 'src/app/Modules/shared/models/Pages/planbeneficio.model';
 import { tipoBeneficio } from 'src/app/Modules/shared/models/Pages/tipoBeneficio.model';
 import { cotizacionIntefaceService } from 'src/app/Modules/shared/services/interfaces/cotizacioninterface.service';
+import { EventService } from 'src/app/Modules/shared/services/interfaces/event.service';
 import { BeneficiosService } from 'src/app/Modules/shared/services/requests/beneficios.service';
 import { CatalogosService } from 'src/app/Modules/shared/services/requests/catalogos.service';
 import { ExtrasService } from 'src/app/Modules/shared/services/requests/extras.service';
@@ -36,8 +37,11 @@ import Swal from 'sweetalert2';
 })
 export class CotizacionComponent implements OnInit{
 
+  eventsSubject: Subject<void> = new Subject<void>();
+
   constructor(
-    private router : Router
+    private router : Router,
+    private eventService : EventService,
 
   ){
 
@@ -52,6 +56,10 @@ export class CotizacionComponent implements OnInit{
   reloadPage() {
 
     this.ngOnInit();
+  }
+
+  emitEventToChild() {
+   this.eventService.reloadPage()
   }
 
 

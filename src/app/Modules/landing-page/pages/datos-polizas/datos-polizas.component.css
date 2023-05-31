@@ -25,8 +25,8 @@
     background-color: var(--body-bg);
     display: block;
     box-sizing: border-box;
-    
-    
+
+
 }
 
 
@@ -43,7 +43,7 @@
     /* padding-right: 2vh; */
     transition: all 0.5s ease;
     overflow-y: auto;
-    
+
 }
 
 
@@ -59,16 +59,16 @@
     flex-direction: column;
 }
 
-.cotizaciones h2 { 
+.cotizaciones h2 {
     font-size: 35px;
     color: var(--main-color);
-    
+
     /*make bold*/
     font-weight: bold;
 
 }
 
-.carrito { 
+.carrito {
     padding:50px;
     border: 1px solid #DADFE0;
 
@@ -78,7 +78,7 @@
 .carrito h2{
     font-size: 25px;
     color: var(--main-color);
-    
+
     margin-bottom: 10px;
     /*make bold*/
     font-weight: bold;
@@ -120,7 +120,7 @@
 
 
 span.descuento,
-.total span { 
+.total span {
     font-size: 17px;
     font-weight: bold;
     padding-left: 2px;
@@ -162,39 +162,39 @@ span.descuento,
 
 .cotizacionBottom{
     display: none;
-    
+
     background-color: var(--body-bg);
     overflow: hidden;
-    
+
     width: 100%;
-   
+
     position: fixed;
     bottom: 0;
     align-items: center ;
     flex-direction: column;
-    
-   
-    
+
+
+
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
     color: wheat;
     padding: 20px;
 
-   
-    
+
+
 }
 
 .cotizacionBottom .BottomFooter{
     position: absolute;
     bottom: 10px;
-    
-    
+
+
     margin-right: 15px;
     margin-bottom: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    
+
     z-index: 5;
 }
 
@@ -215,14 +215,14 @@ span.descuento,
     margin-left: -40px;
     margin-right: -40px;
     margin-top: -10px;
-  
+
     width: 100vw;
-  
+
   }
-  
-  
+
+
   .expandir .btn_expandir{
-      
+
       display: flex;
       justify-content: center;
       width: 100%;
@@ -234,11 +234,11 @@ span.descuento,
       color: var(--main-color);
       font-size: 15px;
       box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  
-      
+
+
   }
 
-  
+
 .contain-pagar{
     display: flex;
     width: 100%;
@@ -248,7 +248,7 @@ span.descuento,
     justify-content: center;
     align-items: center;
   }
-  
+
   .contain-pagar button{
     padding: 5px;
     width: 70%;
@@ -257,16 +257,16 @@ span.descuento,
     background-color: var(--body-bg);
     color: var(--main-color);
     margin-left: 20px;
-    
+
   }
-  
+
   .contain-pagar button.active{
-    
+
     background-color: var(--main-color);
     color: white;
     border: none;
   }
-  
+
   .containBottom{
       overflow: auto;
       height: fit-content;
@@ -275,11 +275,11 @@ span.descuento,
       width: 100%;
       color: var(--main-color);
 }
-  
+
   .expandir .btn_expandir svg{
-      
+
       fill: var(--main-color);
-      
+
   }
 
   .group-cotizacion{
@@ -323,7 +323,6 @@ span.descuento,
 
   .cotizacion:hover{
     box-shadow: 0px 0px 5px 0px  #DADFE0;
-    scale: 1.05;
     transition: 0.5 all ease-in-out;
   }
 
@@ -339,8 +338,8 @@ span.descuento,
     box-shadow: 0px 0px 5px 0px  #DADFE0;
     cursor: pointer;
   }
-  
-  
+
+
 
   .cotizacion-header .data{
     display: flex;
@@ -390,14 +389,14 @@ span.descuento,
     height: 70px;
    }
 
-   .field label { 
+   .field label {
     font-size: 18px;
     color: var(--main-color);
     font-weight: bold;
     padding-bottom: 10px;
    }
 
-   .field input { 
+   .field input {
     width: 100%;
     height: 30px;
     border: 1px solid var(--main-color);
@@ -437,7 +436,7 @@ span.descuento,
     padding: 14px;
    }
 
-  
+
 
 
   svg.success{
@@ -517,13 +516,13 @@ span.descuento,
     justify-content: center;
     align-items: center;
   }
-  
+
   .loading img {
     width: 60px;
     height: 60px;
   }
-  
-  
+
+
 
 
 
@@ -537,7 +536,7 @@ span.descuento,
       padding-right: 0;
       position: fixed;
       overflow-y: auto;
-      
+
     }
 
     .carrito,
@@ -588,9 +587,9 @@ span.descuento,
       align-items: center;
     }
 
-    
 
-    
+
+
   }
 
 

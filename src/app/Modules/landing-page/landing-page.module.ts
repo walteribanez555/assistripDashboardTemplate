@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { LandingPageRoutingModule } from './landing-page-routing.module';
-import { CotizarComponent } from './pages/cotizar/cotizar.component';
-import { DataCotizadorComponent } from './components/data-cotizador/data-cotizador.component';
+import { DataCotizadorComponent } from './components/home/data-cotizador/data-cotizador.component';
 import { DatosPolizasComponent } from './pages/datos-polizas/datos-polizas.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ListPolizasComponent } from './pages/list-polizas/list-polizas.component';
@@ -14,24 +13,28 @@ import { PipesModule } from '../shared/pipes/pipes.module';
 import { RouterModule } from '@angular/router';
 import { LandingPageComponent } from './landing-page.component';
 import { CotizacionComponent } from './pages/cotizacion/cotizacion.component';
-import { CotizadorComponent } from './components/cotizador/cotizador.component';
-import { PlanesComponent } from './components/planes/planes.component';
-import { ModalService } from '../shared/Components/modal/modal.service';
-import { ModalComponent } from '../shared/Components/modal/modal.component';
+import { CotizadorComponent } from './components/cotizacion/cotizador/cotizador.component';
 import { SharedModule } from '../shared/shared.module';
 import { PlanComponent } from './components/plan/plan.component';
 import { InfoComponent } from './components/plan/info/info/info.component';
 import { ShoppingCartComponent } from './components/planes/shoppingCart/shopping-cart/shopping-cart.component';
-import { CategoryPlanComponent } from './components/category-plan/category-plan.component';
+import { CategoryPlanComponent } from './components/cotizacion/category-plan/category-plan.component';
 import { SubCatComponent } from './components/plan/info/sub-cat/sub-cat.component';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { CotizadosComponent } from './components/cotizacion/cotizados/cotizados.component';
+import { FooterComponent } from './components/shared/footer/footer.component';
+import { CotizarComponent } from './components/home/cotizar/cotizar.component';
+import { AyudaComponent } from './components/home/ayuda/ayuda.component';
+import { ProcedimientoComponent } from './components/home/procedimiento/procedimiento.component';
+import { AboutUsComponent } from './components/home/about-us/about-us.component';
+import { SliderComponent } from './components/home/slider/slider.component';
+import { PlanesComponent } from './components/planes/planes.component';
 
 
 @NgModule({
   declarations: [
-    CotizarComponent,
     DataCotizadorComponent,
     DatosPolizasComponent,
-    CotizarComponent,
     HomeComponent,
     ListPolizasComponent,
     PolizaComponent,
@@ -39,12 +42,21 @@ import { SubCatComponent } from './components/plan/info/sub-cat/sub-cat.componen
     LandingPageComponent,
     CotizacionComponent,
     CotizadorComponent,
-    PlanesComponent,
     PlanComponent,
     InfoComponent,
     ShoppingCartComponent,
     CategoryPlanComponent,
     SubCatComponent,
+    CotizadosComponent,
+    SliderComponent,
+    AboutUsComponent,
+    ProcedimientoComponent,
+    AyudaComponent,
+    FooterComponent,
+    CotizarComponent,
+    PlanesComponent,
+    PolizaComponent,
+
 
   ],
   imports: [
@@ -54,7 +66,7 @@ import { SubCatComponent } from './components/plan/info/sub-cat/sub-cat.componen
     ReactiveFormsModule,
     PipesModule,
     SharedModule,
-
+    NgxIntlTelInputModule,
 
     RouterModule,
 

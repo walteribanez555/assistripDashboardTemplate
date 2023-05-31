@@ -272,6 +272,28 @@ option {
 }
 
 
+.dropdown-list{
+    position: absolute;
+    margin-top: 0vh;
+    background-color: white;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 5px 20px;
+    border-radius: 10px;
+    justify-content: space-between;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+    z-index: 10;
+    margin-top: 10px;
+    margin-left: -150px;
+}
+
+.btn-seeMore{
+  cursor: pointer;
+  display: flex;
+}
+
 @media (max-width:768px){
 
   .list-row{
@@ -365,6 +387,8 @@ option {
     color: white;
     align-items: center;
   }
+
+
 
   .cotizacionMain .row.desktop{
     display: none;

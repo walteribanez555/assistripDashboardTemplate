@@ -27,10 +27,10 @@
 
 
       </div>
-      <div  *ngIf="minPlanes>1  && selectedPlans<2"class="alert">
+      <div  *ngIf="minPlanes>1  && selectedPlans<2 &&  listadoMayor.length > 0"class="alert">
         <span>Debe elegir un plan para los menores de 75 años y un plan para los mayores de 75 años</span>
       </div>
-      <div  *ngIf="selectedPlans<minPlanes && minPlanes<2" class="alert">
+      <div  *ngIf="selectedPlans<minPlanes && minPlanes<2 && listadoMenor.length > 0" class="alert">
         <span>Falta {{minPlanes-selectedPlans}} por elegir</span>
       </div>
 
@@ -58,16 +58,28 @@
         <hr [class.sticky]="isSticky" >
       </div>
       <div class="listado-plan">
-        <ng-container  *ngIf="!isOld">
+        <ng-container  *ngIf="!isOld && listadoMenor.length > 0">
           <ng-container *ngFor="let plan of listadoMenor">
             <plan  [isSticky]="isSticky" [plan]="plan"  (servicio)="toggleListPlan($event)" (showServicio)="showPlan($event)" ></plan>
           </ng-container>
 
         </ng-container>
-        <ng-container  *ngIf="isOld">
+        <ng-container  *ngIf="isOld && listadoMayor.length > 0">
           <ng-container *ngFor="let plan of listadoMayor">
             <plan  [isSticky]="isSticky" [plan]="plan"  (servicio)="toggleListPlan($event)" (showServicio)="showPlan($event)"></plan>
           </ng-container>
+        </ng-container>
+
+        <ng-container *ngIf="!isOld && listadoMenor.length === 0">
+          <div class="alert">
+            <span>No hay planes disponibles para la cantidad de dias y los pasajeros menores de 75</span>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="isOld && listadoMayor.length === 0 ">
+          <div class="alert">
+            <span>No hay planes disponibles para la cantidad de dias y los pasajeros mayores de 75</span>
+          </div>
         </ng-container>
 
 
@@ -80,8 +92,8 @@
     </div>
 
   </div>
-  <hr [class.mt-30]="isSticky" >
-  <div class="data"  >
+  <hr [class.mt-30]="isSticky"  *ngIf="(isOld && listadoMayor.length>0) || (!isOld && listadoMenor.length>0)">
+  <div class="data"  *ngIf="(isOld && listadoMayor.length>0) || (!isOld && listadoMenor.length>0)" >
     <div class="left">
       <div class="item">
         <span>COBERTURA GLOBAL</span>
@@ -233,6 +245,8 @@
   </div>
 
 </div>
+
+
 <div class="navbar">
   <button class="btn-card" (click)="openModal()">
     <span class="counter" [ngClass]="{'ready': selectedPlans=== minPlanes}"  >{{selectedPlans}}</span>

@@ -6,6 +6,7 @@ import { ModalService } from './Components/modal/modal.service';
 import { PaginationComponent } from './Components/pagination/pagination.component';
 import { ScrollVisibilityDirective } from './directives/scroll-visibility.directive';
 import { LoadingComponent } from './Components/loading/loading.component';
+import { TruncateDirective } from './pipes/truncate.pipe';
 
 
 
@@ -17,6 +18,7 @@ import { LoadingComponent } from './Components/loading/loading.component';
     PaginationComponent,
     ScrollVisibilityDirective,
     LoadingComponent,
+    TruncateDirective
 
 
 
@@ -32,6 +34,7 @@ import { LoadingComponent } from './Components/loading/loading.component';
     PaginationComponent,
     ScrollVisibilityDirective,
     LoadingComponent,
+    TruncateDirective
 
   ],
   providers: [

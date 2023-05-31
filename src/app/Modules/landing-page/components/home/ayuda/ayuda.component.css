@@ -1,0 +1,122 @@
+
+.container-ayuda{
+  width: 100%;
+  height: fit-content;
+  padding: 20px;
+}
+
+.container-ayuda .container {
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+
+
+}
+
+.container .information-list{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+}
+
+.container .information-list .title{
+  display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    padding: 0px 0px 20px 0px;
+}
+
+.container .information-list h3{
+  font-size: 25px;
+  font-weight: bold;
+  text-align: start;
+  color: var(--main-color);
+  padding: 0px 0px 20px 0px;
+}
+
+.container .information hr{
+  width: 100%;
+  height: 1px;
+  background-color: var(--main-color);
+  border: none;
+  margin: 20px
+}
+
+.container .information-list .information{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%;
+  height: fit-content;
+  padding: 0px 20px 0px 20px;
+}
+
+.container .information-list .information .title{
+  display: flex;
+  flex-direction: row;
+  fill: var(--main-color);
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  padding: 0px 0px 20px 20px;
+  color: var(--main-color);
+  cursor: pointer;
+}
+
+.container .information-list .information .description{
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.container .information-list .information .description p{
+  font-size: 15px;
+  color: var(--main-color);
+  font-weight: bold;
+  text-align: start;
+  padding: 0px 0px 20px 0px;
+}
+
+.container .image{
+  display: flex;
+  width: 100%;
+  border-radius: 20px;
+}
+
+.container .image img{
+  width: 100%;
+  height: 100%;
+  border-radius: 0px 20px 20px 0px;
+  object-fit: cover;
+}
+
+@media (max-width:768px){
+
+  .container-ayuda .container{
+    flex-direction: column;
+    height: fit-content;
+  }
+
+  .container .image img{
+    border-radius: 20px;
+  }
+
+  h4{
+    width: 100%;
+    text-align: center;
+  }
+}

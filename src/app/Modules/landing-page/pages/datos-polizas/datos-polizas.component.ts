@@ -19,6 +19,8 @@ import { PolizasService } from 'src/app/Modules/shared/services/requests/polizas
 import { PreciosService } from 'src/app/Modules/shared/services/requests/precios.service';
 import { VentasService } from 'src/app/Modules/shared/services/requests/ventas.service';
 import Swal from 'sweetalert2';
+import { SearchCountryField, CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-input';
+
 
 
 
@@ -29,7 +31,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./datos-polizas.component.css'],
   animations: [
     loadingAnimation,
-    
+
 
   ]
 })
@@ -62,7 +64,7 @@ export class DatosPolizasComponent implements OnInit {
   costoMayores = 0;
 
 
-  precioMayores = { 
+  precioMayores = {
     precio : 0,
     precioTotal : 0,
     cantidadPolizas : 0,
@@ -76,7 +78,7 @@ export class DatosPolizasComponent implements OnInit {
     servicio: this.servicioMenores
   }
 
-  
+
 
 
 
@@ -106,7 +108,9 @@ export class DatosPolizasComponent implements OnInit {
 
 
   hasLoaded = true;
-  
+
+
+  countryIso = CountryISO;
 
 
 
@@ -122,7 +126,7 @@ export class DatosPolizasComponent implements OnInit {
     private router : Router
   ){
 
-    
+
 
 
   }
@@ -143,7 +147,7 @@ export class DatosPolizasComponent implements OnInit {
     this.hasLoaded = false;
 
 
-    
+
 
 
     //Las polizas limitamos a las edades de 75 años
@@ -167,23 +171,23 @@ export class DatosPolizasComponent implements OnInit {
       this.listPolizas.push(
         {
           form : this.createItemForm(),
-          isOpen : false,
+          isOpen : true,
           servicio : this.servicioMayores,
           type: 2,
         }
       )
-      
+
     });
 
     this.datosCotizacionMenores.forEach(element => {
         this.listPolizas.push(
           {
             form : this.createItemForm(),
-            isOpen : false,
+            isOpen : true,
             servicio : this.servicioMenores,
             type: 1,
           }
-        )  
+        )
     });
 
 
@@ -231,7 +235,7 @@ export class DatosPolizasComponent implements OnInit {
         this.totalBruto = this.precioMayores.precioTotal + this.precioMenores.precioTotal  +this.dataExtra.reduce((a,b)=> a+b.costoTotal,0);
         this.total = this.totalBruto  - this.listDescuentos.reduce((a,b) => a + b.montoTotal,0);
 
-        
+
          const { parteEntera, parteDecimal}   =this.dividirTotal(this.total)
 
          this.totalEnteros = parteEntera,
@@ -239,19 +243,19 @@ export class DatosPolizasComponent implements OnInit {
 
 
 
-        
-        
+
+
       }
     )
 
-    
-
-    
 
 
 
 
-    
+
+
+
+
 
 
   }
@@ -265,7 +269,7 @@ export class DatosPolizasComponent implements OnInit {
       age: new FormControl('',Validators.required),
       ci : new FormControl('', Validators.required),
       passport: new FormControl('',Validators.required),
-      email : new FormControl('',Validators.required),
+      email : new FormControl(this.datosCotizacion.email,Validators.required),
       telf : new FormControl('',Validators.required),
       origen: new FormControl('',Validators.required),
       titular : new FormControl(false,Validators.required),
@@ -276,16 +280,16 @@ export class DatosPolizasComponent implements OnInit {
 
   expand(){
     if(this.minHeightReached){
-      
+
       this.itemHeight = this.maxHeight;
     }
     else{
       this.itemHeight = this.minHeight;
-      
+
     }
     this.minHeightReached = !this.minHeightReached;
 
-    
+
 
   }
   reducir(){
@@ -297,14 +301,14 @@ export class DatosPolizasComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  
+
   onTouchStart(event: TouchEvent) {
     // Record the initial touch position and height of the element
     this.startY = event.touches[0].clientY;
     this.startHeight = this.itemHeight;
   }
 
-  
+
   onTouchMove(event: TouchEvent) {
     this.minHeightReached = false;
     // Calculate the distance between the initial touch position and the current touch position
@@ -329,15 +333,15 @@ export class DatosPolizasComponent implements OnInit {
   }
 
   siguiente(){
-   
-   
+
+
   }
 
 
   openForm(  poliza : any ){
 
     poliza.isOpen = !poliza.isOpen;
-    
+
   }
 
 
@@ -345,28 +349,34 @@ export class DatosPolizasComponent implements OnInit {
     const polizas  = this.listPolizas.filter(poliza => poliza.form.value.titular);
 
     if(polizas.length!==1){
+      this.showErrorMsg("Solamente puede haber un titular");
       return;
     }
 
 
-   
+    if(!polizas.every( poliza => poliza.form.valid)){
+      this.showErrorMsg("Revise los datos de cada poliza, el icono marca la poliza con error");
+      return;
+    }
+
+
     Swal.fire({
-      
+
       text: 'Espere un momento mientras se procesa la informacion',
       imageUrl: 'https://cdn.pixabay.com/animation/2022/10/11/03/16/03-16-39-160_512.gif',
-      
+
       showConfirmButton : false,
       allowOutsideClick: false,
-      
+
       imageWidth: 200,
       imageHeight: 200,
       imageAlt: 'Custom image',
     })
 
 
-    
-    
-      
+
+
+
 
     this.clientesService
   .getClienteById(polizas[0].form.value.ci)
@@ -390,7 +400,7 @@ export class DatosPolizasComponent implements OnInit {
           nit_ci: polizas[0].form.value.ci,
           origen: polizas[0].form.value.origen,
           email: polizas[0].form.value.email,
-          nro_contacto: polizas[0].form.value.telf,
+          nro_contacto: polizas[0].form.value.telf.value ? polizas[0].form.value.telf.value.internationalNumber: '',
         };
         // Use `switchMap` to chain the `postCliente` Observable to the `postVenta` Observable
         return this.clientesService.postCliente(nuevoCliente).pipe(
@@ -410,7 +420,7 @@ export class DatosPolizasComponent implements OnInit {
         );
       }
     }),
-    switchMap((data)=> { 
+    switchMap((data)=> {
       const venta_id = data.id;
       const requests : any[]= [];
 
@@ -430,7 +440,7 @@ export class DatosPolizasComponent implements OnInit {
       console.log(requests);
 
       return forkJoin(
-        requests.map((request)=> { 
+        requests.map((request)=> {
           return this.polizasService.postPolizas(venta_id, request.servicio , this.datosCotizacion.tags.join(','), this.datosCotizacion.initialDate, this.datosCotizacion.finalDate, this.listExtras.length).pipe(
             map((response) => {
               return { request, response };
@@ -450,13 +460,13 @@ export class DatosPolizasComponent implements OnInit {
         const polizas : any[] = response.request.listPolizas;
 
         polizas.forEach(poliza => {
-                    
+
 
           const names = this.splitFirstWord(poliza.form.value.nombres);
 
           const firstName = names.firsWord;
           const secondName= names.resOfWord;
-          
+
           const lastNames= this.splitFirstWord(poliza.form.value.apellidos);
 
           const firtLastName = lastNames.firsWord;
@@ -469,13 +479,13 @@ export class DatosPolizasComponent implements OnInit {
             response.response.id,
             firtLastName,seconLastName,
             firstName,secondName,
-            poliza.form.value.ci, 
+            poliza.form.value.ci,
             poliza.form.value.passport,
             poliza.form.value.age,
             poliza.form.value.gender,
             poliza.form.value.origen,
             poliza.form.value.email,
-            poliza.form.value.telf ).pipe(
+            poliza.form.value ? poliza.form.value.telf.internationalNumber : '' ).pipe(
               map((beneficiario)=> {
                 return { response, beneficiario}
               })
@@ -493,13 +503,13 @@ export class DatosPolizasComponent implements OnInit {
 
       //     this.dataService.listPolizas.push(response.response.id);
 
-          
+
 
       //     const names = this.splitFirstWord(response.request.form.value.nombres);
 
       //     const firstName = names.firsWord;
       //     const secondName= names.resOfWord;
-          
+
       //     const lastNames= this.splitFirstWord(response.request.form.value.apellidos);
 
       //     const firtLastName = lastNames.firsWord;
@@ -511,7 +521,7 @@ export class DatosPolizasComponent implements OnInit {
       //       response.response.id,
       //       firtLastName,seconLastName,
       //       firstName,secondName,
-      //       response.request.form.value.ci, 
+      //       response.request.form.value.ci,
       //       response.request.form.value.passport,
       //       response.request.form.value.age,
       //       response.request.form.value.gender,
@@ -524,7 +534,7 @@ export class DatosPolizasComponent implements OnInit {
       //       )
       //   })
       // )
-     
+
     }),
 
     switchMap((data)=> {
@@ -556,16 +566,16 @@ export class DatosPolizasComponent implements OnInit {
           })
         )
       }
-      
-      
+
+
 
       return "ok";
 
-      
-      
+
+
     })
 
-    
+
   )
   .subscribe((data) => {
 
@@ -589,15 +599,15 @@ export class DatosPolizasComponent implements OnInit {
     const inputNormalized:  string =  this.normalizeSpaces(input);
 
     const firstSpaceIndex = inputNormalized.indexOf(' ');
-  
+
     if (firstSpaceIndex === -1) {
       // No hay espacios en el string, así que se devuelve el string en un array
       return {firsWord : input , resOfWord : ""};
     }
-  
+
     const firstWord = inputNormalized.slice(0, firstSpaceIndex);
     const restOfString = inputNormalized.slice(firstSpaceIndex + 1);
-  
+
     return {firsWord : firstWord , resOfWord : restOfString.trimEnd()}
   }
 
@@ -607,7 +617,7 @@ export class DatosPolizasComponent implements OnInit {
 
   successMessage(msg : string){
     Swal.close();
-   
+
 
     Swal.fire({
       title: 'Venta registrada correctamente',
@@ -627,19 +637,19 @@ export class DatosPolizasComponent implements OnInit {
         console.log("Termino");
       }
     })
-    
-    
+
+
   }
 
 
-  
+
 
 
   obtenerCostoPoliza( ){
 
 
-    const rangoPrecioMenores =  this.precios.find(precio => precio.servicio_id === this.servicioMenores?.servicio_id  && this.betweenTheRange(precio.limite_inferior, precio.limite_superior)); 
-    
+    const rangoPrecioMenores =  this.precios.find(precio => precio.servicio_id === this.servicioMenores?.servicio_id  && this.betweenTheRange(precio.limite_inferior, precio.limite_superior));
+
 
     const rangoPrecioMayores = this.precios.find(precio => precio.servicio_id === this.servicioMayores?.servicio_id  && this.betweenTheRange(precio.limite_inferior, precio.limite_superior));
 
@@ -653,13 +663,13 @@ export class DatosPolizasComponent implements OnInit {
       this.costoMayores = costoMayores;
     }
 
-    
+
     return 0;
 
   }
 
   betweenTheRange( liInf: number, liSup: number ) : boolean{
-    
+
     return this.diffDays >= liInf && this.diffDays <= liSup;
   }
 
@@ -687,29 +697,29 @@ export class DatosPolizasComponent implements OnInit {
 
 
   ecuacionRecta( rangoPrecio : Precio, dias: number){
-      
-      
-  
+
+
+
       const valor = (rangoPrecio.pendiente*dias) + rangoPrecio.intercepto;
-  
+
       return valor;
-  
+
   }
 
   comparar(initialDay : string, finalDay : string){
     const date1: Date = new Date(initialDay);
     const date2: Date = new Date(finalDay);
-  
+
       // Get the difference in milliseconds
       const diffInMs = Math.abs(date2.getTime() - date1.getTime());
-  
+
       // Convert the difference to days
       const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
-  
+
       if(!isNaN(diffInDays)){
         this.diffDays= diffInDays;
       }
-  
+
       this.diffDays = diffInDays +1;
    }
 
@@ -741,11 +751,11 @@ export class DatosPolizasComponent implements OnInit {
 
                                       }
                                   }})
-                              
+
     }
 
     dividirTotal( numero : number ){
-            
+
       let parteEntera;
       let parteDecimal : string = "";
 
@@ -767,15 +777,33 @@ export class DatosPolizasComponent implements OnInit {
     normalizeSpaces(input: string): string {
       // Dividir el string en palabras, utilizando un espacio como separador
       const words = input.split(' ');
-    
+
       // Filtrar palabras vacías (espacios adicionales)
       const nonEmptyWords = words.filter(word => word !== '');
-    
+
       // Unir las palabras con un solo espacio entre ellas
       const normalizedString = nonEmptyWords.join(' ');
-    
+
       return normalizedString;
     }
 
+
+    showErrorMsg(msg : string){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: msg,
+      });
+    }
+
+
+    emailState : boolean = true
+    changeEmail(){
+      this.emailState = !this.emailState
+
+      this.listPolizas.forEach( poliza => {
+        console.log(poliza.form)
+      })
+    }
 
 }

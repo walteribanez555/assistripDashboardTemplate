@@ -224,6 +224,10 @@ export class PlanesComponent implements AfterViewInit,OnInit  {
 
               this.loading = true;
 
+              if(this.cotizacionesMayores.length >0 && this.cotizaciones.length===0){
+                this.isOld = true;
+              }
+
 
 
 
@@ -427,6 +431,9 @@ export class PlanesComponent implements AfterViewInit,OnInit  {
     if(servicio.serv?.edad_base===75){
         if(!this.servicioMayores){
           this.selectedPlans++
+          this.servicioMayores = servicio;
+          this.isOld = !this.isOld;
+
         }else{
           Swal.fire({
             title: '¿Estás seguro?',
@@ -440,13 +447,16 @@ export class PlanesComponent implements AfterViewInit,OnInit  {
           }).then((result) => {
             if (result.isConfirmed) {
               this.servicioMayores = servicio;
+              this.isOld = !this.isOld;
             }
           }
           )
         }
-        if(this.minPlanes>1){
-          this.servicioMayores = servicio;
-        }
+
+
+
+
+
     }else{
       if(!this.servicioMenores){
         this.selectedPlans++
@@ -464,10 +474,14 @@ export class PlanesComponent implements AfterViewInit,OnInit  {
         }).then((result) => {
           if (result.isConfirmed) {
             this.servicioMenores = servicio;
+
+
           }
         }
         )
       }
+
+
 
     }
 
@@ -477,10 +491,23 @@ export class PlanesComponent implements AfterViewInit,OnInit  {
         this.btn_pagar = true;
       }
 
+      if(this.servicioMenores) {
+        this.isOld = !this.isOld;
+      }
+
     }else{
       if(this.servicioMenores){
         this.btn_pagar = true;
       }
+
+      if(this.servicioMayores){
+        this.btn_pagar = true;
+
+      }
+    }
+
+    if(this.selectedPlans === this.minPlanes){
+        this.openModal();
     }
 
 

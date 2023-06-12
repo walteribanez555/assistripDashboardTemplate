@@ -144,6 +144,13 @@ span.counter{
   color: white;
 }
 
+span input{
+  width: fit-content;
+  background: none;
+  border: none;
+
+}
+
 .counter.ready{
   background-color: green;
 }

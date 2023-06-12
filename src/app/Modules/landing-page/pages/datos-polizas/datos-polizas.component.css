@@ -284,6 +284,7 @@ span.descuento,
 
   .group-cotizacion{
     padding-top: 20px;
+    margin-bottom: 40px;
   }
 
   .group-cotizacion span{
@@ -294,9 +295,9 @@ span.descuento,
 
   .group-cotizacion hr{
     border: 1px solid var(--main-color);
-    margin-top: 20px;
+    margin-top: 5px;
     margin-right: 150px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
   }
 
   .list-cotizacion{
@@ -304,7 +305,7 @@ span.descuento,
     display: flex;
     flex-wrap: wrap;
     gap: 50px;
-    margin-bottom: 100px;
+    margin-bottom: 0px;
 
   }
 
@@ -524,6 +525,21 @@ span.descuento,
 
 
 
+  .select-mail{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-top: 10px;
+    align-items: center;
+  }
+
+  .email-info{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
 
 
 @media only screen and (max-width: 768px) {
@@ -563,7 +579,7 @@ span.descuento,
         flex-wrap: nowrap;
     }
     .cotizacion{
-        width: 75%
+        width: 90%
 
     }
 

@@ -28,26 +28,25 @@
 //     "email": "carlosœgmail.com",
 //     "telefono": "34343456"
 //   }
-export interface Beneficiario { 
+export interface Beneficiario {
     beneficiario_id  : number,
     poliza_id : number,
     primer_apellido : string,
     segundo_apellido : string,
     primer_nombre : string,
     segundo_nombre : string,
-    ci : string,
-    pasaporte : string,
+    nro_identificacion : string,
     fecha_nacimiento : string,
     edad: number,
     sexo : number,
     origen : string,
     email : string,
     telefono : string
-    
+
 }
 
 
 export interface BeneficiarioResp extends Omit<Beneficiario, 'beneficiario_id'>{
     id : number;
-    
+
 }

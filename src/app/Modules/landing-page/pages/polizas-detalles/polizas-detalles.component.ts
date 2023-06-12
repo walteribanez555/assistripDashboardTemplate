@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { Router } from '@angular/router';
 import { jsPDF } from "jspdf";
@@ -14,12 +14,13 @@ import { PolizasService } from 'src/app/Modules/shared/services/requests/polizas
   templateUrl: './polizas-detalles.component.html',
   styleUrls: ['./polizas-detalles.component.css']
 })
-export class PolizasDetallesComponent implements OnInit {
-  
+export class PolizasDetallesComponent implements OnInit, AfterViewInit {
+
   listIdPolizas: number[] = [];
   listPolizas: Poliza[] = [];
   nombre : string = "Mireya Alejandra Barriga Lopez";
   titular : ClienteResp | null = null;
+  loading : boolean = false;
 
   @ViewChild('polizaimprimir', {static: false}) polizaImprimir!: ElementRef;
 
@@ -29,14 +30,20 @@ export class PolizasDetallesComponent implements OnInit {
     private polizasService : PolizasService,
     private router : Router,
     private cdRef: ChangeDetectorRef,
-    
+
 
   ){
 
   }
 
 
+  ngAfterViewInit(): void {
+      this.downloadPDF();
+  }
+
   ngOnInit():void {
+
+    this.loading = true
 
     if(this.dataService.haveData){
       this.listIdPolizas = this.dataService.listPolizas;
@@ -47,43 +54,43 @@ export class PolizasDetallesComponent implements OnInit {
         this.listIdPolizas.map(id => this.polizasService.getPolizasById(id))
       ).subscribe(
         data => {
+          this.loading = false
           data.forEach(element => {
             this.listPolizas = [...this.listPolizas, ...element];
           });
 
+
         }
       )
 
-    
+
     }
 
 
-    
+
 
   }
 
 
   mostrarDetalles(idPoliza: number){
-    
+
     this.router.navigate([`../../home/polizas/poliza/${idPoliza}`]);
   }
 
 
   downloadPDF() {
     this.cambiarDatos();
-  
-    console.log("realizando");
+
     this.cdRef.markForCheck();
-  
+
     setTimeout(() => {
       this.realizarConversion();
-      console.log("realizado");
     }, 0);
   }
 
 
   realizarConversion(){
-    
+
     const DATA: any = document.getElementById('poliza-imprimir');
     const data2: any = document.getElementById('poliza-imprimir');
 
@@ -94,8 +101,8 @@ export class PolizasDetallesComponent implements OnInit {
     };
 
     const request : any[] = [];
-    
-    
+
+
     request.push(html2canvas(DATA, options));
     request.push(html2canvas(data2, options));
 
@@ -110,7 +117,7 @@ export class PolizasDetallesComponent implements OnInit {
         doc.addImage(img, 'PNG', bufferX, bufferY, pdfWidth, pdfHeight, undefined, 'FAST');
         doc.addPage();
       });
-      doc.save(`${new Date().toISOString()}_tutorial.pdf`);
+      doc.save(`${new Date().toISOString()}_poliza.pdf`);
 
     });
 
@@ -119,15 +126,13 @@ export class PolizasDetallesComponent implements OnInit {
   cambiarDatos(){
 
     if(this.titular){
-    this.nombre = this.titular.nombre.concat(" ", this.titular.apellido, " ");
-    console.log(this.nombre);
-
+      this.nombre = this.titular.nombre.concat(" ", this.titular.apellido, " ");
     }
     else{
       this.nombre= "Walter Ronny Ibañez Saucedo";
     }
 
-  
+
     return
   }
 
@@ -143,5 +148,5 @@ export class PolizasDetallesComponent implements OnInit {
       console.error("polizaImprimir is undefined");
     }
   }
-  
+
 }

@@ -15,7 +15,7 @@ export class UtilsService {
   DivideByAge(listCotizaciones : any[]){
     const cotizaciones : any = [];
     const cotizacionesMayores: any = [];
-    let minPlanes =1;
+    let minPlanes =0;
 
 
     listCotizaciones.forEach(cotizacion => {
@@ -23,10 +23,13 @@ export class UtilsService {
       if(cotizacion.age*1 < 75*1){
         cotizaciones.push(cotizacion);
       }else{
-        console.log(cotizacion.age);
         cotizacionesMayores.push(cotizacion);
       }
     });
+
+    if(cotizaciones.length> 0){
+      minPlanes++
+    }
 
     if(cotizacionesMayores.length> 0) {
       minPlanes++;

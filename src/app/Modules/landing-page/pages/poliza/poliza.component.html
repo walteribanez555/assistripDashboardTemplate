@@ -3,7 +3,7 @@
 <div class="container">
     <h1>Detalle de la poliza : {{id}}</h1>
 
-    
+
     <div class="datos-poliza"  *ngIf="poliza">
         <div class="field">
             <span class="title">
@@ -35,7 +35,7 @@
             </span>
             <div class="data">
                 <span>
-                    {{poliza.fecha_salida | dateOnly}}
+                    {{poliza.fecha_salida | dateOnly:'yyyy-MM-dd':1 }}
                 </span>
             </div>
 
@@ -46,7 +46,7 @@
             </span>
             <div class="data">
                 <span>
-                    {{poliza.fecha_retorno | dateOnly}}
+                    {{poliza.fecha_retorno | dateOnly:'yyyy-MM-dd':1 }}
                 </span>
             </div>
 
@@ -57,7 +57,7 @@
             </span>
             <div class="data">
                 <span>
-                    {{poliza.fecha_emision  | dateOnly}}
+                    {{poliza.fecha_emision  | date}}
                 </span>
             </div>
 
@@ -86,8 +86,8 @@
                             Nombre(s)
                         </span>
                         <div class="data">
-                            <span>{{beneficiario.primer_nombre}} </span> 
-                            <span *ngIf="beneficiario.segundo_nombre!=='0'">{{beneficiario.segundo_nombre}} </span> 
+                            <span>{{beneficiario.primer_nombre}} </span>
+                            <span *ngIf="beneficiario.segundo_nombre!=='0'">{{beneficiario.segundo_nombre}} </span>
                         </div>
                     </div>
                     <div class="field">
@@ -106,15 +106,15 @@
                             Fecha de nacimiento
                         </span>
                         <div class="data">
-                            <span>{{beneficiario.fecha_nacimiento | dateOnly}} </span> 
+                            <span>{{beneficiario.fecha_nacimiento | dateOnly}} </span>
                         </div>
                     </div>
                     <div class="field">
                         <span class="title">
-                            Numero de pasaporte
+                            Dni o Pasaporte
                         </span>
                         <div class="data">
-                            <span>{{beneficiario.pasaporte}} </span>
+                            <span>{{beneficiario.nro_identificacion}} </span>
                         </div>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
                             Nacionalidad
                         </span>
                         <div class="data">
-                            <span>{{beneficiario.origen}} </span>         
+                            <span>{{beneficiario.origen}} </span>
                         </div>
                     </div>
                     <div class="field">
@@ -136,13 +136,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row m-column" >
                     <div class="field">
                         <span class="title">
                             Correo electronico
                         </span>
                         <div class="data">
-                            <span>{{beneficiario.email}} </span> 
+                            <span>{{beneficiario.email}} </span>
                         </div>
                     </div>
                     <div class="field">
@@ -154,7 +154,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
 
@@ -166,7 +166,7 @@
 
 </div>
 
-<div class="poliza-imprimir" id="poliza-imprimir" #polizaimprimir> 
+<div class="poliza-imprimir" id="poliza-imprimir" #polizaimprimir>
     <div class="top">
         <div class="design">
             <div class="left">
@@ -217,7 +217,7 @@
         <div class="parrafo">
             <p>
                 Nuestra prioridad es acompañarlos durante tus días fuera de tu país, protegiéndote
-                en cada paso que des. Velando así con una atención las 24 horas del día. 
+                en cada paso que des. Velando así con una atención las 24 horas del día.
             </p>
 
         </div>
@@ -233,7 +233,7 @@
                 Recuerda llevar contigo tu Póliza de asistencia, para solicitar cualquier ayuda y tener
                 a mano tu código. Además de revisar el detalle completo sobre las coberturas,
                 condiciones, exclusiones y limitaciones que pueden aplicar al servicio contratado,
-                mismo que podrás ver en tu póliza y en el condicionado. 
+                mismo que podrás ver en tu póliza y en el condicionado.
 
             </p>
         </div>
@@ -279,20 +279,20 @@
         <div class="cierrePagina">
             <div class="design">
                 <div class="detalle">
-    
+
                 </div>
                 <div class="logo">
-    
+
                 </div>
-                
+
             </div>
             <span class="date">
                 05/12/2022 9:27:56
             </span>
         </div>
-        
+
 
 
     </div>
-    
-</div> 
+
+</div>

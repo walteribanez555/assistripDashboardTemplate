@@ -4,10 +4,6 @@
 
 <div class="container">
     <h1>Historial de las polizas</h1>
-   
-
-    <button (click)="downloadPDF()">Imprimir poliza</button>
-    
 
     <div *ngIf="listPolizas.length>0" class="listPolizas">
         <div  *ngFor="let poliza of listPolizas" class="poliza">
@@ -32,13 +28,13 @@
                     <div class="field">
                         <span class="title">Destino</span>
                         <span>{{poliza.destino}}</span>
-    
+
                     </div>
-    
+
                 </div>
-    
+
             </div>
-            
+
             <div class="right">
                 <span class="title">Acciones</span>
                 <div class="listAcciones">
@@ -55,15 +51,15 @@
                         <span>Descargar</span>
                     </div>
                 </div>
-    
+
             </div>
-            
+
         </div>
-    
-    
+
+
     </div>
 
-    
+
 </div>
 
 
@@ -72,134 +68,8 @@
 </div> -->
 
 
- <div class="poliza-imprimir" id="poliza-imprimir" #polizaimprimir> 
-    <div class="top">
-        <div class="design">
-            <div class="left">
-
-            </div>
-            <div class="right">
-
-            </div>
-
-        </div>
-
-
-        <div class="logo">
-            <div class="img">
-                <img src="../../../assets/images/logo_img.png" alt="">
-            </div>
-            <div class="nombre">
-                <p>
-                    <span class="assis">assis</span>
-                    <span class="trip">Trip</span>
-                    <span class="com">.com</span>
-                </p>
-                <div class="descripcion"><span>Asistencia de Viajes</span></div>
-            </div>
-        </div>
-    </div>
+<portada-poliza #polizaimprimir></portada-poliza>
 
 
 
-    <div class="saludo">
-        <div class="left">
-            <h1>
-                ¡Hola!
-            </h1>
-            <span>
-                {{nombre}}
-            </span>
-        </div>
-    </div>
-
-    <div class="presentacion">
-        <div class="parrafo">
-            <p>
-                Queremos agradecer tu preferencia de realizar tu próximo viaje junto a assistrip.com,
-                garantizando tu seguridad durante tu estadía con el plan adquirido.
-            </p>
-        </div>
-        <div class="parrafo">
-            <p>
-                Nuestra prioridad es acompañarlos durante tus días fuera de tu país, protegiéndote
-                en cada paso que des. Velando así con una atención las 24 horas del día. 
-            </p>
-
-        </div>
-        <div class="parrafo">
-            <p>
-                Cada viajero que cubrimos es un nuevo compromiso sumado a los miles que ya
-                tenemos.
-            </p>
-
-        </div>
-        <div class="parrafo">
-            <p>
-                Recuerda llevar contigo tu Póliza de asistencia, para solicitar cualquier ayuda y tener
-                a mano tu código. Además de revisar el detalle completo sobre las coberturas,
-                condiciones, exclusiones y limitaciones que pueden aplicar al servicio contratado,
-                mismo que podrás ver en tu póliza y en el condicionado. 
-
-            </p>
-        </div>
-        <div class="parrafo">
-            <p>
-                Recuerda revisar tu correo electrónico, para conocer más acerca de nuestros
-                servicios en la plataforma de nuestra página web.
-            </p>
-
-        </div>
-        <div class="parrafo">
-            <p>
-                ¡¡¡Reiteramos nuestra gratitud por la confianza depositada en nosotros y te
-                deseamos un muy buen viaje!!!
-            </p>
-
-        </div>
-        <div class="parrafo">
-            <p>
-                Siempre contigo
-            </p>
-        </div>
-    </div>
-
-    <div class="footer">
-        <div class="datos">
-            <div class="firma">
-
-            </div>
-
-            <div class="localizacion">
-                <div class="qr">
-
-                </div>
-                <div class="descripcion">
-                    <p>Visitanos en nuestras plataformas sociales</p>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="cierrePagina">
-            <div class="design">
-                <div class="detalle">
-    
-                </div>
-                <div class="logo">
-    
-                </div>
-                
-            </div>
-            <span class="date">
-                05/12/2022 9:27:56
-            </span>
-        </div>
-        
-
-
-    </div>
-    
-</div> 
-
+<loading *ngIf="loading"></loading>

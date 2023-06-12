@@ -7,6 +7,7 @@ import { PaginationComponent } from './Components/pagination/pagination.componen
 import { ScrollVisibilityDirective } from './directives/scroll-visibility.directive';
 import { LoadingComponent } from './Components/loading/loading.component';
 import { TruncateDirective } from './pipes/truncate.pipe';
+import { CustomLabelDirective } from './directives/custom-label.directive';
 
 
 
@@ -18,7 +19,8 @@ import { TruncateDirective } from './pipes/truncate.pipe';
     PaginationComponent,
     ScrollVisibilityDirective,
     LoadingComponent,
-    TruncateDirective
+    TruncateDirective,
+    CustomLabelDirective
 
 
 
@@ -34,7 +36,9 @@ import { TruncateDirective } from './pipes/truncate.pipe';
     PaginationComponent,
     ScrollVisibilityDirective,
     LoadingComponent,
-    TruncateDirective
+    TruncateDirective,
+    CustomLabelDirective,
+
 
   ],
   providers: [

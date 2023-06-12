@@ -9,6 +9,7 @@
   background-color: aliceblue;
   border-radius: 20px;
   scroll-behavior: smooth;
+  width: 100%;
 
 }
 
@@ -55,29 +56,7 @@
 
 }
 
-.cotizar_btn {
-  display: flex;
 
-  flex-direction: row;
-  fill: #fff;
-  color: #fff;
-  align-items: center;
-  justify-content: center;
-  background-image: linear-gradient(to right, #1D0F9F, #DF085A);
-  height: 40px;
-
-  color: white;
-  cursor: pointer;
-  font-size: 20px;
-  padding: 5px 20px 5px 20px ;
-  text-align: center;
-  text-decoration: none;
-  border: none;
-
-  margin-top: 10px;
-  width: fit-content;
-  border-radius: 8px;
-}
 
 .cotizar_btn:hover{
   scale: 1.05;

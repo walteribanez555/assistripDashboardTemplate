@@ -54,9 +54,15 @@
   font-family:Arial, Helvetica, sans-serif;
 }
 
-.cantidad span{
-  font-size: 20px;
-  font-weight: bold;
+.cantidad input{
+    font-size: 20px;
+    font-weight: bold;
+    width: 50px;
+    border: none;
+    background: none;
+    font-weight: bold;
+    text-align: center;
+    padding-left: 14px;
 }
 
 .cantidad svg{
@@ -87,5 +93,9 @@ button{
 
   .contador{
     width: 100%;
+  }
+
+  .cantidad input{
+    padding-left: 0px;
   }
 }

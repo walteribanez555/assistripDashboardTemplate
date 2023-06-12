@@ -14,7 +14,7 @@ import { PolizasService } from 'src/app/Modules/shared/services/requests/polizas
   selector: 'app-poliza',
   templateUrl: './poliza.component.html',
   styleUrls: ['./poliza.component.css'],
-  providers: [DateOnlyPipe] 
+  providers: [DateOnlyPipe]
 })
 export class PolizaComponent implements OnInit {
     id: number = 0;
@@ -29,7 +29,7 @@ export class PolizaComponent implements OnInit {
     private polizaService : PolizasService,
     private beneficiarioService : BeneficiariosService,
     private beneficiosExtrasService : ExtrasPolizasService,
-    
+
     ) { }
 
   ngOnInit() {
@@ -39,11 +39,12 @@ export class PolizaComponent implements OnInit {
       this.polizaService.getPolizasById(this.id).pipe(
         switchMap(poliza => {
             this.poliza = poliza[0];
-            return this.beneficiarioService.getBeneficiario()
+            return this.beneficiarioService.getBeneficiarioById(this.poliza.poliza_id);
             }
           ),
         switchMap(data => {
-          this.listBeneficiarios = data.filter(beneficiario => beneficiario.poliza_id == this.poliza?.poliza_id);
+
+          this.listBeneficiarios = data;
           return this.beneficiosExtrasService.getPolizasExtras();
 
         })
@@ -53,7 +54,6 @@ export class PolizaComponent implements OnInit {
           this.listExtras = data.filter(extra => extra.poliza_id == this.poliza?.poliza_id);
 
 
-          console.log(this.poliza, this.listBeneficiarios, this.listExtras);
 
         }
 

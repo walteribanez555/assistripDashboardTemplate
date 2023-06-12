@@ -24,12 +24,12 @@ export class BeneficiariosService {
   }
 
 
-  getBeneficiarioById(id : number): Observable<Beneficiario>{
+  getBeneficiarioById(id : number): Observable<Beneficiario[]>{
     let params = new HttpParams;
 
     params = params.append('id', id);
 
-    return this.http.get<Beneficiario>(this.apiUrl, {params});
+    return this.http.get<Beneficiario[]>(this.apiUrl, {params});
 
   }
 
@@ -48,7 +48,7 @@ export class BeneficiariosService {
   //   "telefono": "34343456"
   // }
 
-  postBeneficiario( poliza_id : number, primer_apellido : string, segundo_apellido : string, primer_nombre: string , segundo_nombre: string, ci: string, pasaporte: string, fecha_nacimiento: string, sexo: string, origen : string, email : string, telefono : string ): Observable<BeneficiarioResp>{
+  postBeneficiario( poliza_id : number, primer_apellido : string, segundo_apellido : string, primer_nombre: string , segundo_nombre: string, identifier: string, fecha_nacimiento: string, sexo: string, origen : string, email : string, telefono : string ): Observable<BeneficiarioResp>{
 
     return this.http.post<BeneficiarioResp>(this.apiUrl, {
       poliza_id,
@@ -56,8 +56,7 @@ export class BeneficiariosService {
       segundo_apellido,
       primer_nombre,
       segundo_nombre,
-      ci,
-      pasaporte,
+      nro_identificacion: identifier,
       fecha_nacimiento,
       sexo,
       origen,

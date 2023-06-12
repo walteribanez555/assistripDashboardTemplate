@@ -29,6 +29,11 @@ import { ProcedimientoComponent } from './components/home/procedimiento/procedim
 import { AboutUsComponent } from './components/home/about-us/about-us.component';
 import { SliderComponent } from './components/home/slider/slider.component';
 import { PlanesComponent } from './components/planes/planes.component';
+import { ModalHeadlineComponent } from './components/data-polizas/modal-headline/modal-headline.component';
+import { SelectorHeadlineComponent } from './components/data-polizas/selector-headline/selector-headline.component';
+import { PolizaModalComponent } from './components/data-polizas/poliza/poliza.component';
+import { AseguradoComponent } from './components/polizas/asegurado/asegurado.component';
+import { PortadaComponent } from './components/polizas/portada/portada.component';
 
 
 @NgModule({
@@ -56,6 +61,11 @@ import { PlanesComponent } from './components/planes/planes.component';
     CotizarComponent,
     PlanesComponent,
     PolizaComponent,
+    ModalHeadlineComponent,
+    SelectorHeadlineComponent,
+    PolizaModalComponent,
+    AseguradoComponent,
+    PortadaComponent
 
 
   ],

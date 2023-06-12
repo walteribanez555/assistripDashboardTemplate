@@ -21,6 +21,7 @@ export class ShoppingCartComponent implements OnInit {
   @Input() cotizacionesMenores : number = 0;
   @Input() cotizacionesMayores : number = 0;
   @Input() dias : number = 0;
+  @Input() messageReady : boolean = false;
   listCupones : Cupon[] = [];
   listDescuentos : CuponAplicado[] =[] ;
   loading : boolean = false;

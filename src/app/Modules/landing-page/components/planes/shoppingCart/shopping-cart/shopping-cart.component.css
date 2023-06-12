@@ -159,7 +159,7 @@ button{
   padding: 10px 10px 10px 10px;
   border: none;
   border-radius: 10px;
-  margin: 10px;
+  margin: 0px;
   font-size: 25px;
   font-weight: bold;
   cursor: pointer;
@@ -237,11 +237,28 @@ button{
 }
 
 
+span.msg{
+  padding-left: 10px;
+  font-size: 12px;
+  color: greenyellow;
+}
+
+span.msg.red{
+  color: red;
+}
+
 
 @media (max-width:768px) {
+
+  .modal {
+    top: 0;
+    left: 0;
+    transform: none;
+  }
+
   .modal.sm {
     width: 100%;
-    height: 100vh;
+    height: 90vh;
   }
   .main{
     display: block;
@@ -262,4 +279,7 @@ button{
     order: 9999;
   }
 
+  .modal-backdrop{
+    display: none;
+  }
 }

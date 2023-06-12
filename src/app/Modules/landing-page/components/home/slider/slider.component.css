@@ -106,7 +106,7 @@ svg#next {
   border-radius: 18px 0px 0px 18px;
   transform: translateX(-25%);
   transition: all 0.4s ease;
-  animation: slide-in 0.4s ease;
+  animation: slide-in 1s ease;
 }
 
 .image-container .carousel {

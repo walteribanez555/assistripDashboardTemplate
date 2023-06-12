@@ -419,13 +419,26 @@
   }
 
   option[value="pais"] {
-    background-image: url('../../../../../assets/svg/add.svg');
+    background-image: url('../../../../../../assets/svg/add.svg');
   }
 
   .buttonSpace{
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+
+  .wrapper .listCotizaciones{
+    font-size: 20px;
+    font-weight: bold;
+    width: 50px;
+    border: none;
+    background: none;
+    font-weight: bold;
+    text-align: center;
+    padding-left: 14px;
+    color: var(--main-color);
   }
 
   @media (max-width: 980px){

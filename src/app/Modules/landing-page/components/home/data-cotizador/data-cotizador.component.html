@@ -14,7 +14,7 @@
                 <h2>Destino(s)</h2>
             </div>
             <div class="content">
-                <p>Se puede agregar mas de 1 destino </p>
+                <p>Se puede elegir <span class="number">1</span> destino </p>
                 <div class="list-item">
                     <ul class="tagList"  >
                         <li  *ngFor="let tag of tags"  >
@@ -51,12 +51,12 @@
                 <input type="date" [min]="firstDate" [max]="limitDate" [(ngModel)]="formData.finalDate" name="finalDate" placeholder="Ingresar la fecha de llegada" id="fechaLlegada"  (change)="comparar()">
             </div>
             <div *ngIf="diffDays>=0">
-                <span>La cantidad de dias es: {{diffDays}} </span>
+                <span>La cantidad de dias es: <span class="number">{{diffDays}}</span> </span>
             </div>
         </div>
 
         <div class="wrapper">
-            <h2 >Pasajeros: {{listCotizaciones.length}}   </h2>
+            <h2 >Pasajeros: <input class="listCotizaciones" type="button" [value]="listCotizaciones.length">   </h2>
 
 
             <cotizados [cantMayores]="cantMayores" [cantMenores]="cantMenores" (addItem)="agregarCotizado($event)"></cotizados>

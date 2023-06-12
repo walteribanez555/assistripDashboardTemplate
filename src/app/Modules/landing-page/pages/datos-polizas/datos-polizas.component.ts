@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { EmailValidator, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { forkJoin, map, switchMap } from 'rxjs';
 import { loadingAnimation } from 'src/app/Modules/shared/animations/loading.animation';
@@ -20,8 +20,15 @@ import { PreciosService } from 'src/app/Modules/shared/services/requests/precios
 import { VentasService } from 'src/app/Modules/shared/services/requests/ventas.service';
 import Swal from 'sweetalert2';
 import { SearchCountryField, CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-input';
+import { emailValidator } from 'src/app/Modules/shared/validators/email.validators';
+import { dateValidator } from 'src/app/Modules/shared/validators/date.validators';
 
 
+
+export enum typePolicie  {
+  mayores = 2,
+  menores = 1,
+}
 
 
 
@@ -109,8 +116,14 @@ export class DatosPolizasComponent implements OnInit {
 
   hasLoaded = true;
 
+  showHeadlines  : boolean = false;
+
 
   countryIso = CountryISO;
+
+  similarEmail : boolean = false;
+
+  defaultEmail : string = '';
 
 
 
@@ -141,6 +154,11 @@ export class DatosPolizasComponent implements OnInit {
     this.listExtras = this.dataService.listExtras;
 
 
+    // if(this.dataService.sharedData.listCotizaciones.length === 0){
+    //   Swal.close();
+    //   this.router.navigate(['../../home]']);
+    // }
+
     this.comparar(this.datosCotizacion.initialDate,this.datosCotizacion.finalDate);
 
 
@@ -150,45 +168,53 @@ export class DatosPolizasComponent implements OnInit {
 
 
 
-    //Las polizas limitamos a las edades de 75 años
+    // //Las polizas limitamos a las edades de 75 años
 
-    const fecha = new Date(this.datosCotizacion.finalDate); // fecha del viaje
-    const anosARestar = 75;
+    // const fecha = new Date(this.datosCotizacion.finalDate); // fecha del viaje
+    // const anosARestar = 75;
 
-    const nuevaFecha = new Date(
-      fecha.getFullYear() - anosARestar,
-      fecha.getMonth(),
-      Math.min(fecha.getDate(), new Date(fecha.getFullYear() - anosARestar, fecha.getMonth() + 1, 0).getDate())
-    );
+    // const nuevaFecha = new Date(
+    //   fecha.getFullYear() - anosARestar,
+    //   fecha.getMonth(),
+    //   Math.min(fecha.getDate(), new Date(fecha.getFullYear() - anosARestar, fecha.getMonth() + 1, 0).getDate())
+    // );
 
 
-    nuevaFecha.setDate(fecha.getDate() + 2);
+    // this.defaultEmail = this.datosCotizacion.email;
 
-    this.fechaLimite = nuevaFecha.toISOString().split('T')[0];
+    // nuevaFecha.setDate(fecha.getDate() + 2);
 
+    // this.fechaLimite = nuevaFecha.toISOString().split('T')[0];
+
+    this.fechaLimite = this.setFechaLimite(this.datosCotizacion.finalDate);
+
+
+    this.datosCotizacionMenores.forEach(element => {
+        this.listPolizas.push(
+          {
+            form : this.createItemForm(typePolicie.menores),
+            isOpen : true,
+            servicio : this.servicioMenores,
+            type: typePolicie.menores,
+          }
+        )
+    });
 
     this.datosCotizacionMayores.forEach(element => {
       this.listPolizas.push(
         {
-          form : this.createItemForm(),
+          form : this.createItemForm(typePolicie.mayores),
           isOpen : true,
           servicio : this.servicioMayores,
-          type: 2,
+          type: typePolicie.mayores,
         }
       )
 
     });
 
-    this.datosCotizacionMenores.forEach(element => {
-        this.listPolizas.push(
-          {
-            form : this.createItemForm(),
-            isOpen : true,
-            servicio : this.servicioMenores,
-            type: 1,
-          }
-        )
-    });
+
+
+
 
 
     this.preciosService.getPrecios().pipe(
@@ -218,6 +244,8 @@ export class DatosPolizasComponent implements OnInit {
         }
 
 
+
+
         this.realizarDescuentos();
 
         this.dataExtra = this.listExtras.map(
@@ -245,6 +273,10 @@ export class DatosPolizasComponent implements OnInit {
 
 
 
+
+
+
+
       }
     )
 
@@ -261,19 +293,38 @@ export class DatosPolizasComponent implements OnInit {
   }
 
 
+  setFechaLimite(finalDate : string): string{
+    //Las polizas limitamos a las edades de 75 años
 
-  createItemForm(  ): FormGroup {
+    const fecha = new Date(finalDate); // fecha del viaje
+    const anosARestar = 75;
+
+    const nuevaFecha = new Date(
+      fecha.getFullYear() - anosARestar,
+      fecha.getMonth(),
+      Math.min(fecha.getDate(), new Date(fecha.getFullYear() - anosARestar, fecha.getMonth() + 1, 0).getDate())
+    );
+
+
+    this.defaultEmail = this.datosCotizacion.email;
+
+    nuevaFecha.setDate(fecha.getDate() + 2);
+
+    return nuevaFecha.toISOString().split('T')[0];
+  }
+
+
+  createItemForm( typePoliza : typePolicie ): FormGroup {
     return new FormGroup({
-      nombres: new FormControl('',Validators.required),
-      apellidos: new FormControl('',Validators.required),
-      age: new FormControl('',Validators.required),
-      ci : new FormControl('', Validators.required),
-      passport: new FormControl('',Validators.required),
-      email : new FormControl(this.datosCotizacion.email,Validators.required),
-      telf : new FormControl('',Validators.required),
-      origen: new FormControl('',Validators.required),
+      nombres: new FormControl(null,Validators.required),
+      apellidos: new FormControl(null,Validators.required),
+      age: new FormControl(null, [Validators.required,dateValidator( typePoliza,this.fechaLimite)]),
+      identifier : new FormControl(null, Validators.required),
+      email : new FormControl(null,[Validators.required, emailValidator]),
+      telf : new FormControl(null,Validators.required),
+      origen: new FormControl(null,Validators.required),
       titular : new FormControl(false,Validators.required),
-      gender : new FormControl('', Validators.required)
+      gender : new FormControl(null, Validators.required)
     });
   }
 
@@ -339,22 +390,23 @@ export class DatosPolizasComponent implements OnInit {
 
 
   openForm(  poliza : any ){
-
     poliza.isOpen = !poliza.isOpen;
 
   }
 
 
-  comprobarDatos(){
-    const polizas  = this.listPolizas.filter(poliza => poliza.form.value.titular);
+  comprobarDatos(polizas: any){
+
+
+    console.log(polizas);
 
     if(polizas.length!==1){
-      this.showErrorMsg("Solamente puede haber un titular");
+      this.showErrorMsg("Se necesita que sea un titular obligatoriamente");
       return;
     }
 
 
-    if(!polizas.every( poliza => poliza.form.valid)){
+    if(!this.listPolizas.every( poliza => poliza.form.valid)){
       this.showErrorMsg("Revise los datos de cada poliza, el icono marca la poliza con error");
       return;
     }
@@ -379,7 +431,7 @@ export class DatosPolizasComponent implements OnInit {
 
 
     this.clientesService
-  .getClienteById(polizas[0].form.value.ci)
+  .getClienteById(polizas[0].form.value.identifier)
   .pipe(
     switchMap((data) => {
       let cliente_id: number = 0;
@@ -397,7 +449,7 @@ export class DatosPolizasComponent implements OnInit {
         const nuevoCliente: ClientePost = {
           apellido: polizas[0].form.value.apellidos,
           nombre: polizas[0].form.value.nombres,
-          nit_ci: polizas[0].form.value.ci,
+          nit_ci: polizas[0].form.value.identifier,
           origen: polizas[0].form.value.origen,
           email: polizas[0].form.value.email,
           nro_contacto: polizas[0].form.value.telf.value ? polizas[0].form.value.telf.value.internationalNumber: '',
@@ -406,6 +458,7 @@ export class DatosPolizasComponent implements OnInit {
         return this.clientesService.postCliente(nuevoCliente).pipe(
           switchMap((data) => {
             cliente_id = data.id;
+
 
             this.dataService.titular = data;
             return this.ventasService.postVenta(
@@ -437,7 +490,6 @@ export class DatosPolizasComponent implements OnInit {
 
 
 
-      console.log(requests);
 
       return forkJoin(
         requests.map((request)=> {
@@ -473,18 +525,30 @@ export class DatosPolizasComponent implements OnInit {
           const seconLastName = lastNames.resOfWord;
 
 
+          console.log(
+            names
+          )
+
+          console.log(
+            lastNames
+          )
+
+          console.log(poliza);
+
+
 
           requests.push(
             this.beneficiarioService.postBeneficiario(
             response.response.id,
-            firtLastName,seconLastName,
-            firstName,secondName,
-            poliza.form.value.ci,
-            poliza.form.value.passport,
+            firtLastName,
+            seconLastName,
+            firstName,
+            secondName,
+            poliza.form.value.identifier,
             poliza.form.value.age,
-            poliza.form.value.gender,
+            poliza.form.value.gender ==='Masculino' ? '1' : '2 ',
             poliza.form.value.origen,
-            poliza.form.value.email,
+            poliza.form.value.email.trimEnd(),
             poliza.form.value ? poliza.form.value.telf.internationalNumber : '' ).pipe(
               map((beneficiario)=> {
                 return { response, beneficiario}
@@ -804,6 +868,30 @@ export class DatosPolizasComponent implements OnInit {
       this.listPolizas.forEach( poliza => {
         console.log(poliza.form)
       })
+    }
+
+
+    openHeadlines(){
+      this.showHeadlines = true;
+    }
+
+    closeHeadlines(){
+      this.showHeadlines = false;
+    }
+
+
+    showEvent( ) {
+      console.log(this.similarEmail);
+    }
+
+    setEmails(event  : any){
+
+
+      if(this.similarEmail){
+        this.listPolizas.forEach(poliza => {
+          poliza.form.get('email').setValue(this.defaultEmail);
+        });
+      }
     }
 
 }

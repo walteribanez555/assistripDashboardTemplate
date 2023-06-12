@@ -2,7 +2,9 @@
   <div class="top">
     <div class="title">
       <svg xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 96 960 960" width="40"><path d="M284.525 975.333q-30.858 0-52.691-21.975Q210 931.384 210 900.525q0-30.858 21.975-52.691Q253.95 826 284.808 826q30.859 0 52.692 21.975t21.833 52.833q0 30.859-21.975 52.692-21.974 21.833-52.833 21.833Zm400 0q-30.858 0-52.691-21.975Q610 931.384 610 900.525q0-30.858 21.975-52.691Q653.95 826 684.808 826q30.859 0 52.692 21.975t21.833 52.833q0 30.859-21.975 52.692-21.974 21.833-52.833 21.833ZM238.666 322 344 540.667h285.334l120-218.667H238.666ZM206 255.333h589.382q22.976 0 34.964 20.834Q842.333 297 830.667 318L693.333 565.333q-11 19.333-28.872 30.667-17.873 11.333-39.128 11.333H324l-52 96.001h487.333V770H278q-43 0-63-31.833T214.667 670l60.667-111.333L126 242.666H47.334V176h121.333L206 255.333Zm138 285.334h285.334H344Z"/></svg>
-      <span>TU CARRITO</span>
+      <span>TU CARRITO  </span>
+      <span class="msg red"  *ngIf="!messageReady">(aun falta elegir planes)</span>
+      <span class="msg  green" *ngIf="messageReady">(pagar para siguiente paso)</span>
     </div>
 
     <span (click)="close()">X</span>
@@ -43,15 +45,15 @@
             <div class="item"  >
               <div class="data">
                 <svg class="ml-10" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M480-160q-33 0-56.5 23.5T400-80H280q-33 0-56.5-23.5T200-160v-640q0-33 23.5-56.5T280-880h120q0 33 23.5 56.5T480-800q33 0 56.5-23.5T560-880h120q33 0 56.5 23.5T760-800v640q0 33-23.5 56.5T680-80H560q0-33-23.5-56.5T480-160Zm0-80q43 0 79.5 21.5T618-160h62v-640h-62q-22 37-58.5 58.5T480-720q-43 0-79.5-21.5T342-800h-62v640h62q22-37 58.5-58.5T480-240Zm0-240Z"/></svg>
-                  <span >
+                  <span class="number" >
                     {{precioMenores.servicio?.servicio + " - "  }}
                   </span>
                 <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M360-80v-529q-91-24-145.5-100.5T160-880h80q0 83 53.5 141.5T430-680h100q30 0 56 11t47 32l181 181-56 56-158-158v478h-80v-240h-80v240h-80Zm120-640q-33 0-56.5-23.5T400-800q0-33 23.5-56.5T480-880q33 0 56.5 23.5T560-800q0 33-23.5 56.5T480-720Z"/></svg>
                 <span class="fs-20">{{"x"+cotizacionesMenores}}</span>
               </div>
-              <div class="precio">
+              <span class="precio number">
                 +{{precioMenores.precioTotal | currency:'USD':'$':'1.2-2'}}
-              </div>
+              </span>
             </div>
             <hr>
           </ng-container>
@@ -60,15 +62,15 @@
             <div class="item"   >
               <div class="data">
                 <svg class="ml-10" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M480-160q-33 0-56.5 23.5T400-80H280q-33 0-56.5-23.5T200-160v-640q0-33 23.5-56.5T280-880h120q0 33 23.5 56.5T480-800q33 0 56.5-23.5T560-880h120q33 0 56.5 23.5T760-800v640q0 33-23.5 56.5T680-80H560q0-33-23.5-56.5T480-160Zm0-80q43 0 79.5 21.5T618-160h62v-640h-62q-22 37-58.5 58.5T480-720q-43 0-79.5-21.5T342-800h-62v640h62q22-37 58.5-58.5T480-240Zm0-240Z"/></svg>
-                  <span >
+                  <span  class="number">
                     {{precioMayores.servicio?.servicio + " - " }}
                   </span>
                   <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M360-80v-529q-91-24-145.5-100.5T160-880h80q0 83 53.5 141.5T430-680h100q30 0 56 11t47 32l181 181-56 56-158-158v478h-80v-240h-80v240h-80Zm120-640q-33 0-56.5-23.5T400-800q0-33 23.5-56.5T480-880q33 0 56.5 23.5T560-800q0 33-23.5 56.5T480-720Z"/></svg>
                     <span class="fs-20">{{"x"+cotizacionesMayores}}</span>
               </div>
-              <div class="precio">
+              <span class="precio number">
                 +{{precioMayores.precioTotal | currency:'USD':'$':'1.2-2'}}
-              </div>
+              </span>
             </div>
             <hr>
           </ng-container>
@@ -82,9 +84,9 @@
                   Descuento nro : {{descuento.cupon.cupon_id}}
                 </span>
               </div>
-              <div class="precio">
+              <span class="precio number">
                 -{{descuento.montoTotal | currency:'USD':'$':'1.2-2'}}
-              </div>
+              </span>
             </div>
             <hr>
 
@@ -96,9 +98,9 @@
                   Total :
                 </span>
             </div>
-            <div class="precio total">
+            <span class="precio total number">
               {{total | currency:'USD':'$':'1.2-2'}}
-            </div>
+            </span>
           </div>
           <hr>
         </div>

@@ -5,6 +5,14 @@
                 Detalles para las polizas
             </h2>
 
+            <div class="select-mail">
+                <input type="checkbox"  style="margin-right: 10px;" [(ngModel)]="similarEmail" (change)="setEmails($event)"   >
+                <div class="email-info">
+                  <span>Todos utilizan el mismo email?</span>
+                  <span>{{defaultEmail}}</span>
+                </div>
+            </div>
+
 
             <div  *ngIf="datosCotizacionMenores.length>0" class="group-cotizacion">
 
@@ -67,19 +75,15 @@
                                         <div class="select">
                                             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M784 936 532 684q-30 24-69 38t-83 14q-109 0-184.5-75.5T120 476q0-109 75.5-184.5T380 216q109 0 184.5 75.5T640 476q0 44-14 83t-38 69l252 252-56 56ZM380 656q75 0 127.5-52.5T560 476q0-75-52.5-127.5T380 296q-75 0-127.5 52.5T200 476q0 75 52.5 127.5T380 656Z"/></svg>
                                             <select name="gender" id="gender"  formControlName="gender"  >
-                                                <option value="1">Masculino</option>
-                                                <option value="2">Femenino</option>
+                                                <option value="Masculino">Masculino</option>
+                                                <option value="Femenino">Femenino</option>
 
                                             </select>
                                         </div>
                                     </div>
                                     <div class="field">
-                                        <label for="number">Numero de Ci</label>
-                                        <input type="number"  formControlName="ci"  id="ci" name="ci" placeholder="1231415">
-                                    </div>
-                                    <div class="field">
-                                        <label for="number">Numero de pasaporte</label>
-                                        <input type="number"  formControlName="passport"  id="number" name="number" placeholder="Numero">
+                                      <label for="identier">Dni o Pasaporte</label>
+                                      <input type="text"  formControlName="identifier"  id="identifier" name="identifier" placeholder="ABC1231415">
                                     </div>
                                     <div class="field">
                                         <label for="email"   >Correo electronico</label>
@@ -103,10 +107,10 @@
 
 
                                 </div>
-                                <div class="cotizacion-footer">
+                                <!-- <div class="cotizacion-footer">
                                     <input type="checkbox" formControlName="titular"    name="titular" id="titular" value="titular">
                                     <label for="titular">Titular</label>
-                                </div>
+                                </div> -->
                             </form>
 
 
@@ -182,28 +186,35 @@
                                     </div>
                                 </div>
                                 <div class="field">
-                                    <label for="number">Numero de Ci</label>
-                                    <input type="number"  formControlName="ci"  id="ci" name="ci" placeholder="1231415">
-                                </div>
-                                <div class="field">
-                                    <label for="number">Numero de pasaporte</label>
-                                    <input type="number"  formControlName="passport"  id="number" name="number" placeholder="Numero">
+                                    <label for="identifier">Dni o Pasaporte</label>
+                                    <input type="text"  formControlName="identifier"  id="identifier" name="identifier" placeholder="ABC1231415">
                                 </div>
                                 <div class="field">
                                     <label for="email">Correo electronico</label>
                                     <input type="email" formControlName="email" id="email" name="email" placeholder="email">
                                 </div>
                                 <div class="field">
-                                    <label for="telf">Numero de telefono</label>
-                                    <input type="text"   formControlName="telf" id="telf" name="telf" placeholder="+591 77777777">
-                                </div>
+                                  <label for="telf">Numero de telefono</label>
+                                  <ngx-intl-tel-input
+                                    [enableAutoCountrySelect]="true"
+                                    [enablePlaceholder]="true"
+                                    [searchCountryFlag]="true"
+                                    [selectedCountryISO]="countryIso.Bolivia"
+                                    [separateDialCode]="true"
+                                    [formControlName]="'telf'"
+                                    [customPlaceholder]="'Inserta tu numero'"
+                                    [maxLength]="15"
+                                    [phoneValidation]="true"
+                                    name="telf"
+                                  ></ngx-intl-tel-input>
+                              </div>
 
 
                             </div>
-                            <div class="cotizacion-footer">
+                            <!-- <div class="cotizacion-footer">
                                 <input type="checkbox" formControlName="titular"    name="titular" id="titular" value="titular">
                                 <label for="titular">Titular</label>
-                            </div>
+                            </div> -->
                         </form>
 
 
@@ -238,29 +249,29 @@
                     </span>
                     <ng-container *ngIf="datosCotizacionMenores.length>0">
                         <div class="item-carrito">
-                            <span class="descripcion">{{servicioMenores?.servicio}} * {{precioMenores.cantidadPolizas}} / {{costoMenores | number:'1.0-3'}}</span>
-                            <span class="costo" >+{{precioMenores.precioTotal | currency:'USD':'$':'1.2-2' }}...</span>
+                            <span class="descripcion number">{{servicioMenores?.servicio}} * {{precioMenores.cantidadPolizas}} / {{costoMenores | number:'1.0-3'}}</span>
+                            <span class="costo number" >+{{precioMenores.precioTotal | currency:'USD':'$':'1.2-2' }}...</span>
 
                         </div>
                     </ng-container>
 
                     <ng-container *ngIf="datosCotizacionMayores.length>0">
                         <div class="item-carrito">
-                            <span class="descripcion">{{servicioMayores?.servicio}} * {{precioMayores.cantidadPolizas}} / {{costoMayores | number:'1.0-3'}}</span>
-                            <span class="costo" >+{{precioMayores.precioTotal | currency:'USD':'$':'1.2-2' }}...</span>
+                            <span class="descripcion number">{{servicioMayores?.servicio}} * {{precioMayores.cantidadPolizas}} / {{costoMayores | number:'1.0-3'}}</span>
+                            <span class="costo number" >+{{precioMayores.precioTotal | currency:'USD':'$':'1.2-2' }}...</span>
 
                         </div>
                     </ng-container>
 
                     <hr>
-                    <span class="descuento" *ngIf="listExtras.length>0">
+                    <span class="descuento number" *ngIf="listExtras.length>0">
                         Extras
                     </span>
 
                     <ng-container *ngFor="let extra of dataExtra">
                         <div class="item-carrito">
-                            <span class="descripcion">{{extra.extra.descripcion}}*Dias: {{diffDays}} * Costo: {{extra.costo}} * Cantidad: {{extra.cantidad}} </span>
-                            <span class="costo" >+{{extra.costoTotal| currency:'USD':'$':'1.2-2' }}</span>
+                            <span class="descripcion number">{{extra.extra.descripcion}}*Dias: {{diffDays}} * Costo: {{extra.costo}} * Cantidad: {{extra.cantidad}} </span>
+                            <span class="costo number" >+{{extra.costoTotal| currency:'USD':'$':'1.2-2' }}</span>
 
                         </div>
                         <hr>
@@ -272,8 +283,8 @@
                     </span>
                     <ng-container *ngFor="let descuento of listDescuentos">
                         <div class="item-carrito">
-                            <span class="descripcion">{{descuento.cupon.cupon_id}} * {{descuento.monto}} </span>
-                            <span class="costo" >-{{descuento.montoTotal | currency:'USD':'$':'1.2-2' }}</span>
+                            <span class="descripcion number">{{descuento.cupon.cupon_id}} * {{descuento.monto}} </span>
+                            <span class="costo number" >-{{descuento.montoTotal | currency:'USD':'$':'1.2-2' }}</span>
 
                         </div>
                         <hr>
@@ -284,7 +295,7 @@
 
                 <div class="total">
                     <span>Total</span>
-                    <p>${{totalEnteros}}<span class="decimal">{{totalDecimales}}</span> <span class="type-money">USD</span></p>
+                    <p class="number">${{totalEnteros}}<span class="decimal number">{{totalDecimales}}</span> <span class="type-money">USD</span></p>
                 </div>
             </ng-container>
         </div>
@@ -294,7 +305,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 896 160 576l320-320 42 42-248 248h526v60H274l248 248-42 42Z"/></svg>
             Volver
         </button>
-        <button  class="btn_guardar"  (click)="comprobarDatos()">
+        <button  class="btn_guardar"  (click)="openHeadlines()">
 
             Comprobar
         </button>
@@ -336,7 +347,7 @@
                     <ng-container *ngIf="datosCotizacionMenores.length>0">
                         <div class="item-carrito">
                             <span class="descripcion">{{servicioMenores?.servicio}} * {{precioMenores.cantidadPolizas}} / {{costoMenores | number:'1.0-3'}}</span>
-                            <span class="costo" >+{{precioMenores.precioTotal | number:'1.0-3'}}...</span>
+                            <span class="costo number" >+{{precioMenores.precioTotal | number:'1.0-3'}}...</span>
 
                         </div>
                     </ng-container>
@@ -344,7 +355,7 @@
                     <ng-container *ngIf="datosCotizacionMayores.length>0">
                         <div class="item-carrito">
                             <span class="descripcion">{{servicioMayores?.servicio}} * {{precioMayores.cantidadPolizas}} / {{costoMayores | number:'1.0-3'}}</span>
-                            <span class="costo" >+{{precioMayores.precioTotal | number:'1.0-3'}}...</span>
+                            <span class="costo number" >+{{precioMayores.precioTotal | number:'1.0-3'}}...</span>
 
                         </div>
                     </ng-container>
@@ -356,8 +367,8 @@
 
                     <ng-container *ngFor="let extra of dataExtra">
                         <div class="item-carrito">
-                            <span class="descripcion">{{extra.extra.descripcion}}*Dias: {{diffDays}} * Costo: {{extra.costo}} * Cantidad: {{extra.cantidad}} </span>
-                            <span class="costo" >+{{extra.costoTotal| number:'1.0-3'}}</span>
+                            <span class="descripcion number">{{extra.extra.descripcion}}*Dias: {{diffDays}} * Costo: {{extra.costo}} * Cantidad: {{extra.cantidad}} </span>
+                            <span class="costo number" >+{{extra.costoTotal| number:'1.0-3'}}</span>
 
                         </div>
                         <hr>
@@ -369,8 +380,8 @@
                     </span>
                     <ng-container *ngFor="let descuento of listDescuentos">
                         <div class="item-carrito">
-                            <span class="descripcion">{{descuento.cupon.cupon_id}} * {{descuento.monto}} </span>
-                            <span class="costo" >-{{descuento.montoTotal | number:'1.0-3'}}</span>
+                            <span class="descripcion number">{{descuento.cupon.cupon_id}} * {{descuento.monto}} </span>
+                            <span class="costo number" >-{{descuento.montoTotal | number:'1.0-3'}}</span>
 
                         </div>
                         <hr>
@@ -381,7 +392,7 @@
 
                 <div class="total">
                     <span>Total</span>
-                    <p>${{totalEnteros}}<span class="decimal">{{totalDecimales}}</span> <span class="type-money">USD</span></p>
+                    <p class="number">${{totalEnteros}}<span class="decimal number">{{totalDecimales}}</span> <span class="type-money">USD</span></p>
                 </div>
             </ng-container>
         </div>
@@ -392,7 +403,7 @@
             <button (click)="backPrev()">
                 Prev
             </button>
-            <button class="active"   (click)="comprobarDatos()">
+            <button class="active"   (click)="openHeadlines()">
                 Generar Polizas
             </button>
 
@@ -409,3 +420,8 @@
 
 
 </div>
+
+
+
+<headline *ngIf="showHeadlines"  (closeModal)="closeHeadlines()" [listPolizas]="listPolizas" (generateSold)="comprobarDatos($event)" ></headline>
+

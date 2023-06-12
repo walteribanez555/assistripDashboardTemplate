@@ -27,6 +27,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PipesModule } from './Modules/shared/pipes/pipes.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalService } from './Modules/shared/Components/modal/modal.service';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common'
 
 
 
@@ -72,7 +73,8 @@ import { ModalService } from './Modules/shared/Components/modal/modal.service';
     VentasService,
     ExtrasPolizasService,
     BeneficiariosService,
-    ModalService
+    ModalService,
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]
 })

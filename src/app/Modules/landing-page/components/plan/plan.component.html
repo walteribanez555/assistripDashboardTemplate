@@ -1,8 +1,8 @@
 <div class="card">
   <div class="top">
 
-    <h1>{{plan.serv?.servicio}}</h1>
-    <h2>{{plan.precio | currency:'USD':'$':'1.2-2'}}</h2>
+    <h3>{{plan.serv?.servicio}}</h3>
+    <h4 class="number">{{plan.precio | currency:'USD':'$':'1.2-2'}}</h4>
     <p class="price">(Por persona)</p>
 
       <button *ngIf="plan.serv"  (click)="togglePlan(plan)">
@@ -15,7 +15,7 @@
 
     <div class="info" [class.sticky]="isSticky" >
       <p>Cobertura global </p>
-      <p class="cobertura">{{plan.serv?.cobertura_global | currency:'USD':'$':'1.2-2'}}</p>
+      <p class="cobertura number">{{plan.serv?.cobertura_global | currency:'USD':'$':'1.2-2'}}</p>
     </div>
     <hr [class.sticky]="isSticky">
     <div class="info " [class.sticky]="isSticky" (click)="openModal()">

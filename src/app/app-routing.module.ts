@@ -1,6 +1,7 @@
 
 import {  NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NotFoundComponent } from './Shared/pages/not-found/not-found.component';
 
 
 
@@ -12,36 +13,38 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 const routes : Routes = [
-  
+
+
   {
-    path: '',
-    redirectTo : 'home/inicio',
+    path : 'landing-page',
+    loadChildren : () => import('./Landing-Page/landing-page.module').then(m=> m.LandingPageModule),
+  },
+  {
+    path : 'auth',
+    loadChildren : () => import('./Auth/auth.module').then( m => m.AuthModule),
+  },
+
+  {
+    path : 'dashboard',
+    loadChildren : () => import('./Dashboard/dashboard.module').then( m => m.DashboardModule),
+  },
+  {
+    path : '404',
+    component : NotFoundComponent,
+  },
+
+  {
+    path : '',
+    redirectTo : 'landing-page/home',
     pathMatch : 'full'
   },
   {
-    path: 'home',
-    redirectTo : 'home/inicio',
-  },
-
-  {
-    path: 'dashboard',
-    redirectTo : 'dashboard/polizas/listado-polizas',
-  },
-
-  
-  { path: 'home' , loadChildren: () => import('./Modules/landing-page/landing-page.module').then(m => m.LandingPageModule) },
-
-  
-  
-
-  
-
-  {
     path : '**',
-    redirectTo : 'home/inicio',
-  },
-  
-  
+    redirectTo : '404',
+
+  }
+
+
 
 
 ]
@@ -49,9 +52,9 @@ const routes : Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes),
-    
-    
-    
+
+
+
   ],
   exports: [RouterModule]
 })

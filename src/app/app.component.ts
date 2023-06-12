@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, OnInit,  ElementRef,TemplateRef } from '@angular/core';
-import { ModalService } from './Modules/shared/Components/modal/modal.service';
 
 
 

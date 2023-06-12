@@ -1,0 +1,522 @@
+
+.container-form{
+  background: none;
+}
+.btn_field{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+
+
+.alert{
+  color: red;
+}
+
+
+  header{
+    position: relative;
+    font-size: 25px;
+    font-weight: 600;
+    color: var(--text-color);
+  }
+  header::before{
+    content: "";
+
+    left: 0;
+    bottom: -2px;
+    height: 3px;
+    width: 27px;
+    border-radius: 8px;
+    background-color: #4070f4;
+  }
+  form{
+    margin: 20px;
+    margin-top: 16px;
+    background: none;
+
+  }
+
+  select {
+    width: 100%;
+    border: 1px solid var(--main-color);
+
+  }
+
+  span {
+    color: var(--main-color);
+    font-size: 12px;
+  }
+
+   h2{
+    font-size: 20px;
+    margin-left: 8px;
+    color: var(--main-color);
+  }
+   form .form{
+    margin-left: 8px;
+    transition: 0.3s ease;
+  }
+
+  form.secActive .form.second{
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+
+  }
+
+
+  form.secActive .form.first{
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-100%);
+  }
+   form .title{
+    display: block;
+    margin-bottom: 8px;
+    font-size: 20px;
+    font-weight: 500;
+    margin: 6px 0;
+    color: var(--text-color);
+  }
+   form .fields{
+    padding: 15px;
+    margin-right: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  form .fields.travel{
+    font-size: 10px;
+    padding: 0px;
+
+  }
+  form .fields .input-field{
+    display: flex;
+    width: calc(100% / 2 - 10px);
+    flex-direction: column;
+    margin: 0px 0;
+  }
+
+
+
+  .wrapper{
+    margin-bottom: 5px;
+    background: none;
+  }
+
+  .wrapper .input-field{
+    margin: 0;
+  }
+  .input-field label{
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--main-color);
+  }
+  .input-field input, select{
+    outline: none;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--main-color);
+    border-radius: 5px;
+    border: 1px solid var(--main-color);
+    background: var(--body-bg);
+    padding: 0 5px;
+    height: 40px;
+    margin: 5px 0;
+  }
+
+
+
+
+  .wrapper .input-field input{
+    width: 100%;
+    color: var(--main-color);
+  }
+
+
+  .wrapper .listado{
+    appearance: none;
+    color: var(--main-color);
+    width: fit-content;
+    height: fit-content;
+    color: white;
+    border: none;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    transition: 0.8 all ease
+
+  }
+
+  .wrapper .listado:focus {
+    outline: none;
+  }
+  .wrapper .listado option{
+    color: var(--main-color);
+  }
+  .input-field input :focus,
+  .input-field select:focus{
+    box-shadow: 0 3px 6px rgba(0,0,0,0.13);
+  }
+
+  .input-field input[type="date"]:valid{
+    color: var(--main-color);
+
+  }
+
+  .input-field input[type="date"]::-webkit-calendar-picker-indicator {
+    background: url(https://cdn3.iconfinder.com/data/icons/linecons-free-vector-icons-pack/32/calendar-16.png) center/80% no-repeat;
+    color: var(--main-color);
+  }
+    .backBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    max-width: 200px;
+    width: 150px;
+    border: none;
+    outline: none;
+    color: white;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    background-color: var(--body-bg);
+    transition: all 0.3s linear;
+    cursor: pointer;
+
+  }
+   form .btnText{
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+
+  form .btn_add_cliente{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--main-color);
+    border: 1px solid var(--main-color);
+    height: 30px;
+    width: fit-content;
+    padding: 5px;
+    fill: var(--main-color);
+  }
+  form .btn_add_cliente:hover{
+    scale: 1.1;
+  }
+
+
+.cotizar_btn {
+    display: flex;
+
+    flex-direction: row;
+    fill: #fff;
+    color: #fff;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(to right, #1D0F9F, #DF085A);
+    height: 40px;
+
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 5px ;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+
+    margin-top: 10px;
+    width: 100%;
+  }
+  .cotizar_btn:hover{
+    scale: 1.05;
+   }
+
+  ::selection{
+    color: var(--text-color);
+    background: var(--logo-color);
+  }
+
+  .wrapper{
+    width: 100%;
+    border-radius: 10px;
+    padding: 0px 15px 0px;
+  }
+
+  .wrapper .cotizaciones-list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+  }
+
+  .wrapper ul li{
+    padding-top: 10px;
+  }
+
+  .wrapper ul li svg {
+    cursor: pointer;
+  }
+  .wrapper ul li svg:hover{
+    scale: 1.1;
+    fill: red;
+  }
+
+  li input{
+    padding: 0px 0px 0px 10px ;
+    font-size: 14px;
+    height: 30px;
+    border: 1px solid var(--main-color);
+    width: 70px;
+  }
+
+  .wrapper :where(.title, li, li i, .details){
+    display: flex;
+    align-items: center;
+  }
+  .title img{
+    max-width: 21px;
+  }
+
+  .wrapper .content{
+    margin: 5px 0;
+    border: none;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .wrapper .content .list-item{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2px;
+    align-items: center;
+
+  }
+
+  .tagList {
+    border: none;
+  }
+
+  .content p{
+    font-size: 15px;
+    color: var(--main-color);
+  }
+
+  .content ul{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 7px;
+    border-radius: 5px;
+  }
+
+  .content ul  li{
+    color: var(--main-color);
+    margin: 1px 3px;
+    list-style: none;
+    border-radius: 5px;
+    background-color: var(--body-bg);
+    padding: 2px 3px 5px 10px;
+    border: 1px solid var(--main-color);
+  }
+
+  .content ul li svg{
+    height: 20px;
+    width: 20px;
+    fill: var(--main-color);
+    margin-right: 8px;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 50%;
+
+    justify-content: center;
+  }
+
+  .content ul input{
+    flex: 1;
+    padding: 5px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    background-color: var(--body-bg);
+  }
+
+  .options {
+    width: fit-content;
+    margin: 0px;
+  }
+
+  .list {
+    padding: 2px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    background: var(--main-color);
+    border-radius: 10px;
+  }
+
+  .options.w-100{
+    width: 100%;
+  }
+
+  .flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .options svg  {
+    fill:white;
+  }
+
+  .options .listado{
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--main-color);
+    color: white;
+    width: 100%;
+    height: fit-content;
+  }
+
+  .options .listado option{
+    background-color: white;
+    width: 100%;
+  }
+
+  .btn-seeMore{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    fill: var(--main-color);
+    cursor: pointer;
+  }
+
+  .btn-seeMore span{
+    font-size: 14px;
+    color: var(--main-color);
+    margin-left: 5px;
+  }
+
+  option {
+    background-repeat: no-repeat;
+    background-position: right center;
+    padding-right: 20px;
+  }
+
+  option[value="pais"] {
+    background-image: url('/src/assets/svg/add.svg');
+  }
+
+  .buttonSpace{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  .wrapper .listCotizaciones{
+    font-size: 20px;
+    font-weight: bold;
+    width: 50px;
+    border: none;
+    background: none;
+    font-weight: bold;
+    text-align: center;
+    padding-left: 14px;
+    color: var(--main-color);
+  }
+
+  @media (max-width: 980px){
+    .options .listado{
+        width: 100%;
+      }
+  }
+
+  .nextBtn:hover,
+  .nextBtn:focus{
+    background-color: var(--main-color);
+    color: white;
+    cursor: pointer;
+    border: 2px solid var(--main-color);
+  }
+
+  .wrapper .details{
+    justify-content: space-between;
+  }
+
+   button{
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 17px;
+    cursor: pointer;
+    padding: 9px 15px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+    margin-bottom: 30px;
+  }
+
+  @media (max-width: 1150px) {
+    form{
+       overflow-y: scroll;
+   }
+    form::-webkit-scrollbar{
+      display: none;
+   }
+   form .fields .input-field{
+       width: calc(100% / 2 - 15px);
+   }
+
+   .cotizar_btn{
+       margin-top: 10px;
+       font-size: 12px;
+       width: 100%;
+   }
+
+   h2{
+       font-size: 12px;
+   }
+   label {
+    font-size: 12px;
+   }
+ }
+
+  @media (max-width: 870px) {
+    form{
+       margin-left: 0px;
+       width: 100%;
+   }
+    form::-webkit-scrollbar{
+      display: none;
+   }
+   form .fields .input-field{
+       width: calc(100% / 2 - 15px);
+   }
+
+   .cotizar_btn{
+       margin-top: 10px;
+       font-size: 15px;
+       width: 100px;
+   }
+   h2{
+       font-size: 12px;
+   }
+
+ }
+

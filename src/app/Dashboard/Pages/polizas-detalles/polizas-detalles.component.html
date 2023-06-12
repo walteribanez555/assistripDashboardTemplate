@@ -1,0 +1,75 @@
+
+
+
+
+<div class="container">
+    <h1>Historial de las polizas</h1>
+
+    <div *ngIf="listPolizas.length>0" class="listPolizas">
+        <div  *ngFor="let poliza of listPolizas" class="poliza">
+            <div class="left">
+                <div class="cats">
+                    <div  class="estado vigente">
+                        Vigente
+                    </div>
+                    <div class="siniestro">
+                        Siniestro(1)
+                    </div>
+                </div>
+                <div class="fields">
+                    <div class="field">
+                        <span class="title">Nro Poliza</span>
+                        <span>{{poliza.poliza_id }}</span>
+                    </div>
+                    <div class="field">
+                        <span class="title">Fecha de emision</span>
+                        <span>{{poliza.fecha_emision | dateOnly }}</span>
+                    </div>
+                    <div class="field">
+                        <span class="title">Destino</span>
+                        <span>{{poliza.destino}}</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="right">
+                <span class="title">Acciones</span>
+                <div class="listAcciones">
+                    <div class="accion"  (click)="mostrarDetalles(poliza.poliza_id)">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M480 736q75 0 127.5-52.5T660 556q0-75-52.5-127.5T480 376q-75 0-127.5 52.5T300 556q0 75 52.5 127.5T480 736Zm0-72q-45 0-76.5-31.5T372 556q0-45 31.5-76.5T480 448q45 0 76.5 31.5T588 556q0 45-31.5 76.5T480 664Zm0 192q-146 0-266-81.5T40 556q54-137 174-218.5T480 256q146 0 266 81.5T920 556q-54 137-174 218.5T480 856Zm0-300Zm0 220q113 0 207.5-59.5T832 556q-50-101-144.5-160.5T480 336q-113 0-207.5 59.5T128 556q50 101 144.5 160.5T480 776Z"/></svg>
+                        <span>Ver</span>
+                    </div>
+                    <div class="accion">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M200 936V256h360l16 80h224v400H520l-16-80H280v280h-80Zm300-440Zm86 160h134V416H510l-16-80H280v240h290l16 80Z"/></svg>
+                        <span>Reportar siniestro</span>
+                    </div>
+                    <div (click)="downloadPDF()" class="accion">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M240 896q-33 0-56.5-23.5T160 816V696h80v120h480V696h80v120q0 33-23.5 56.5T720 896H240Zm240-160L280 536l56-58 104 104V256h80v326l104-104 56 58-200 200Z"/></svg>
+                        <span>Descargar</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<!-- <div class="datos" class="datos-imprimir" #polizaimprimir>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex dolorem rerum tempore, laborum beatae vero! Reprehenderit repellendus nam sit dicta placeat amet laborum perspiciatis fugit distinctio reiciendis? Quos, natus dolores sunt laborum at aperiam. Ipsa neque eaque nobis repudiandae corrupti cupiditate id quidem, ullam quibusdam delectus quod quam harum sed. Non iure itaque tempora vero magni. Necessitatibus modi cupiditate laboriosam earum voluptas esse labore reprehenderit ad dicta voluptatibus corrupti saepe error, inventore cum debitis accusamus numquam cumque commodi totam a? Nisi nobis et vero sed! Quos, laborum suscipit? Hic tenetur atque sed nobis inventore aspernatur eligendi cum facilis porro quas quia nisi, sapiente impedit exercitationem soluta dolorem ea voluptatum omnis, consequuntur perferendis. Soluta, ab, officiis laboriosam nesciunt laborum eius explicabo quaerat ad nihil exercitationem odio hic error expedita doloribus, sint eaque ullam repellat! Modi a aut, dicta non rem error tempore natus, voluptates rerum corporis iste officia et, vitae laboriosam?</p>
+</div> -->
+
+
+<portada #polizaimprimir></portada>
+
+
+
+<loading *ngIf="loading"></loading>

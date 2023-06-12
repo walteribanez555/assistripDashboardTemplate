@@ -9,25 +9,26 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 
 import { CommonModule } from '@angular/common';
-import { BeneficiosService } from './Modules/shared/services/requests/beneficios.service';
-import { CatalogosService } from './Modules/shared/services/requests/catalogos.service';
-import { ClientesService } from './Modules/shared/services/requests/clientes.service';
-import { CuponesService } from './Modules/shared/services/requests/cupones.service';
-import { ExtrasService } from './Modules/shared/services/requests/extras.service';
-import { PlanesService } from './Modules/shared/services/requests/planes.service';
-import { PolizasService } from './Modules/shared/services/requests/polizas.service';
-import { PreciosService } from './Modules/shared/services/requests/precios.service';
-import { ServiciosService } from './Modules/shared/services/requests/servicios.service';
-import { GetLocationService } from './Modules/shared/services/get-location.service';
-import { VentasService } from './Modules/shared/services/requests/ventas.service';
-import { ExtrasPolizasService } from './Modules/shared/services/requests/beneficiosExtras.service';
-import { BeneficiariosService } from './Modules/shared/services/requests/beneficiarios.service';
+
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PipesModule } from './Modules/shared/pipes/pipes.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ModalService } from './Modules/shared/Components/modal/modal.service';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common'
+import { ExtrasService } from './Shared/services/requests/extras.service';
+import { GetLocationService } from './Shared/services/get-location.service';
+import { BeneficiariosService } from './Shared/services/requests/beneficiarios.service';
+import { BeneficiosService } from './Shared/services/requests/beneficios.service';
+import { ExtrasPolizasService } from './Shared/services/requests/beneficiosExtras.service';
+import { CatalogosService } from './Shared/services/requests/catalogos.service';
+import { ClientesService } from './Shared/services/requests/clientes.service';
+import { CuponesService } from './Shared/services/requests/cupones.service';
+import { PlanesService } from './Shared/services/requests/planes.service';
+import { PolizasService } from './Shared/services/requests/polizas.service';
+import { PreciosService } from './Shared/services/requests/precios.service';
+import { ServiciosService } from './Shared/services/requests/servicios.service';
+import { VentasService } from './Shared/services/requests/ventas.service';
+import { ModalService } from './Shared/components/modal/modal.service';
+import { SharedModule } from './Shared/shared.module';
 
 
 
@@ -51,8 +52,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common'
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    PipesModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SharedModule,
 
 
 

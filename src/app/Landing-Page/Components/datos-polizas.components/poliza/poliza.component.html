@@ -1,0 +1,42 @@
+<div class="item"  >
+
+  <div class="info">
+    <div class="data">
+      <input type="checkbox" [(ngModel)]="poliza.titular"  (click)="toggleCheck()" >
+        <span *ngIf="poliza.form.value.nombres && poliza.form.value.apellidos">{{poliza.form.value.nombres + ' ' + poliza.form.value.apellidos }}</span>
+        <span *ngIf="poliza.form.value.nombres && !poliza.form.value.apellidos">{{poliza.form.value.nombres}}</span>
+        <span *ngIf="!poliza.form.value.nombres && poliza.form.value.apellidos">{{poliza.form.value.apellidos}}</span>
+        <span *ngIf="!poliza.form.value.nombres && !poliza.form.value.apellidos">Falta el nombre</span>
+
+    </div>
+    <div class="state">
+      <svg class="red"  *ngIf="!poliza.form.valid"   xmlns="http://www.w3.org/2000/svg" height="32" viewBox="0 -960 960 960" width="32"><path d="M479.982-280q14.018 0 23.518-9.482 9.5-9.483 9.5-23.5 0-14.018-9.482-23.518-9.483-9.5-23.5-9.5-14.018 0-23.518 9.482-9.5 9.483-9.5 23.5 0 14.018 9.482 23.518 9.483 9.5 23.5 9.5ZM453-433h60v-253h-60v253Zm27.266 353q-82.734 0-155.5-31.5t-127.266-86q-54.5-54.5-86-127.341Q80-397.681 80-480.5q0-82.819 31.5-155.659Q143-709 197.5-763t127.341-85.5Q397.681-880 480.5-880q82.819 0 155.659 31.5Q709-817 763-763t85.5 127Q880-563 880-480.266q0 82.734-31.5 155.5T763-197.684q-54 54.316-127 86Q563-80 480.266-80Zm.234-60Q622-140 721-239.5t99-241Q820-622 721.188-721 622.375-820 480-820q-141 0-240.5 98.812Q140-622.375 140-480q0 141 99.5 240.5t241 99.5Zm-.5-340Z"/></svg>
+
+
+       <svg class="green" *ngIf="poliza.form.valid"  xmlns="http://www.w3.org/2000/svg" height="32" viewBox="0 -960 960 960" width="32"><path d="M480-80q-85 0-158-30.5T195-195q-54-54-84.5-127T80-480q0-84 30.5-157T195-764q54-54 127-85t158-31q75 0 140 24t117 66l-43 43q-44-35-98-54t-116-19q-145 0-242.5 97.5T140-480q0 145 97.5 242.5T480-140q145 0 242.5-97.5T820-480q0-30-4.5-58.5T802-594l46-46q16 37 24 77t8 83q0 85-31 158t-85 127q-54 54-127 84.5T480-80Zm-59-218L256-464l45-45 120 120 414-414 46 45-460 460Z"/></svg>
+    </div>
+  </div>
+  <div class="details">
+    <button (click)="toggleDetails()">
+      <span *ngIf="!displayDetails">Ver detalles</span>
+      <span *ngIf="displayDetails">Ocultar detalles</span>
+      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M480 711 240 471l56-56 184 184 184-184 56 56-240 240Z"/></svg>
+    </button>
+
+      <hr *ngIf="displayDetails" >
+      <div class="list-details" [@toggleDetails]="displayDetails ? 'show' : 'hide'" [class.active]="displayDetails">
+      <selector-headline [title]="'nombres'"           [validations]="poliza.form.get('nombres')?.errors"     [value]="poliza.form.value.nombres"></selector-headline>
+      <selector-headline [title]="'apellidos'"         [validations]="poliza.form.get('apellidos')?.errors"   [value]="poliza.form.value.apellidos"></selector-headline>
+      <selector-headline [title]="'age'"               [validations]="poliza.form.get('age')?.errors"         [value]="poliza.form.value.age"></selector-headline>
+      <selector-headline [title]="'origen'"            [validations]="poliza.form.get('origen')?.errors"      [value]="poliza.form.value.origen"></selector-headline>
+      <selector-headline [title]="'Dni o identifier'"  [validations]="poliza.form.get('identifier')?.errors"  [value]="poliza.form.value.identifier"></selector-headline>
+      <selector-headline [title]="'email'"             [validations]="poliza.form.get('email')?.errors"       [value]="poliza.form.value.email"></selector-headline>
+      <selector-headline [title]="'gender'"            [validations]="poliza.form.get('gender')?.errors"      [value]="poliza.form.value.gender"></selector-headline>
+      <selector-headline [title]="'telf'"              [validations]="poliza.form.get('telf')?.errors"        [value]="poliza.form.value.telf ?  poliza.form.value.telf.number : null"></selector-headline>
+
+
+    </div>
+
+  </div>
+</div>
+<hr>

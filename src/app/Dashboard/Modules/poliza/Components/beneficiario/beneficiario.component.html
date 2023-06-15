@@ -1,0 +1,77 @@
+<div class="beneficiario">
+  <div class="row">
+    <div class="field">
+        <span class="title">
+            Nombre(s)
+        </span>
+        <div class="data">
+            <span>{{beneficiario.primer_nombre}} </span>
+            <span *ngIf="beneficiario.segundo_nombre!=='0'">{{beneficiario.segundo_nombre}} </span>
+        </div>
+    </div>
+    <div class="field">
+        <span class="title">
+            Apellido(s)
+        </span>
+        <div class="data">
+            <span>{{beneficiario.primer_apellido}} </span>
+            <span *ngIf="beneficiario.segundo_apellido !=='0' ">{{beneficiario.segundo_apellido}}</span>
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="field">
+        <span class="title">
+            Fecha de nacimiento
+        </span>
+        <div class="data">
+            <span>{{beneficiario.fecha_nacimiento | dateOnly}} </span>
+        </div>
+    </div>
+    <div class="field">
+        <span class="title">
+            Dni o Pasaporte
+        </span>
+        <div class="data">
+            <span>{{beneficiario.nro_identificacion}} </span>
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="field">
+        <span class="title">
+            Nacionalidad
+        </span>
+        <div class="data">
+            <span>{{beneficiario.origen}} </span>
+        </div>
+    </div>
+    <div class="field">
+        <span class="title">
+            Telefono
+        </span>
+        <div class="data">
+            <span>{{beneficiario.telefono}} </span>
+        </div>
+    </div>
+  </div>
+  <div class="row m-column" >
+    <div class="field">
+        <span class="title">
+            Correo electronico
+        </span>
+        <div class="data">
+            <span>{{beneficiario.email}} </span>
+        </div>
+    </div>
+    <div class="field">
+        <span class="title">
+            Numero de Poliza
+        </span>
+        <div class="data" >
+            <span>{{beneficiario.poliza_id}} </span>
+        </div>
+    </div>
+  </div>
+
+</div>

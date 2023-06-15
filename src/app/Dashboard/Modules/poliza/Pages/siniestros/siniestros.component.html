@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="top" (click)="backBtn()">
+    <button class="backBtn" >
+      <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 896 160 576l320-320 42 42-248 248h526v60H274l248 248-42 42Z"/></svg>
+      <span>Volver</span>
+    </button>
+    <div class="poliza-data">
+      <span>Poliza :</span>
+      <span class="number">{{polizaId}}</span>
+    </div>
+
+  </div>
+  <div class="data" *ngIf="!loading" >
+      <div class="listado-siniestro" *ngIf="listSiniestros.length > 0 ; else ElseBlock">
+        <span>Siniestros existentes ({{listSiniestros.length }})</span>
+        <div class="list">
+          <a *ngFor="let siniestro of listSiniestros"  [routerLink]="['../../../siniestro', siniestro.siniestro_id]">
+
+            <siniestro [siniestro]="siniestro" [beneficiarios]="listBeneficiarios" ></siniestro>
+          </a>
+        </div>
+      </div>
+      <ng-template #ElseBlock >
+        <div class="message">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M440 776h80V536h-80v240Zm40-320q17 0 28.5-11.5T520 416q0-17-11.5-28.5T480 376q-17 0-28.5 11.5T440 416q0 17 11.5 28.5T480 456Zm0 520q-83 0-156-31.5T197 859q-54-54-85.5-127T80 576q0-83 31.5-156T197 293q54-54 127-85.5T480 176q83 0 156 31.5T763 293q54 54 85.5 127T880 576q0 83-31.5 156T763 859q-54 54-127 85.5T480 976Z"/></svg>
+          <span>
+            No tiene ningun siniestro con esta poliza
+          </span>
+        </div>
+
+      </ng-template>
+
+      <siniestro-form *ngIf="poliza" [beneficiarios]="listBeneficiarios" [poliza]="poliza" ></siniestro-form>
+
+
+
+  </div>
+
+  <loading-div *ngIf="loading"></loading-div>
+
+</div>

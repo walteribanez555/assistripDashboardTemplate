@@ -1,0 +1,427 @@
+
+.list-row{
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+  align-items: center;
+}
+
+.list-row form{
+display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+}
+
+.list-item{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+
+.item-space{
+width: 100%;
+padding: 15px;
+}
+
+.item-space.center {
+justify-content: center;
+padding-top: 25px;
+height: 100%;
+width: 100%;
+}
+
+.item-space input{
+padding-top: 5px;
+padding-left: 8px;
+height: 40px;
+width: 100%;
+}
+
+.item-space button{
+display: flex;
+flex-direction: row;
+border: none;
+background: none;
+padding-left: 10px;
+align-items: center;
+justify-content: center;
+color: var(--main-color);
+fill: var(--main-color);
+cursor: pointer;
+}
+
+.item-space .btn_cotizar{
+background-color: var(--main-color);
+display: flex;
+justify-content: center;
+color: white;
+fill: white;
+width: 100%;
+height: 50px;
+border: none;
+border-radius: 5px;
+}
+
+.btn_cotizar svg{
+margin-left: 20px;
+transition: all 0.5s ease;
+}
+
+.btn_cotizar:hover svg{
+margin-left: 50px;
+transition: all 0.5s ease;
+}
+
+.w-full{
+  width: 100%;
+}
+
+.h-full{
+  height: 100%;
+}
+
+button span {
+padding-left: 5px;
+}
+
+.origen,
+.destino
+{
+  padding: 10px;
+}
+
+h2{
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--main-color);
+  margin: 0;
+  padding: 0;
+}
+
+.origen .select-space{
+display: flex;
+align-items: center;
+justify-content: center;
+fill: var(--main-color);
+}
+
+.origen .select-space svg{
+position: relative;
+left: 25px;
+top: 2px;
+}
+
+.origen .select-space select{
+  margin-top: 5px;
+  width: 100%;
+  height: 30px;
+  background: none;
+  border: 1px solid var(--main-color);
+  color: var(--main-color);
+  font-size: 10px;
+  font-weight: bold;
+  background-repeat: no-repeat;
+  background-position: left center;
+  padding-left: 30px;
+}
+
+.origen .select-space select option{
+font-size: 15px;
+}
+
+.container-data{
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper{
+  width: 100%;
+}
+
+.wrapper :where(.title, li, li i, .details){
+  display: flex;
+  align-items: center;
+}
+
+.title img{
+  max-width: 21px;
+}
+
+.title h2{
+  font-size: 21px;
+  font-weight: 600;
+  margin-left: 8px;
+}
+
+.wrapper .content{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-top: 5px;
+  overflow-y: auto;
+  height: 10vh;
+  gap: 2px;
+
+}
+
+.content p{
+  font-size: 15px;
+}
+
+.content ul{
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 5px;
+  gap: 2px;
+}
+
+.content ul  li{
+  color: var(--main-color);
+  list-style: none;
+  font-size: 10px;
+  margin-right: 2px;
+  border-radius: 5px;
+  background-color: var(--body-bg);
+  padding: 3px 5px 3px 6px;
+  border: 1px solid var(--main-color);
+}
+
+.content ul li svg{
+  height: 20px;
+  width: 20px;
+  fill: var(--main-color);
+  margin-right: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 50%;
+  justify-content: center;
+}
+
+.content ul input{
+  flex: 1;
+  padding: 3px;
+  border: none;
+  outline: none;
+  font-size: 12px;
+}
+
+.options {
+  display: flex;
+  height: fit-content;
+  flex-direction: row;
+  align-items: center;
+  width: fit-content;
+  background-color: var(--main-color);
+  border: 1px solid var(--main-color);
+  border-radius: 5px;
+  transition: 0.3 all ease-in-out;
+}
+
+.options svg{
+  fill: white;
+}
+
+.options .listado{
+  padding-left: 5px;
+  background-color: var(--main-color);
+  width: fit-content;
+  height: 20px;
+  color: white;
+  border: none;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  appearance:none;
+}
+
+.overflow{
+  overflow-y: auto;
+  height: 10vh;
+}
+
+option {
+  color: black;
+  background-color: white;
+}
+
+.flex-row{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.flex-column{
+  display: flex;
+  flex-direction: column;
+}
+
+.title{
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.mobile-row{
+  display: none;
+}
+
+
+.dropdown-list{
+    position: absolute;
+    margin-top: 0vh;
+    background-color: white;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 5px 20px;
+    border-radius: 10px;
+    justify-content: space-between;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+    z-index: 10;
+    margin-top: 10px;
+    margin-left: -150px;
+}
+
+.btn-seeMore{
+  cursor: pointer;
+  display: flex;
+}
+
+@media (max-width:768px){
+
+  .list-row{
+    display: none;
+  }
+
+    .mobile-row{
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: fit-content;
+      color: white;
+      overflow-x: auto;
+      overflow-y: auto;
+      background-color: var(--main-color);
+      padding: 10px;
+      position: absolute;
+      z-index: 20;
+  }
+
+  .listCountries{
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+
+
+  .item-list-first{
+    padding-top: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+    background-color: var(--main-color);
+    color: white;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+
+  .item-list-second{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+
+    margin-bottom: 10px;
+    width: 100%;
+    height: 60%;
+  }
+
+  .subitem{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    fill: white;
+  }
+
+  .subitem.f-row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .subitem.f-row.f-start{
+    justify-content: flex-start;
+  }
+
+  .subitem svg{
+    fill: white;
+  }
+
+  .subitem span{
+    margin-left: 5px;
+  }
+
+  .subitem span.red{
+    color: red;
+  }
+
+  .btn-editar{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    background: none;
+    border: none;
+    fill: white;
+    color: white;
+    align-items: center;
+  }
+
+
+
+  .cotizacionMain .row.desktop{
+    display: none;
+  }
+
+  .cotizacionMain .row.mobile{
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+
+  }
+
+  .list{
+    padding-top: 20px;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .card{
+    width: 90%;
+    margin: 20px;
+    padding: 10px;
+  }
+
+  .footer-desktop{
+    display: none;
+  }
+
+  .title-cat{
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--main-color);
+    margin: 10px;
+  }
+}

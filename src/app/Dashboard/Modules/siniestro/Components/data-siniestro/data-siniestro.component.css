@@ -1,0 +1,52 @@
+.container{
+  display: flex;
+  width: 100%;
+  border: 1px solid var(--main-color);
+  flex-direction: column;
+  padding: 20px;
+  background-color: gainsboro;
+
+
+}
+
+.top{
+  font-size: 20px;
+  color: var(--main-color);
+
+}
+
+.data{
+  display: flex;
+  flex-direction: column;
+}
+
+.field{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  padding: 20px 0px;
+  text-align: center;
+  color: var(--main-color);
+}
+
+.row{
+  display: flex;
+  flex-direction: row;
+}
+
+.column{
+  display: flex;
+  flex-direction: column;
+}
+
+
+.description span,
+.description p{
+  font-weight: bold;
+  font-size: 20px;
+}
+
+
+
+

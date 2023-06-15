@@ -1,0 +1,19 @@
+<div class="item">
+  <div class="field">
+    <div class="title">
+      <span>{{title}}</span>
+    </div>
+    <div class="data">
+      <span class="number" *ngIf="value">{{value}}</span>
+      <span *ngIf="!value">Sin datos</span>
+    </div>
+  </div>
+
+  <span class="errors" customLabel
+  [errors]="validations">
+    El nombre tiene letras de mas
+  </span>
+
+
+</div>
+<hr>

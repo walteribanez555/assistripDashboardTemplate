@@ -1,0 +1,148 @@
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.top{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+
+}
+
+
+
+
+.backBtn{
+
+  color: var(--main-color);
+  fill: var(--main-color);
+  border-radius: 10px 0px 0px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--body-bg);
+  padding: 10px;
+  border: none;
+  font-size: 20px;
+  transition: all 0.5s ease-in-out;
+  width: 80px;
+  height: 50px;
+  cursor: pointer;
+
+}
+
+.backBtn span{
+  display: none;
+  transition: all 0.5s ease-in;
+
+}
+
+.top:hover .backBtn{
+
+  background-color: gainsboro;
+  transition: all 0.5s ease-in;
+
+}
+
+.top:hover .backBtn span{
+  display: flex;
+  transition: all 0.5s ease-in;
+
+}
+
+.poliza-data{
+  display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    color: var(--main-color);
+    font-size: 20px;
+    width: 100%;
+    height: 100%;
+    transition: all 0.5s ease-in;
+
+}
+
+.top:hover  .poliza-data{
+  padding-left: 20px;
+
+  color: white;
+  background-color: var(--main-color);
+  transition: all 0.5s ease-in;
+  border-radius: 0px 10px 10px 0px;
+
+}
+
+.poliza-data span{
+  font-weight: bold;
+}
+
+.data{
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: 1fr 1fr; /* Single column by default */
+  gap: 10px; /* Gap between grid items */
+}
+
+
+.message{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  height: fit-content;
+
+}
+
+.message svg{
+  fill: var(--main-color);
+}
+
+.message span{
+  color: var(--main-color);
+  padding: 0px 10px;
+}
+
+.listado-siniestro{
+  width: 90%;
+  padding: 10px;
+}
+
+.listado-siniestro span{
+  font-size: 30px;
+  color: var(--main-color);
+  font-weight: bold;
+}
+
+.listado-siniestro .list{
+  margin-top: 20px;
+}
+
+a{
+  text-decoration: none;
+}
+
+siniestro{
+  margin: 20px 0px;
+}
+
+
+
+
+@media (max-width: 768px) {
+  /* Two columns on screens with minimum width 768px */
+  .data {
+    grid-template-columns: 1fr ;
+  }
+}
+

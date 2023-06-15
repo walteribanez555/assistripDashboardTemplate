@@ -1,0 +1,60 @@
+<div class="datos-poliza"  *ngIf="poliza">
+  <div class="field">
+      <span class="title">
+          Estatus
+      </span>
+      <div class="estatus">
+          <span class="icon">
+              <i class="fas fa-circle"></i>
+          </span>
+          <span class="text">
+              Activa
+          </span>
+      </div>
+  </div>
+  <div class="field">
+      <span class="title">
+          Destino(s)
+      </span>
+      <div class="data">
+          <span>
+              {{poliza.destino}}
+          </span>
+      </div>
+
+  </div>
+  <div class="field">
+      <span class="title">
+          Fecha de salida
+      </span>
+      <div class="data">
+          <span>
+              {{poliza.fecha_salida | dateOnly:'yyyy-MM-dd':1 }}
+          </span>
+      </div>
+
+  </div>
+  <div class="field">
+      <span class="title">
+          Fecha de retorno
+      </span>
+      <div class="data">
+          <span>
+              {{poliza.fecha_retorno | dateOnly:'yyyy-MM-dd':1 }}
+          </span>
+      </div>
+
+  </div>
+  <div class="field">
+      <span class="title">
+          Fecha de emision
+      </span>
+      <div class="data">
+          <span>
+              {{poliza.fecha_emision  | date}}
+          </span>
+      </div>
+
+  </div>
+
+</div>

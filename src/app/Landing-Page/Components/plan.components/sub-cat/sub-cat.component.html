@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="cat">
+    <div class="title dropdown" (click)="toggleDropdown()">
+      <div class="info">
+        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M410-120v-238L204-239l-70-121 206-120-206-119 70-121 206 119v-239h140v239l206-119 70 121-206 119 206 120-70 121-206-119v238H410Z"/></svg>
+        <span>{{typeBeneficio.tipo_beneficio.etiqueta }}</span>
+      </div>
+      <svg class="dropdown"  xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 699q-6 0-11-2t-10-7L261 492q-8-8-7.5-21.5T262 449q10-10 21.5-8.5T304 450l176 176 176-176q8-8 21.5-9t21.5 9q10 8 8.5 21t-9.5 22L501 690q-5 5-10 7t-11 2Z"/></svg>
+    </div>
+    <hr *ngIf="dropdownItems">
+    <div class="items" *ngIf="dropdownItems"  >
+      <ng-container *ngFor="let beneficio of typeBeneficio.beneficios">
+        <div class="item" >
+          <span>{{beneficio.beneficio}}</span>
+          <div class="estado">
+            <svg  class="green" *ngIf="beneficio.complemento" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="m424 760 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197 859q-54-54-85.5-127T80 576q0-83 31.5-156T197 293q54-54 127-85.5T480 176q83 0 156 31.5T763 293q54 54 85.5 127T880 576q0 83-31.5 156T763 859q-54 54-127 85.5T480 976Z"/></svg>
+            <span class="number"  *ngIf="beneficio.cobertura ; else noCobertura ">
+                {{beneficio.cobertura | currency:'USD':'$':'1.2-2'}}
+            </span>
+
+
+            <ng-template #noCobertura>
+                <span  *ngIf="beneficio.complemento ; else noContent ">Incluye</span>
+                <ng-template #noContent>
+                    <svg class="red" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="m336 776 144-144 144 144 56-56-144-144 144-144-56-56-144 144-144-144-56 56 144 144-144 144 56 56Zm144 200q-83 0-156-31.5T197 859q-54-54-85.5-127T80 576q0-83 31.5-156T197 293q54-54 127-85.5T480 176q83 0 156 31.5T763 293q54 54 85.5 127T880 576q0 83-31.5 156T763 859q-54 54-127 85.5T480 976Z"/></svg>
+                    <span >N/A</span>
+                </ng-template>
+            </ng-template>
+
+          </div>
+        </div>
+        <hr>
+
+      </ng-container>
+
+    </div>
+  </div>
+
+</div>
+

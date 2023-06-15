@@ -1,0 +1,129 @@
+<div class="modal {{ size }}" >
+  <div class="top">
+    <div class="title">
+      <svg xmlns="http://www.w3.org/2000/svg" height="40" viewBox="0 96 960 960" width="40"><path d="M284.525 975.333q-30.858 0-52.691-21.975Q210 931.384 210 900.525q0-30.858 21.975-52.691Q253.95 826 284.808 826q30.859 0 52.692 21.975t21.833 52.833q0 30.859-21.975 52.692-21.974 21.833-52.833 21.833Zm400 0q-30.858 0-52.691-21.975Q610 931.384 610 900.525q0-30.858 21.975-52.691Q653.95 826 684.808 826q30.859 0 52.692 21.975t21.833 52.833q0 30.859-21.975 52.692-21.974 21.833-52.833 21.833ZM238.666 322 344 540.667h285.334l120-218.667H238.666ZM206 255.333h589.382q22.976 0 34.964 20.834Q842.333 297 830.667 318L693.333 565.333q-11 19.333-28.872 30.667-17.873 11.333-39.128 11.333H324l-52 96.001h487.333V770H278q-43 0-63-31.833T214.667 670l60.667-111.333L126 242.666H47.334V176h121.333L206 255.333Zm138 285.334h285.334H344Z"/></svg>
+      <span>TU CARRITO  </span>
+      <span class="msg red"  *ngIf="!messageReady">(aun falta elegir planes)</span>
+      <span class="msg  green" *ngIf="messageReady">(pagar para siguiente paso)</span>
+    </div>
+
+    <span (click)="close()">X</span>
+
+  </div>
+  <hr>
+  <div class="main">
+    <div class="data" *ngIf="!loading && empty">
+      <svg xmlns="http://www.w3.org/2000/svg" height="60" viewBox="0 -960 960 960" width="60"><path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM480-580q-17 0-28.5-11.5T440-620q0-17 11.5-28.5T480-660q17 0 28.5 11.5T520-620q0 17-11.5 28.5T480-580Zm-40-140v-200h80v200h-80ZM280-280q-45 0-69-39.5t-1-78.5l54-98-144-304H40v-80h131l170 360h281l155-280 70 38-155 280q-11 20-29 31t-41 11H324l-44 80h480v80H280Z"/></svg>
+      <span>El carrito esta vacio</span>
+
+    </div>
+
+    <div class="data" *ngIf="loading || !empty" >
+      <div class="listado">
+        <div class="loading-container" *ngIf="loading">
+          <svg width="50" height="50" viewBox="0 0 38 38" fill="#34189A" xmlns="http://www.w3.org/2000/svg" stroke="#34189A">
+            <g fill="none" fill-rule="evenodd">
+                <g transform="translate(1 1)" stroke-width="2">
+                    <circle stroke-opacity=".5" cx="18" cy="18" r="18"/>
+                    <path d="M36 18c0-9.94-8.06-18-18-18">
+                        <animateTransform
+                            attributeName="transform"
+                            type="rotate"
+                            from="0 18 18"
+                            to="360 18 18"
+                            dur="1s"
+                            repeatCount="indefinite"/>
+                    </path>
+                </g>
+            </g>
+          </svg>
+          <span>Cargando planes, precios y descuentos</span>
+
+        </div>
+        <div class="info" *ngIf="!empty && !loading">
+          <ng-container *ngIf="cotizacionesMenores>0 && planMenores">
+            <div class="item"  >
+              <div class="data">
+                <svg class="ml-10" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M480-160q-33 0-56.5 23.5T400-80H280q-33 0-56.5-23.5T200-160v-640q0-33 23.5-56.5T280-880h120q0 33 23.5 56.5T480-800q33 0 56.5-23.5T560-880h120q33 0 56.5 23.5T760-800v640q0 33-23.5 56.5T680-80H560q0-33-23.5-56.5T480-160Zm0-80q43 0 79.5 21.5T618-160h62v-640h-62q-22 37-58.5 58.5T480-720q-43 0-79.5-21.5T342-800h-62v640h62q22-37 58.5-58.5T480-240Zm0-240Z"/></svg>
+                  <span class="number" >
+                    {{precioMenores.servicio?.servicio + " - "  }}
+                  </span>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M360-80v-529q-91-24-145.5-100.5T160-880h80q0 83 53.5 141.5T430-680h100q30 0 56 11t47 32l181 181-56 56-158-158v478h-80v-240h-80v240h-80Zm120-640q-33 0-56.5-23.5T400-800q0-33 23.5-56.5T480-880q33 0 56.5 23.5T560-800q0 33-23.5 56.5T480-720Z"/></svg>
+                <span class="fs-20">{{"x"+cotizacionesMenores}}</span>
+              </div>
+              <span class="precio number">
+                +{{precioMenores.precioTotal | currency:'USD':'$':'1.2-2'}}
+              </span>
+            </div>
+            <hr>
+          </ng-container>
+          <ng-container *ngIf="cotizacionesMayores>0 && planMayores" >
+
+            <div class="item"   >
+              <div class="data">
+                <svg class="ml-10" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M480-160q-33 0-56.5 23.5T400-80H280q-33 0-56.5-23.5T200-160v-640q0-33 23.5-56.5T280-880h120q0 33 23.5 56.5T480-800q33 0 56.5-23.5T560-880h120q33 0 56.5 23.5T760-800v640q0 33-23.5 56.5T680-80H560q0-33-23.5-56.5T480-160Zm0-80q43 0 79.5 21.5T618-160h62v-640h-62q-22 37-58.5 58.5T480-720q-43 0-79.5-21.5T342-800h-62v640h62q22-37 58.5-58.5T480-240Zm0-240Z"/></svg>
+                  <span  class="number">
+                    {{precioMayores.servicio?.servicio + " - " }}
+                  </span>
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M360-80v-529q-91-24-145.5-100.5T160-880h80q0 83 53.5 141.5T430-680h100q30 0 56 11t47 32l181 181-56 56-158-158v478h-80v-240h-80v240h-80Zm120-640q-33 0-56.5-23.5T400-800q0-33 23.5-56.5T480-880q33 0 56.5 23.5T560-800q0 33-23.5 56.5T480-720Z"/></svg>
+                    <span class="fs-20">{{"x"+cotizacionesMayores}}</span>
+              </div>
+              <span class="precio number">
+                +{{precioMayores.precioTotal | currency:'USD':'$':'1.2-2'}}
+              </span>
+            </div>
+            <hr>
+          </ng-container>
+
+
+          <ng-container  *ngFor="let descuento of listDescuentos">
+            <div class="item" *ngIf="precioMenores" >
+              <div class="data">
+                <svg class="ml-10" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M640-520q17 0 28.5-11.5T680-560q0-17-11.5-28.5T640-600q-17 0-28.5 11.5T600-560q0 17 11.5 28.5T640-520Zm-320-80h200v-80H320v80ZM180-120q-34-114-67-227.5T80-580q0-92 64-156t156-64h200q29-38 70.5-59t89.5-21q25 0 42.5 17.5T720-820q0 6-1.5 12t-3.5 11q-4 11-7.5 22.5T702-751l91 91h87v279l-113 37-67 224H480v-80h-80v80H180Zm60-80h80v-80h240v80h80l62-206 98-33v-141h-40L620-720q0-20 2.5-38.5T630-796q-29 8-51 27.5T547-720H300q-58 0-99 41t-41 99q0 98 27 191.5T240-200Zm240-298Z"/></svg>
+                <span >
+                  Descuento nro : {{descuento.cupon.cupon_id}}
+                </span>
+              </div>
+              <span class="precio number">
+                -{{descuento.montoTotal | currency:'USD':'$':'1.2-2'}}
+              </span>
+            </div>
+            <hr>
+
+          </ng-container>
+
+          <div class="item" >
+            <div class="total">
+                <span >
+                  Total :
+                </span>
+            </div>
+            <span class="precio total number">
+              {{total | currency:'USD':'$':'1.2-2'}}
+            </span>
+          </div>
+          <hr>
+        </div>
+
+
+
+      </div>
+      <hr>
+      <div class="opciones">
+        <button class="pay-button"  (click)="submit()">
+          PAGAR
+        </button>
+
+        <button class="out-button" (click)="close()">
+          X SALIR
+        </button>
+
+
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<div class="modal-backdrop" (click)="close()"></div>

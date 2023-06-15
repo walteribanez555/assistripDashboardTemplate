@@ -1,0 +1,7 @@
+<div class="beneficio" >
+  <div class="top">
+    <input type="checkbox" [(ngModel)]="beneficio.subDropdownOpen" (change)="changeEvent()"  >
+    <p>{{beneficio.tipo_beneficio.etiqueta}}</p>
+  </div>
+  <cat [beneficios]="beneficio.beneficios" ></cat>
+</div>

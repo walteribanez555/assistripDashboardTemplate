@@ -1,0 +1,35 @@
+<section class="wrapper">
+  <svg xmlns="http://www.w3.org/2000/svg" (click)="sliderLeft()" class="button prev" height="24" viewBox="0 96 960 960" width="24"  id="prev"><path d="M400 976 0 576l400-400 71 71-329 329 329 329-71 71Z"/></svg>
+  <div class="container slider">
+      <div class="image-container"  [style.transform]="'translateX(' + slider_translate + '%)'" >
+          <div class="carousel">
+            <img src="../../../assets/images/1.webp" alt="" />
+            <img src="../../../assets/images/2.webp" alt="" />
+            <img src="../../../assets/images/3.webp" alt="" />
+            <img src="../../../assets/images/4.webp" alt="" />
+
+          </div>
+        </div>
+  </div>
+
+  <div class="container information">
+      <div class="information">
+          <p>Esto es una descripcion de prueba para ver la informacion</p>
+
+      </div>
+  </div>
+
+  <svg xmlns="http://www.w3.org/2000/svg" (click)="sliderRight()" class="button" height="24" viewBox="0 96 960 960" width="24" id="next"><path d="m321 976-71-71 329-329-329-329 71-71 400 400-400 400Z"/></svg>
+
+
+
+
+
+
+</section>
+<div class="list-position">
+  <div class="position"   [class.active]="slider_translate===0"  (click)=" setSliderTranslate(0)"  ></div>
+  <div class="position" [class.active]="slider_translate===-25" (click)=" setSliderTranslate(-25)"  ></div>
+  <div class="position" [class.active]="slider_translate===-50"   (click)=" setSliderTranslate(-50)" ></div>
+  <div class="position"  [class.active]="slider_translate===-75" (click)=" setSliderTranslate(-75)"  ></div>
+</div>

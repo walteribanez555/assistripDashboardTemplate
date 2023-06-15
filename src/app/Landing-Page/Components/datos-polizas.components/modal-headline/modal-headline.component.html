@@ -1,0 +1,102 @@
+<div class="modal-backdrop" (click)="close()"></div>
+<div class="modal " >
+  <div class="top">
+    <div class="top-info">
+      <div class="title">
+        <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="M700-490h40v-75l65 37 20-34-65-38 65-38-20-34-65 37v-75h-40v75l-65-37-20 34 65 38-65 38 20 34 65-37v75ZM60-120q-24 0-42-18T0-180v-600q0-24 18-42t42-18h840q24 0 42 18t18 42v600q0 24-18 42t-42 18H60Zm531-60h309v-600H60v600h7q44-69 112.5-109T329-329q81 0 149.5 40T591-180ZM329-400q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35ZM143-180h372q-35.606-42.275-84.303-65.637Q382-269 329-269t-101.5 23.5Q179-222 143-180Zm186-280q-25.5 0-42.75-17.25T269-520q0-25.5 17.25-42.75T329-580q25.5 0 42.75 17.25T389-520q0 25.5-17.25 42.75T329-460Zm151-20Z"/></svg>
+        <span>Elije un titular</span>
+
+      </div>
+
+      <span (click)="close()">X</span>
+    </div>
+    <div class="data-table">
+      <div class="left">
+        <span class="select" >Elije uno</span>
+        <span class="details">Detalles</span>
+      </div>
+
+      <span class="state">Estado</span>
+    </div>
+
+  </div>
+  <hr>
+  <div class="main">
+    <div class="data" *ngIf="!loading ">
+        <div class="listado">
+          <poliza-modal *ngFor="let poliza of listPolizas"  [poliza]="poliza" (isCheckedChange)="onSelectPoliza($event)" ></poliza-modal>
+
+
+        </div>
+
+
+
+
+    </div>
+    <div class="space-button">
+      <button class="cotizar_btn"  (click)="toggleSold()">
+        Comprar
+      </button>
+    </div>
+
+    <div class="data" *ngIf="loading " >
+      <div class="listado">
+        <div class="loading-container" *ngIf="loading">
+          <svg width="50" height="50" viewBox="0 0 38 38" fill="#34189A" xmlns="http://www.w3.org/2000/svg" stroke="#34189A">
+            <g fill="none" fill-rule="evenodd">
+                <g transform="translate(1 1)" stroke-width="2">
+                    <circle stroke-opacity=".5" cx="18" cy="18" r="18"/>
+                    <path d="M36 18c0-9.94-8.06-18-18-18">
+                        <animateTransform
+                            attributeName="transform"
+                            type="rotate"
+                            from="0 18 18"
+                            to="360 18 18"
+                            dur="1s"
+                            repeatCount="indefinite"/>
+                    </path>
+                </g>
+            </g>
+          </svg>
+          <span>Cargando planes, precios y descuentos</span>
+
+        </div>
+        <div class="info" >
+
+
+
+
+
+          <div class="item" >
+            <div class="total">
+                <span >
+                  Total :
+                </span>
+            </div>
+            <div class="precio total">
+              {{'1500000'| currency:'USD':'$':'1.2-2'}}
+            </div>
+          </div>
+          <hr>
+        </div>
+
+
+
+      </div>
+      <hr>
+      <div class="opciones">
+        <button class="pay-button"  >
+          PAGAR
+        </button>
+
+        <button class="out-button" (click)="close()">
+          X SALIR
+        </button>
+
+
+      </div>
+    </div>
+
+
+  </div>
+</div>

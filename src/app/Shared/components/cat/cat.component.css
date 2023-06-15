@@ -1,0 +1,11 @@
+ul{
+  width: 100%;
+  padding: 0px 10px;
+}
+
+li{
+  color: var(--main-color);
+  font-weight: lighter;
+  height: 30px;
+  font-size: 12px;
+}

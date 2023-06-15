@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Venta } from '../../models/Data/Venta.model';
+import { Venta, VentaResp } from '../../models/Data/Venta.model';
+import { Observable, map, catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,15 +17,15 @@ export class VentasService {
 
 
   constructor(private http : HttpClient) {
-  
+
    }
 
 
-   postVenta(cliente_id : number,cantidad : number,descuento : number,fechaSalida : string, fechaRegreso : string, costoPolizaTotal:  number ) : Observable<Venta>{
+   postVenta(cliente_id : number,cantidad : number,descuento : number,fechaSalida : string, fechaRegreso : string, costoPolizaTotal:  number ) : Observable<VentaResp>{
 
-    
 
-    return this.http.post<Venta>(this.apiUrl,{
+
+    return this.http.post<VentaResp>(this.apiUrl,{
       username : "raforios",
       officeId : 1,
       cliente_id :cliente_id,
@@ -39,19 +39,26 @@ export class VentasService {
       servicio_id : 2,
       total_pago : costoPolizaTotal,
       status:1
-    })
+    }).pipe(
+      map(
+        data => data,
+      ),
+      catchError(
+        err => throwError( () => err.error.message)
+      )
+    )
 
    }
 
    getVentas() : Observable<Venta[]>{
-      
+
       return this.http.get<Venta[]>(this.apiUrl);
-  
+
     }
-    
 
 
 
 
-  
+
+
 }

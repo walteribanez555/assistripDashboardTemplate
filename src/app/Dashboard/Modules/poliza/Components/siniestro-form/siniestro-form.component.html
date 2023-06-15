@@ -1,0 +1,62 @@
+<div  class="container">
+  <span class="title">
+    Reportar siniestro
+  </span>
+
+  <form   [formGroup]="siniestroForm"  (ngSubmit)="submitForm()">
+    <div class="field">
+      <div class="title">
+        <span>Fecha de siniestro</span>
+      </div>
+      <input formControlName="fechaSiniestro" name="fechaSiniestro" type="date">
+    </div>
+    <div class="field">
+      <div class="title">
+        <span>Elije la persona</span>
+      </div>
+      <select formControlName="beneficiario_id" name="beneficiario_id">
+        <option *ngFor="let beneficiario of beneficiarios" [value]="beneficiario.beneficiario_id">
+          <span>{{beneficiario.primer_nombre}} </span>
+          <span *ngIf="beneficiario.segundo_nombre!=='0'">{{beneficiario.segundo_nombre}} </span>
+          <span>{{beneficiario.primer_apellido}}</span>
+          <span *ngIf="beneficiario.segundo_apellido!=='0'">{{beneficiario.segundo_apellido}} </span>
+
+        </option>
+      </select>
+    </div>
+    <div class="field">
+        <div class="title">
+          <span>Tipo de siniestro</span>
+        </div>
+
+        <list-cats [inputControl]="siniestroForm.get('beneficio')"  ></list-cats>
+    </div>
+
+    <div class="field">
+      <div class="title">
+        <span>Descripcion (opcional)</span>
+      </div>
+      <textarea formControlName="descripcion" name="descripcion" id="" cols="40" rows="5"></textarea>
+    </div>
+
+
+    <div class="field">
+      <div class="title">
+        <span>Adjuntar documento (opcional)</span>
+      </div>
+      <file-drop [inputControl]="inputControl" (filesDropped)="showFile()"></file-drop>
+    </div>
+
+    <hr>
+
+
+    <div class="button-field">
+      <button type="submit" [class.valid]="siniestroForm.valid" >Cargar siniestro</button>
+    </div>
+
+
+  </form>
+
+
+
+</div>

@@ -1,36 +1,45 @@
-import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef, AfterViewInit } from '@angular/core';
-import { forkJoin } from 'rxjs';
+import { Component, OnInit, ElementRef, ViewChild, ChangeDetectorRef, AfterViewInit, inject } from '@angular/core';
+import { forkJoin, map, switchMap } from 'rxjs';
 import { Router } from '@angular/router';
 import { jsPDF } from "jspdf";
 import html2canvas from 'html2canvas';
 import { Poliza } from 'src/app/Shared/models/Data/Poliza';
-import { ClienteResp } from 'src/app/Shared/models/Data/Cliente';
-import { cotizacionIntefaceService } from 'src/app/Shared/services/interfaces/cotizacioninterface.service';
+import { Cliente, ClienteResp } from 'src/app/Shared/models/Data/Cliente';
 import { PolizasService } from 'src/app/Shared/services/requests/polizas.service';
+import { AuthService } from 'src/app/Auth/services/auth.service';
+import { VentasService } from 'src/app/Shared/services/requests/ventas.service';
+import { ClientesService } from 'src/app/Shared/services/requests/clientes.service';
+import { Venta } from 'src/app/Shared/models/Data/Venta.model';
+import { PolizasVentasService } from 'src/app/Shared/services/requests/polizas-ventas.service';
 
 
 
 @Component({
-  selector: 'polizas-detalles',
   templateUrl: './polizas-detalles.component.html',
   styleUrls: ['./polizas-detalles.component.css']
 })
 export class PolizasDetallesComponent implements OnInit, AfterViewInit {
+
+  private authService = inject(AuthService);
 
   listIdPolizas: number[] = [];
   listPolizas: Poliza[] = [];
   nombre : string = "Mireya Alejandra Barriga Lopez";
   titular : ClienteResp | null = null;
   loading : boolean = false;
+  cliente : Cliente | null = null;
+  listVentas : Venta[] = [];
 
   @ViewChild('polizaimprimir', {static: false}) polizaImprimir!: ElementRef;
 
 
   constructor(
-    private dataService: cotizacionIntefaceService,
     private polizasService : PolizasService,
     private router : Router,
     private cdRef: ChangeDetectorRef,
+    private ventasService : VentasService,
+    private clienteService : ClientesService,
+    private polizasVentasService : PolizasVentasService,
 
 
   ){
@@ -39,33 +48,62 @@ export class PolizasDetallesComponent implements OnInit, AfterViewInit {
 
 
   ngAfterViewInit(): void {
-      this.downloadPDF();
+      // this.downloadPDF();
   }
 
   ngOnInit():void {
 
-    this.loading = true
-
-    if(this.dataService.haveData){
-      this.listIdPolizas = this.dataService.listPolizas;
-
-      this.titular = this.dataService.titular;
-
-      forkJoin(
-        this.listIdPolizas.map(id => this.polizasService.getPolizasById(id))
-      ).subscribe(
-        data => {
-          this.loading = false
-          data.forEach(element => {
-            this.listPolizas = [...this.listPolizas, ...element];
-          });
 
 
-        }
-      )
+    this.loading = true;
+
+    const idClient = this.authService.currentClient();
 
 
+    if(idClient){
+
+      this.clienteService.getClienteById(idClient).pipe(
+       switchMap(
+           data => {
+
+             this.cliente = data[0]
+
+             return this.ventasService.getVentas()
+
+           }
+         ),
+       switchMap(
+         data => {
+
+           this.listVentas = data.filter( venta => venta.cliente_id === this.cliente?.cliente_id);
+           const requests : any[] = [];
+
+           this.listVentas.forEach(venta => {
+              requests.push(this.polizasVentasService.getPolizasByVentas(venta.venta_id));
+           });
+
+           return forkJoin(requests);
+          }
+         ),
+     ).subscribe(
+       data => {
+        data.forEach( response => {
+          if(response.length > 0){
+            this.listPolizas = [ ...this.listPolizas, ...response]
+          }
+
+        });
+
+
+         this.listPolizas = this.listPolizas.reverse();
+         this.loading= false;
+
+       }
+     )
     }
+
+
+
 
 
 

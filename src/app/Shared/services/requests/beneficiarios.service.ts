@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, map, throwError } from 'rxjs';
 import { Beneficiario, BeneficiarioResp } from '../../models/Data/Beneficiario';
 import { environment } from 'src/environments/environment';
 @Injectable({
@@ -62,7 +62,13 @@ export class BeneficiariosService {
       origen,
       email,
       telefono
-    })
+    }).pipe(
+      map(
+        data => data,
+      ),
+      catchError( err => throwError( () => err.error.message))
+
+    )
   }
 
 }

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutPageComponent } from './Pages/layout-page/layout-page.component';
 import { PolizasDetallesComponent } from './Pages/polizas-detalles/polizas-detalles.component';
-import { PolizaComponent } from './Pages/poliza/poliza.component';
+
 
 const routes : Routes = [
   {
@@ -11,12 +11,19 @@ const routes : Routes = [
     children : [
       {
         path: 'polizas-detalles',
+
         component : PolizasDetallesComponent,
       },
       {
-        path : 'poliza/:id',
-        component : PolizaComponent,
+        path : 'poliza',
+        loadChildren : () => import('./Modules/poliza/poliza.module').then( m => m.PolizaModule),
+      },
+      {
+        path: 'siniestro',
+        loadChildren : () => import('./Modules/siniestro/siniestro.module').then( m=> m.SiniestroModule),
       }
+
+
 
     ]
   }

@@ -5,8 +5,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding-top: 20vh;
+  padding-top: 10vh;
 }
+
 
 
 
@@ -75,7 +76,6 @@ button.disabled{
 
 
 button:hover{
-  scale: 1.05;
   transition: 0.3s ease-in-out;
 }
 
@@ -85,13 +85,31 @@ button.disabled{
 }
 
 
-.input-otp{
-  margin-top: 30px;
-  width: fit-content;
+
+.backBtn{
+  background: none;
+  color: var(--main-color);
+  border: none;
+  cursor: pointer;
+  margin: 30px 0px 0px 0px;
+  fill: var(--main-color);
+  height: fit-content;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  transition: all 0.25s ease-in-out;
+}
+
+.backBtn:hover{
+  background-color: gainsboro;
+  transition:  all 0.25s ease-in-out;
+  border: 0.5px solid var(--main-color);
+  scale: 1;
+}
+
+.backBtn svg{
+  fill: var(--main-color);
 }
 
 

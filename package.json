@@ -30,6 +30,7 @@
     "html2canvas": "^1.4.1",
     "intl-tel-input": "^18.1.6",
     "jspdf": "^2.5.1",
+    "ng-otp-input": "^1.9.2",
     "ngx-bootstrap": "^10.2.0",
     "ngx-intl-tel-input": "^3.2.0",
     "ngx-owl-carousel-o": "^15.0.0",

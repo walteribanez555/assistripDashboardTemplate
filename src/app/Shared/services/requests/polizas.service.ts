@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, map, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Poliza, PolizaResp } from '../../models/Data/Poliza';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,14 @@ export class PolizasService {
 
     params = params.append('id', id);
 
-    return this.http.get<Poliza[]>(this.apiUrl,{params});
+    return this.http.get<Poliza[]>(this.apiUrl,{params}).pipe(
+      map(
+        data => data
+      ),
+      catchError(
+        err => throwError( () => err.error.message )
+      )
+    )
 
   }
 
@@ -47,6 +54,8 @@ export class PolizasService {
   postPolizas(venta_id: number, servicio_id : number, destino : string,fecha_salida : string, fecha_retorno : string, extra:number):Observable<PolizaResp>{
     console.log(fecha_salida, fecha_retorno);
 
+    console.log(venta_id,servicio_id, destino, fecha_salida, fecha_retorno , extra);
+
     return this.http.post<PolizaResp>(this.apiUrl, {
       venta_id,
       servicio_id,
@@ -54,7 +63,10 @@ export class PolizasService {
       fecha_salida,
       fecha_retorno,
       extra
-    })
+    }).pipe(
+      map( data => data),
+      catchError( err => throwError( () => err.error.message) )
+    )
 
   }
 

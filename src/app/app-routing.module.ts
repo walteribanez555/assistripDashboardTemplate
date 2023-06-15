@@ -2,6 +2,7 @@
 import {  NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './Shared/pages/not-found/not-found.component';
+import { isAuthenticatedGuard, isNotAuthenticatedGuard } from './Auth/Guards';
 
 
 
@@ -21,11 +22,13 @@ const routes : Routes = [
   },
   {
     path : 'auth',
+    canActivate : [ isNotAuthenticatedGuard ],
     loadChildren : () => import('./Auth/auth.module').then( m => m.AuthModule),
   },
 
   {
     path : 'dashboard',
+    canActivate : [ isAuthenticatedGuard ],
     loadChildren : () => import('./Dashboard/dashboard.module').then( m => m.DashboardModule),
   },
   {

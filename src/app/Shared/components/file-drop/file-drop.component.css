@@ -1,0 +1,26 @@
+.file-drop {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  width: 100%;
+}
+
+.drop-message {
+  font-size: 18px;
+}
+
+label{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--main-color);
+}
+
+input{
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+}

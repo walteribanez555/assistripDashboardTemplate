@@ -1,7 +1,7 @@
 
 
-export interface Venta { 
-    id : number,
+export interface Venta {
+    venta_id : number,
     username : string,
     officeId : number,
     cliente_id : number,
@@ -15,4 +15,8 @@ export interface Venta {
     servicio_id : number,
     status : number
 
+}
+
+export interface VentaResp extends Omit<Venta, 'venta_id'>{
+  id : number,
 }

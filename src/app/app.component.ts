@@ -1,4 +1,5 @@
-import { ChangeDetectorRef, Component, OnInit,  ElementRef,TemplateRef } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit,  ElementRef,TemplateRef, inject } from '@angular/core';
+import { AuthService } from './Auth/services/auth.service';
 
 
 
@@ -8,6 +9,13 @@ import { ChangeDetectorRef, Component, OnInit,  ElementRef,TemplateRef } from '@
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  private authService = inject(AuthService)
+
+
+  constructor(){
+    this.authService.checkAuthStatus().subscribe();
+  }
 
 
 

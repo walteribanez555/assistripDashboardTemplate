@@ -1,0 +1,13 @@
+<div class="list-cat" *ngIf="!loading">
+
+
+
+  <beneficio  *ngFor="let beneficio of beneficioData" [beneficio]="beneficio"  (toggleBeneficio)="toggleBeneficio($event)" >
+
+  </beneficio>
+
+
+</div>
+<loading-div *ngIf="loading"></loading-div>
+
+

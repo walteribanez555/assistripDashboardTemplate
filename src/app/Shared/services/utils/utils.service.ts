@@ -3,6 +3,11 @@ import { cotizacionDataForm } from '../../models/Pages/cotizacionDataForm.model'
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Servicio } from '../../models/Data/Servicio';
 import { Precio } from '../../models/Data/Precio';
+import { Catalogo } from '../../models/Data/Catalogo';
+import { Plan } from '../../models/Data/Plan';
+import { catalogoBeneficio } from '../../models/Pages/catalogoBeneficio.model';
+import { Beneficio } from '../../models/Data/Beneficio';
+import { catalogoBeneficioData } from '../../models/Pages/catalogoBeneficioData.model';
 
 @Injectable({
   providedIn: 'root'
@@ -198,6 +203,42 @@ export class UtilsService {
       return valor;
 
   }
+
+
+  //Mapear los listados de beneficio por cada plan
+  mapListBeneficio(listPlan : Plan[], beneficios : Catalogo[]){
+
+    const listCatBeneficio : catalogoBeneficio[] = [];
+    beneficios.forEach(beneficio=> {
+      const planesByBeneficio : Plan[] = listPlan.filter( plan => plan.tipo_beneficio === beneficio.valor);
+      const catyBeneficio = {
+        tipo_beneficio : beneficio,
+        beneficios :  planesByBeneficio,
+        isSubDropdownOpen: false,
+      }
+      listCatBeneficio.push(catyBeneficio);
+    })
+
+    return listCatBeneficio
+   }
+
+   //Mapear los listados de beneficios por cada categoria
+   mapListBeneficioCat(listBeneficios : Beneficio[], beneficiosData : Catalogo[] ){
+    const listCatBeneficio : catalogoBeneficioData[] = [];
+    beneficiosData.forEach(cat=> {
+      const catbyBeneficio : Beneficio[] = listBeneficios.filter( beneficio => beneficio.tipo_beneficio === cat.valor);
+      const catyBeneficio = {
+        tipo_beneficio : cat,
+        beneficios :  catbyBeneficio,
+        subDropdownOpen: false,
+      }
+
+      listCatBeneficio.push(catyBeneficio);
+    })
+
+    return listCatBeneficio
+
+ }
 
 
 }

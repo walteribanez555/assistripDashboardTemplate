@@ -2,13 +2,13 @@
 /* You can add global styles to this file, and also import other style files */
 @font-face {
     font-family: 'Lato';
-    src: url('../src/assets/font/Raleway/static/Raleway-Bold.ttf') format('truetype');
+    src: url('../src/assets/font/Raleway-Bold.ttf') format('truetype');
   }
 
 
 @font-face{
   font-family: 'Poppins';
-  src: url('../src/assets/font/Poppins/Poppins-Bold.ttf') format('truetype');
+  src: url('../src/assets/font/Poppins-Bold.ttf') format('truetype');
 }
 
 
@@ -142,4 +142,13 @@ h3.number,
 h4.number,
 span.number{
   font-family: 'Poppins';
+}
+
+
+
+.otp-input {
+
+  border: solid var(--main-color) !important;
+  color: var(--main-color);
+
 }

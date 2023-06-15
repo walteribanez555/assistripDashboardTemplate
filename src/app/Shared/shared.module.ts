@@ -12,6 +12,16 @@ import { TruncateDirective } from './pipes/truncate.pipe';
 import { DollarPipe } from './pipes/dolar.pipe';
 import { ExtractDatePipe } from './pipes/extract-date.pipe';
 import { DateOnlyPipe } from './pipes/getDateOnly.pipe';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { RouterModule } from '@angular/router';
+import { LoadingDivComponent } from './components/loading-div/loading-div.component';
+import { ListCatsComponent } from './components/list-cats/list-cats.component';
+import { CatComponent } from './components/cat/cat.component';
+import { BeneficioComponent } from './components/beneficio/beneficio.component';
+import { FileDropComponent } from './components/file-drop/file-drop.component';
+import { UploadFileDirective } from './directives/upload-file.directive';
+import { ListBeneficiarioComponent } from './components/list-beneficiario/list-beneficiario.component';
+import { BeneficiarioComponent } from './components/beneficiario/beneficiario.component';
 
 
 
@@ -28,12 +38,22 @@ import { DateOnlyPipe } from './pipes/getDateOnly.pipe';
     DollarPipe,
     ExtractDatePipe,
     DateOnlyPipe,
-    TruncateDirective
+    TruncateDirective,
+    NavbarComponent,
+    LoadingDivComponent,
+    ListCatsComponent,
+    CatComponent,
+    BeneficioComponent,
+    FileDropComponent,
+    UploadFileDirective,
+    ListBeneficiarioComponent,
+    BeneficiarioComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule,
 
   ],
   exports : [
@@ -45,10 +65,16 @@ import { DateOnlyPipe } from './pipes/getDateOnly.pipe';
     LoadingComponent,
     TruncateDirective,
     CustomLabelDirective,
+    UploadFileDirective,
     DollarPipe,
     ExtractDatePipe,
     DateOnlyPipe,
-    TruncateDirective
+    TruncateDirective,
+    NavbarComponent,
+    LoadingDivComponent,
+    ListCatsComponent,
+    BeneficioComponent,
+    FileDropComponent,
   ]
 })
 export class SharedModule { }

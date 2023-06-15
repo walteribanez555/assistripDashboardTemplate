@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmailValidator, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { forkJoin, map, switchMap } from 'rxjs';
+import { catchError, forkJoin, map, switchMap, throwError } from 'rxjs';
 
 import Swal from 'sweetalert2';
 import { SearchCountryField, CountryISO, PhoneNumberFormat } from 'ngx-intl-tel-input';
@@ -437,6 +437,7 @@ export class DatosPolizasComponent implements OnInit {
     switchMap((data) => {
       let cliente_id: number = 0;
       if (data.length > 0) {
+        console.log("Encontro cliente");
         cliente_id = data[0].cliente_id;
         return this.ventasService.postVenta(
           cliente_id,
@@ -447,6 +448,7 @@ export class DatosPolizasComponent implements OnInit {
           this.total
         );
       } else {
+        console.log("No encontro cliente");
         const nuevoCliente: ClientePost = {
           apellido: polizas[0].form.value.apellidos,
           nombre: polizas[0].form.value.nombres,
@@ -458,6 +460,9 @@ export class DatosPolizasComponent implements OnInit {
         // Use `switchMap` to chain the `postCliente` Observable to the `postVenta` Observable
         return this.clientesService.postCliente(nuevoCliente).pipe(
           switchMap((data) => {
+
+
+            console.log(data);
             cliente_id = data.id;
 
 
@@ -471,10 +476,15 @@ export class DatosPolizasComponent implements OnInit {
               this.total
             );
           })
-        );
+        ).pipe(
+          catchError( (err)=> {
+            return throwError(err);
+          })
+        )
       }
     }),
     switchMap((data)=> {
+      console.log(data);
       const venta_id = data.id;
       const requests : any[]= [];
 
@@ -500,7 +510,11 @@ export class DatosPolizasComponent implements OnInit {
             })
           );
         })
-      );
+      ).pipe(
+        catchError( (err)=> {
+          return throwError(err);
+        })
+      )
     }),
     switchMap((data)=>{
 
@@ -526,16 +540,6 @@ export class DatosPolizasComponent implements OnInit {
           const seconLastName = lastNames.resOfWord;
 
 
-          console.log(
-            names
-          )
-
-          console.log(
-            lastNames
-          )
-
-          console.log(poliza);
-
 
 
           requests.push(
@@ -560,7 +564,12 @@ export class DatosPolizasComponent implements OnInit {
       })
 
 
-      return forkJoin(requests);
+      return forkJoin(requests)
+        .pipe(
+          catchError( (err)=> {
+            return throwError(err);
+          })
+        )
 
 
       // return forkJoin(
@@ -602,13 +611,12 @@ export class DatosPolizasComponent implements OnInit {
 
     }),
 
-    switchMap((data)=> {
+    map((data)=> {
 
 
       if(this.dataExtra.length>0){
         const requests : any[] = [];
 
-        console.log(data);
 
         data.forEach(
           response => {
@@ -629,27 +637,28 @@ export class DatosPolizasComponent implements OnInit {
           requests.map((request)=> {
             return this.polizasPlusService.postPolizaExtra(request.poliza_id, request.extra.beneficio_id,request.costo)
           })
+        ).pipe(
+            catchError( (err)=> {
+              return throwError(err);
+            })
         )
       }
 
-
-
-      return "ok";
-
-
-
+      return forkJoin()
     })
 
-
   )
-  .subscribe((data) => {
+  .subscribe({
+    next: (data) => {
+      Swal.close();
+      this.dataService.haveData = true;
+      this.successMessage('Se ha registrado la venta correctamente');
+    },
+    error: (error) => {
+      console.log(error);
+      this.showErrorMsg( error);
+    }
 
-
-    Swal.close();
-    this.dataService.haveData = true;
-
-
-    this.successMessage('Se ha registrado la venta correctamente');
 
 
 

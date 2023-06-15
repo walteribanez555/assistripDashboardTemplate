@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, map, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Catalogo } from '../../models/Data/Catalogo';
 import { BeneficioExtra } from '../../models/Data/BeneficioExtra.model';
@@ -9,12 +9,12 @@ import { BeneficioExtra } from '../../models/Data/BeneficioExtra.model';
   providedIn: 'root'
 })
 export class ExtrasPolizasService {
-  
+
   private apiUrl  = '/api/polizasExtras';
 
   // private apiUrl = environment.apiUrl + '/polizasExtras';
 
-  constructor( private http : HttpClient) { 
+  constructor( private http : HttpClient) {
 
    }
 
@@ -31,13 +31,20 @@ export class ExtrasPolizasService {
       poliza_id,
       beneficio_id,
       monto_adicional
-    } )
+    } ).pipe(
+      map(
+        data => data
+      ),
+      catchError(
+        err => throwError( () => err.error.message )
+      )
+    )
 
   }
 
-  
 
 
-  
+
+
 
 }

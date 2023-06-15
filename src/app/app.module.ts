@@ -29,6 +29,8 @@ import { ServiciosService } from './Shared/services/requests/servicios.service';
 import { VentasService } from './Shared/services/requests/ventas.service';
 import { ModalService } from './Shared/components/modal/modal.service';
 import { SharedModule } from './Shared/shared.module';
+import { BeneficiariosPolizasService } from './Shared/services/requests/beneficiarios-polizas.service';
+import { PolizasVentasService } from './Shared/services/requests/polizas-ventas.service';
 
 
 
@@ -75,7 +77,9 @@ import { SharedModule } from './Shared/shared.module';
     ExtrasPolizasService,
     BeneficiariosService,
     ModalService,
-    {provide: LocationStrategy, useClass: HashLocationStrategy}
+    BeneficiariosPolizasService,
+    PolizasVentasService,
+    // {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]
 })

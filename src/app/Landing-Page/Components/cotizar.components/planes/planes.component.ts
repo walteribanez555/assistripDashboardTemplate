@@ -152,12 +152,9 @@ export class PlanesComponent implements AfterViewInit,OnInit  {
       switchMap(data => {
         const listData = data.filter(item => item.status === 1);
         this.listadoPlanes= listData;
-        return this.extras.getExtras();
-      }),
-      switchMap(data => {
-        this.extraList = data;
         return this.preciosService.getPrecios();
       }),
+
       switchMap(data => {
         this.precios = data;
 
@@ -183,7 +180,7 @@ export class PlanesComponent implements AfterViewInit,OnInit  {
     ).subscribe(
       (data)=> {
           this.beneficiosData = data.filter(item => item.status === 1);
-          this.listBeneficiosCat = this.mapListBeneficioCat(this.listBeneficios);
+          this.listBeneficiosCat = this.utils.mapListBeneficioCat(this.listBeneficios, this.beneficiosData);
 
 
           //Se procede a hacer una consulta por cada plan
@@ -209,7 +206,7 @@ export class PlanesComponent implements AfterViewInit,OnInit  {
                   return ({
                     //Se procede a hacer la separacion de los planes y sus beneficios de acuerdo a si esos beneficios estan listados
                     serv :  this.listadoPlanes.find(plan => plan.servicio_id === request)? this.listadoPlanes.find(plan => plan.servicio_id === request) : null,
-                    beneficios:  this.mapListBeneficio(response)
+                    beneficios:  this.utils.mapListBeneficio(response,this.beneficiosData)
                   })
                 } )
               )
@@ -252,40 +249,10 @@ export class PlanesComponent implements AfterViewInit,OnInit  {
 
 
   //Mapear los listados de beneficio por cada plan
-  mapListBeneficio(listPlan : Plan[]){
-
-    const listCatBeneficio : catalogoBeneficio[] = [];
-    this.beneficiosData.forEach(beneficio=> {
-      const planesByBeneficio : Plan[] = listPlan.filter( plan => plan.tipo_beneficio === beneficio.valor);
-      const catyBeneficio = {
-        tipo_beneficio : beneficio,
-        beneficios :  planesByBeneficio,
-        isSubDropdownOpen: false,
-      }
-      listCatBeneficio.push(catyBeneficio);
-    })
-
-    return listCatBeneficio
-   }
 
 
-   //Mapear los listados de beneficios por cada categoria
-   mapListBeneficioCat(listBeneficios : Beneficio[]){
-      const listCatBeneficio : catalogoBeneficioData[] = [];
-      this.beneficiosData.forEach(cat=> {
-        const catbyBeneficio : Beneficio[] = listBeneficios.filter( beneficio => beneficio.tipo_beneficio === cat.valor);
-        const catyBeneficio = {
-          tipo_beneficio : cat,
-          beneficios :  catbyBeneficio,
-          subDropdownOpen: false,
-        }
 
-        listCatBeneficio.push(catyBeneficio);
-      })
 
-      return listCatBeneficio
-
-   }
 
     //Reemplazar la informacion en local
   reemplazarData(data: FormCotizarModel){

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cliente, ClientePost, ClienteResp } from '../../models/Data/Cliente';
 import { environment } from 'src/environments/environment';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 
@@ -16,26 +16,26 @@ export class ClientesService {
   // private apiUrl = environment.apiUrl + '/clientes';
 
   constructor(private http: HttpClient) {
-    
+
    }
 
-  getClientes(): Observable<Cliente[]> { 
+  getClientes(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(this.apiUrl);
   }
 
 
-  getClienteById(id : number): Observable<Cliente[]>{ 
+  getClienteById(id : string): Observable<Cliente[]>{
      let params  = new HttpParams;
 
      params = params.append('id', id);
-     
+
      return this.http.get<Cliente[]>(this.apiUrl,{params});
   }
 
   postCliente(cliente : ClientePost) :Observable<ClienteResp>{
 
 
-    const data = { 
+    const data = {
       tipo_cliente : 1,
       nombre : cliente.nombre,
       apellido : cliente.apellido,
@@ -48,23 +48,21 @@ export class ClientesService {
     }
 
     return this.http.post<ClienteResp>(this.apiUrl, data).pipe(
-      catchError((error: HttpErrorResponse) => {
-        let errorMessage = '';
-        if (error.error instanceof ErrorEvent) {
-          // Client-side error
-          errorMessage = `Error: ${error.error.message}`;
-        } else {
-          // Server-side error
-          errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-        }
-        console.error(errorMessage);
-        return throwError(errorMessage);
-      })
-    );;
+        map((response: ClienteResp) => {
+          if (response.errno) {
+            throw new Error("El email del titular ya se encuentra registrado");
+          } else {
+            return response;
+          }
+        }),
+        catchError((error: HttpErrorResponse) => {
 
-  }
+          return throwError(error.message);
+        })
+      )
+    }
 
 
 
-  
+
 }

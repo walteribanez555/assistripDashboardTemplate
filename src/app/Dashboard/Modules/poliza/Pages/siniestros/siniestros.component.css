@@ -17,7 +17,9 @@
 
 }
 
-
+a{
+  text-decoration: none;
+}
 
 
 .backBtn{
@@ -130,6 +132,10 @@
 
 a{
   text-decoration: none;
+}
+
+loading-div{
+  width: 100%;
 }
 
 siniestro{

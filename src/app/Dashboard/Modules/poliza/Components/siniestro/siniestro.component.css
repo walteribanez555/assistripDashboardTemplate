@@ -6,7 +6,36 @@
   align-items: flex-start;
   justify-content: center;
   border: 1px solid var(--main-color);
+  border-radius: 2px;
+  background-color: #efedf7;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
   margin: 20px;
+  position: relative;
+}
+
+
+@keyframes colorChange {
+  0% {
+    fill: var(--blue);
+  }
+  100% {
+    fill: var(--main-color);
+  }
+}
+
+
+
+.icon-touch{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: 1px solid var(--main-color);
+  border-radius: 10;
+  fill: var(--main-color);
+      animation-name: colorChange;
+      animation-duration: 1s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
 }
 
 .top{
@@ -24,12 +53,36 @@
 
 .data{
   display: flex;
+  flex-direction:column;
+  align-items: normal;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px;
+}
+
+.field{
+  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
-  width: 100%;
-  padding-bottom: 20px;
 }
+
+
+.item-description{
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--main-color);
+}
+
+.description span{
+  font-weight: bold;
+}
+
+
+
 
 .column{
   display: flex;

@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataSiniestroComponent } from './Components/data-siniestro/data-siniestro.component';
 import { MensajeFormComponent } from './Components/mensaje-form/mensaje-form.component';
 import { ListMessagesComponent } from './Components/list-messages/list-messages.component';
+import { MessageComponent } from './Components/message/message.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { ListMessagesComponent } from './Components/list-messages/list-messages.
     SiniestroComponent,
     DataSiniestroComponent,
     MensajeFormComponent,
-    ListMessagesComponent
+    ListMessagesComponent,
+    MessageComponent
   ],
   imports: [
     CommonModule,

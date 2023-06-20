@@ -1,5 +1,8 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
+import { Beneficiario } from 'src/app/Shared/models/Data/Beneficiario';
+import { MessageResp } from 'src/app/Shared/models/Data/Mensaje';
 import { Siniestro } from 'src/app/Shared/models/Data/Siniestro';
 import { BeneficiariosService } from 'src/app/Shared/services/requests/beneficiarios.service';
 import { PolizasService } from 'src/app/Shared/services/requests/polizas.service';
@@ -14,16 +17,23 @@ export class SiniestroComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private siniestrosService = inject(SiniestroService);
 
+  addToChildMessage: Subject<MessageResp> = new Subject<MessageResp>();
+
+
+  loading : boolean = false;
+
   siniestroId : number = -1;
   siniestro : Siniestro | null = null;
+  beneficiario : Beneficiario | null = null;
 
   ngOnInit(): void {
+    this.loading = true;
     this.route.params.subscribe( params => {
         this.siniestroId = +params['id'];
         this.siniestrosService.getSiniestroById(this.siniestroId).subscribe(
           {
-            next : (data) => { this.siniestro = data[0]},
-            error : (error) => { console.log(error)  }
+            next :  (data)  => { this.loading=false;  this.siniestro = data[0]},
+            error : (error) => { this.loading=false;  console.log(error)  }
           }
         )
 
@@ -31,6 +41,15 @@ export class SiniestroComponent implements OnInit {
 
     )
   }
+
+  haveBeneficiario(beneficiario : Beneficiario){
+    this.beneficiario = beneficiario;
+  }
+
+  onAddMessage( newMessage : MessageResp){
+    this.addToChildMessage.next(newMessage);
+  }
+
 
 
 }

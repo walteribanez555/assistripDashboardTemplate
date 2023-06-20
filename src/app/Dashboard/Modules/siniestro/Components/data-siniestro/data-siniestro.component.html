@@ -8,8 +8,11 @@
           <div class="title">
             <span>Persona</span>
           </div>
-          <div class="description">
-            <span>Walter Ronny</span>
+          <div class="description" *ngIf="beneficiario">
+            <span class="info">{{beneficiario.primer_nombre}} </span>
+            <span class="info" *ngIf="beneficiario.segundo_nombre!=='0'">{{beneficiario.segundo_nombre}} </span>
+            <span class="info">{{beneficiario.primer_apellido}} </span>
+            <span class="info" *ngIf="beneficiario.segundo_apellido!=='0'">{{beneficiario.segundo_apellido}} </span>
           </div>
 
 
@@ -19,7 +22,7 @@
           <span>Lugar</span>
         </div>
         <div class="description">
-          <span>America</span>
+          <span>{{siniestro.pais_ocurrencia}}</span>
         </div>
       </div>
 
@@ -29,31 +32,31 @@
           <span>Tipo de siniestro</span>
         </div>
         <div class="description">
-          <span>Un grandioso siniestro</span>
+          <span>{{tipoBeneficio?.etiqueta}}</span>
         </div>
 
 
     </div>
 
-    <div class="field column">
+    <div class="item-description">
 
       <div class="title">
         <span>Descripcion del siniestro</span>
       </div>
 
       <div class="description">
-        <p>Descripcion de siniestro un parrafo completo para ello</p>
+        <p class="">   {{siniestro.descripcion | zeroToMessage | signals_string}}</p>
       </div>
 
     </div>
 
-    <div class="field column">
+    <div class="item-description">
 
       <div class="title">
         <span>Archivo Adjunto</span>
       </div>
-      <div class="description">
-        <span>archivo.jpg</span>
+      <div class="description" >
+        <span class="fit-span"   >{{siniestro.url_archivo | zeroToMessage | signals_string }}</span>
       </div>
 
     </div>

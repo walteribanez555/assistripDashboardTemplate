@@ -4,11 +4,11 @@ export interface Siniestro {
   siniestro_id:      number;
   tipo_siniestro:    number;
   beneficiario_id:   number;
-  descripcion?:       string;
+  descripcion:       string;
   fecha_siniestro:   string;
   pais_ocurrencia:   string;
-  ciudad_ocurrencia?: string;
-  url_archivo?:       string;
+  ciudad_ocurrencia: string;
+  url_archivo:       string;
 }
 
 

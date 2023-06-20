@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { catchError, switchMap, throwError } from 'rxjs';
 import { Beneficiario } from 'src/app/Shared/models/Data/Beneficiario';
 import { Catalogo } from 'src/app/Shared/models/Data/Catalogo';
@@ -15,17 +15,23 @@ import { CatalogosService } from 'src/app/Shared/services/requests/catalogos.ser
 export class DataSiniestroComponent implements OnInit {
 
   @Input() siniestro! : Siniestro;
+  @Output() beneficiarioEmit = new EventEmitter();
 
   private beneficiarioService  = inject(BeneficiariosService);
   private catalogoService = inject(CatalogosService);
-  private beneficiario : Beneficiario | null = null;
-  private tipoBeneficio : Catalogo | null = null;
+   beneficiario : Beneficiario | null = null;
+   tipoBeneficio : Catalogo | null = null;
 
   ngOnInit(): void {
+    console.log(this.siniestro);
+
       this.beneficiarioService.getBeneficiarioById(this.siniestro.beneficiario_id).pipe(
         switchMap(
           data => {
             this.beneficiario = data[0];
+
+            this.beneficiarioEmit.emit(this.beneficiario);
+
 
             return this.catalogoService.getBeneficios().pipe(
               catchError( (err)=> {

@@ -30,7 +30,7 @@
 
       </ng-template>
 
-      <siniestro-form *ngIf="poliza" [beneficiarios]="listBeneficiarios" [poliza]="poliza" ></siniestro-form>
+      <siniestro-form *ngIf="poliza" [beneficiarios]="listBeneficiarios" [poliza]="poliza" (addSiniestro)="onAddSiniestro($event)" ></siniestro-form>
 
 
 

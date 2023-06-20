@@ -75,7 +75,6 @@ export class ListCatsComponent implements OnInit {
               this.loading = false
               this.beneficioList =data;
                this.beneficioData = this.utilsService.mapListBeneficioCat(data, this.beneficios);
-               console.log(this.beneficioData);
 
           },
 

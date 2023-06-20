@@ -13,7 +13,7 @@
                         Vigente
                     </div>
                     <div class="siniestro">
-                        Siniestro(1)
+                        Siniestro
                     </div>
                 </div>
                 <div class="fields">
@@ -38,14 +38,14 @@
             <div class="right">
                 <span class="title">Acciones</span>
                 <div class="listAcciones">
-                    <div class="accion"  (click)="mostrarDetalles(poliza.poliza_id)">
+                    <a class="accion"  routerLink="../poliza/{{poliza.poliza_id}}">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M480 736q75 0 127.5-52.5T660 556q0-75-52.5-127.5T480 376q-75 0-127.5 52.5T300 556q0 75 52.5 127.5T480 736Zm0-72q-45 0-76.5-31.5T372 556q0-45 31.5-76.5T480 448q45 0 76.5 31.5T588 556q0 45-31.5 76.5T480 664Zm0 192q-146 0-266-81.5T40 556q54-137 174-218.5T480 256q146 0 266 81.5T920 556q-54 137-174 218.5T480 856Zm0-300Zm0 220q113 0 207.5-59.5T832 556q-50-101-144.5-160.5T480 336q-113 0-207.5 59.5T128 556q50 101 144.5 160.5T480 776Z"/></svg>
                         <span>Ver</span>
-                    </div>
-                    <div class="accion">
+                    </a>
+                    <a routerLink="../poliza/{{poliza.poliza_id}}/siniestros" class="accion">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M200 936V256h360l16 80h224v400H520l-16-80H280v280h-80Zm300-440Zm86 160h134V416H510l-16-80H280v240h290l16 80Z"/></svg>
                         <span>Reportar siniestro</span>
-                    </div>
+                    </a>
                     <div (click)="downloadPDF()" class="accion">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M240 896q-33 0-56.5-23.5T160 816V696h80v120h480V696h80v120q0 33-23.5 56.5T720 896H240Zm240-160L280 536l56-58 104 104V256h80v326l104-104 56 58-200 200Z"/></svg>
                         <span>Descargar</span>

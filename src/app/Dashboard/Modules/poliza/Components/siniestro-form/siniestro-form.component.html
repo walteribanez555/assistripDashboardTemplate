@@ -44,7 +44,7 @@
       <div class="title">
         <span>Adjuntar documento (opcional)</span>
       </div>
-      <file-drop [inputControl]="inputControl" (filesDropped)="showFile()"></file-drop>
+      <file-drop [inputControl]="inputControl" ></file-drop>
     </div>
 
     <hr>
@@ -52,6 +52,7 @@
 
     <div class="button-field">
       <button type="submit" [class.valid]="siniestroForm.valid" >Cargar siniestro</button>
+      <loading-process [loading]="loading"  [showReady]="ready" ></loading-process>
     </div>
 
 

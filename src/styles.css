@@ -2,7 +2,7 @@
 /* You can add global styles to this file, and also import other style files */
 @font-face {
     font-family: 'Lato';
-    src: url('../src/assets/font/Raleway-Bold.ttf') format('truetype');
+    src: url('../src/assets/font/Lato-Regular.ttf') format('truetype');
   }
 
 
@@ -151,4 +151,9 @@ span.number{
   border: solid var(--main-color) !important;
   color: var(--main-color);
 
+}
+
+
+loading-div{
+  width: 100%;
 }

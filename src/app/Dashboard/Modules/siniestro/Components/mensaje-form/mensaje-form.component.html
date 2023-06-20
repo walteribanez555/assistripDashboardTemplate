@@ -1,1 +1,25 @@
-<p>mensaje-form works!</p>
+<div class="container"  >
+  <form [formGroup]="messageForm" (ngSubmit)="submitForm()">
+    <div class="field">
+      <div class="title">
+        <span>Mensaje</span>
+      </div>
+      <textarea formControlName="message" name="message" id="" cols="40" rows="5"></textarea>
+    </div>
+
+    <div class="field">
+      <div class="title">
+        <span>Adjuntar documento (opcional)</span>
+      </div>
+      <file-drop [inputControl]="inputControl" ></file-drop>
+    </div>
+
+    <div class="button-field">
+      <button type="submit" [class.valid]="messageForm.valid" >Enviar mensaje</button>
+      <loading-process [loading]="loading"  [showReady]="showReady"></loading-process>
+    </div>
+
+
+
+  </form>
+</div>

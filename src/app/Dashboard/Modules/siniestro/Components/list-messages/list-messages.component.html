@@ -1,1 +1,17 @@
-<p>list-messages works!</p>
+<div class="container"  *ngIf="!loading">
+  <div class="title">
+    <span>Mensajes ({{listMessages.length}})</span>
+    <hr>
+  </div>
+
+  <div class="list" *ngIf="listMessages.length> 0; else noMessages">
+    <message *ngFor="let message of listMessages" [beneficiario]="beneficiario" [message]="message"></message>
+
+  </div>
+
+  <ng-template #noMessages>No hay mensajes</ng-template>
+
+
+</div>
+
+<loading-div *ngIf="loading"></loading-div>

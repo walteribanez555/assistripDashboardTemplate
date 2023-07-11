@@ -27,6 +27,8 @@ export class ClientesService {
   getClienteById(id : string): Observable<Cliente[]>{
      let params  = new HttpParams;
 
+     console.log(id);
+
      params = params.append('id', id);
 
      return this.http.get<Cliente[]>(this.apiUrl,{params});
@@ -39,7 +41,7 @@ export class ClientesService {
       tipo_cliente : 1,
       nombre : cliente.nombre,
       apellido : cliente.apellido,
-      nit_ci : cliente.nit_ci,
+      nro_identificacion : cliente.nit_ci,
       origen : cliente.origen,
       email : cliente.email,
       nro_contacto : cliente.nro_contacto,

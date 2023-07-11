@@ -8,7 +8,6 @@ import { DateOnlyPipe } from 'src/app/Shared/pipes/getDateOnly.pipe';
 import { BeneficiariosPolizasService } from 'src/app/Shared/services/requests/beneficiarios-polizas.service';
 import { BeneficiariosService } from 'src/app/Shared/services/requests/beneficiarios.service';
 import { ExtrasPolizasService } from 'src/app/Shared/services/requests/beneficiosExtras.service';
-import { PolizasVentasService } from 'src/app/Shared/services/requests/polizas-ventas.service';
 import { PolizasService } from 'src/app/Shared/services/requests/polizas.service';
 import Swal from 'sweetalert2';
 import { Location } from '@angular/common';
@@ -30,6 +29,7 @@ export class PolizaComponent implements OnInit {
     routeSiniestro : string ='';
     loading : boolean = false
     private route = inject(ActivatedRoute);
+    openModal : boolean  = false;
 
 
 
@@ -110,6 +110,14 @@ export class PolizaComponent implements OnInit {
       }
     })
 
+  }
+
+  toggleButtonModal(){
+    this.openModal = true;
+  }
+
+  closeCart(): void{
+    this.openModal = false;
   }
 }
 

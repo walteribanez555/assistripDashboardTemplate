@@ -1,0 +1,235 @@
+
+
+<!-- Nombre(s)
+Apellido(s)
+Nro. Pasaporte
+Fec. Nacimiento
+Teléfono
+Destino
+ERNESTO
+BARRÓN
+A54682
+06/11/1998
++591 65823459
+ESPAÑA -->
+<div class="polizaToPdf" [id]="beneficiario.beneficiario_id">
+  <div class="poliza-imprimir">
+    <div class="top">
+
+      <div class="items">
+        <div class="saludo">
+          <h1>Póliza de Asistencia</h1>
+        </div>
+        <div class="qr_space">
+          <div class="qr" >
+            <qrcode [qrdata]="qrCode" [width]="100"   (qrCodeURL)="onLoadedQr($event)" ></qrcode>
+          </div>
+          <div class="message">
+            Verifica los datos de tu Póliza
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+    <div class="datos-beneficiario">
+      <div class="data">
+        <div class="left">
+          <div class="descriptions">
+            <span>
+              Nombre(s)
+            </span>
+            <span>
+              Apellido(s)
+            </span>
+            <span>
+              Nro. Pasaporte
+            </span>
+            <span>
+              Fec. Nacimiento
+            </span>
+            <span>
+              Teléfono
+            </span>
+
+
+          </div>
+          <div class="info">
+            <div class="nombre-beneficiario">
+              <span >{{beneficiario.primer_nombre}} </span>
+              <span  *ngIf="beneficiario.segundo_nombre!=='0'">{{beneficiario.segundo_nombre}} </span>
+            </div>
+            <div class="nombre-beneficiario">
+              <span >{{beneficiario.primer_apellido}}</span>
+              <span *ngIf="beneficiario.segundo_apellido!=='0'">{{beneficiario.segundo_apellido}} </span>
+            </div>
+
+            <div class="nombre-beneficiario">
+              <span>{{beneficiario.nro_identificacion}}</span>
+            </div>
+            <div class="nombre-beneficiario">
+              <span>{{beneficiario.fecha_nacimiento | extractDate}}</span>
+            </div>
+            <div class="nombre-beneficiario">
+              <span>{{beneficiario.telefono}}</span>
+            </div>
+
+          </div>
+
+        </div>
+        <div class="right">
+          <div class="descriptions">
+            <span>
+              Salida
+            </span>
+            <span>
+              Retorno
+            </span>
+            <span>
+              Nro. Póliza
+            </span>
+            <span>
+              Dias
+            </span>
+            <span>
+              Destino
+            </span>
+
+          </div>
+          <div class="info">
+            <div class="nombre-beneficiario">
+              <span>{{poliza.fecha_salida | extractDate}}</span>
+            </div>
+            <div class="nombre-beneficiario">
+              <span >{{poliza.fecha_retorno | extractDate}}</span>
+            </div>
+
+            <div class="nombre-beneficiario">
+              <span>{{poliza.poliza_id}}</span>
+            </div>
+            <div class="nombre-beneficiario">
+              <span>{{poliza.nro_dias}}</span>
+            </div>
+            <div class="nombre-beneficiario">
+              <span>{{poliza.destino}}</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="data_plan">
+
+        <div class="catalogo">
+          <div class="plan">
+            <span>PLAN {{servicio.servicio}}</span>
+          </div>
+          <div class="description">
+            <span>CERTIFICAMOS QUE:</span>
+            <span>ESTÁ PROTEGIDO POR LA PÓLIZA DE ASISTENCIA DE VIAJES</span>
+          </div>
+          <div class="beneficios">
+            <div class="beneficio" *ngFor="let beneficio of beneficiosMapped">
+              <div class="title" >
+                <span>
+                  {{beneficio.tipo_beneficio.etiqueta |uppercase}}
+                </span>
+
+              </div>
+              <div class="list-cats"  >
+                <div class="data"  >
+                  <ng-container *ngFor="let beneficio of beneficio.beneficios">
+
+                    <span *ngIf="beneficio.cobertura ; else noCobertura ">{{beneficio.cobertura | currency:'USD':'$':'1.2-2' |uppercase}}</span>
+                    <ng-template #noCobertura>
+                      <span  *ngIf="beneficio.complemento "  >{{'Incluye' |uppercase}}</span>
+                      <!-- <ng-template #noContent>
+                          <span >No incluye</span>
+                      </ng-template> -->
+                    </ng-template>
+                  </ng-container>
+
+                </div>
+                <div class="cats"   >
+                  <ng-container *ngFor="let plan of beneficio.beneficios">
+
+                    <span *ngIf="plan.cobertura || plan.complemento" >{{plan.beneficio  }}</span>
+                  </ng-container>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+        <div class="asistencia">
+          <div class="logo">
+                <div class="img">
+                    <img src="../../../assets/images/logo_img.png" alt="">
+                </div>
+                <div class="nombre">
+                    <p>
+                        <span class="assis">assis</span>
+                        <span class="trip">Trip</span>
+                        <span class="com">.com</span>
+                    </p>
+                    <div class="descripcion"><span>Asistencia de Viajes</span></div>
+                </div>
+            </div>
+
+            <div class="soporte">
+              <div class="mensaje">
+                <p>Para hacer uso de
+                  la asistencia
+                  <span class="important">
+                    debe
+                    comunicarse al
+                    siguiente número
+                  </span>
+                  de contacto.</p>
+              </div>
+              <div class="contacto">
+                <span class="title">
+                  Whatsapp Mundial
+                </span>
+                <span class="description">
+                  +1-305-280-8950
+                </span>
+
+              </div>
+              <div class="whatsappLogo">
+                <img src="../../../../../../../assets/svg/whatsapp-svgrepo-com.svg" width="40" height="40"  alt="">
+              </div>
+
+
+            </div>
+
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <div class="info">
+        <div class="line">
+          <hr>
+
+          <div class="img">
+            <img src="../../../assets/images/logo_img.png" alt="">
+          </div>
+
+        </div>
+        <div class="date">
+          <span>{{date}}</span>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>

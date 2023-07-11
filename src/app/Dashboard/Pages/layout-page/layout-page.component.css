@@ -7,7 +7,6 @@
 
 .sidenav {
   grid-column: 1 / 2;
-  padding: 20px;
 }
 
 .listLinks{
@@ -109,13 +108,34 @@
 
 }
 
+.mb-display{
+  display: none;
+}
+
 
 
 /* Responsive layout for smaller screens */
 @media screen and (max-width: 768px) {
+
+
+
+  hr{
+    margin: 0px 0px;
+    width: 100%;
+    height: 0.25px;
+    background-color: #dedddc;
+    border: none;
+
+  }
+
+  h1{
+    display: none;
+  }
   .grid-container {
     grid-template-columns: 1fr;
     margin-top: 0px;
+    height: 90vh;
+    overflow-y: hidden;
   }
 
   .sidenav {
@@ -127,22 +147,44 @@
 
   .listLinks{
       display: flex;
-      flex-direction: row;
+      flex-direction: row-reverse;
       align-items: center;
       justify-content: space-between;
       list-style: none;
-      padding: 30px;
-      margin-top: 20px;
+      padding: 0px;
+      margin-top: 0px;
     }
 
 
   .content{
     grid-column: auto;
+    overflow-y: auto;
   }
+
+  .link{
+    margin-top: 0;
+  }
+
   hr{
     display: none;
   }
   svg{
     display: none;
   }
+
+  .mb-display{
+    display: flex;
+    padding: 0px;
+    margin: 0px;
+  }
+
+.link a span,
+.link button span{
+
+  justify-content: center;
+
+  transition: 1s all ease-in-out;
+
+}
+
 }

@@ -22,6 +22,10 @@ import { FileDropComponent } from './components/file-drop/file-drop.component';
 import { UploadFileDirective } from './directives/upload-file.directive';
 import { ListBeneficiarioComponent } from './components/list-beneficiario/list-beneficiario.component';
 import { BeneficiarioComponent } from './components/beneficiario/beneficiario.component';
+import { ZeroToMessagePipe } from './pipes/zero-to-message.pipe';
+import { LoadingProcessComponent } from './components/loading-process/loading-process.component';
+import { SignalsPipe } from './pipes/signals.pipe';
+
 
 
 
@@ -36,7 +40,6 @@ import { BeneficiarioComponent } from './components/beneficiario/beneficiario.co
     TruncateDirective,
     CustomLabelDirective,
     DollarPipe,
-    ExtractDatePipe,
     DateOnlyPipe,
     TruncateDirective,
     NavbarComponent,
@@ -48,6 +51,11 @@ import { BeneficiarioComponent } from './components/beneficiario/beneficiario.co
     UploadFileDirective,
     ListBeneficiarioComponent,
     BeneficiarioComponent,
+    ZeroToMessagePipe,
+    LoadingProcessComponent,
+    SignalsPipe,
+    ExtractDatePipe,
+
   ],
   imports: [
     CommonModule,
@@ -67,7 +75,6 @@ import { BeneficiarioComponent } from './components/beneficiario/beneficiario.co
     CustomLabelDirective,
     UploadFileDirective,
     DollarPipe,
-    ExtractDatePipe,
     DateOnlyPipe,
     TruncateDirective,
     NavbarComponent,
@@ -75,6 +82,12 @@ import { BeneficiarioComponent } from './components/beneficiario/beneficiario.co
     ListCatsComponent,
     BeneficioComponent,
     FileDropComponent,
+    ZeroToMessagePipe,
+    LoadingProcessComponent,
+    SignalsPipe,
+    ExtractDatePipe,
+
+
   ]
 })
 export class SharedModule { }

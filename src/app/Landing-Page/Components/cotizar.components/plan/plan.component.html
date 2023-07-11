@@ -3,7 +3,7 @@
 
     <h3>{{plan.serv?.servicio}}</h3>
     <h4 class="number">{{plan.precio | currency:'USD':'$':'1.2-2'}}</h4>
-    <p class="price">(Por persona)</p>
+    <p class="price">(Por Persona)</p>
 
       <button *ngIf="plan.serv"  (click)="togglePlan(plan)">
         <span >Seleccionar plan</span>
@@ -14,7 +14,7 @@
   <ng-container  >
 
     <div class="info" [class.sticky]="isSticky" >
-      <p>Cobertura global </p>
+      <p>Cobertura Global </p>
       <p class="cobertura number">{{plan.serv?.cobertura_global | currency:'USD':'$':'1.2-2'}}</p>
     </div>
     <hr [class.sticky]="isSticky">
@@ -30,12 +30,12 @@
       </div>
       <hr>
       <div class="cat">
-        <div class="title">Asistencia en viaje</div>
+        <div class="title">Asistencia en Viaje</div>
         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M480 711 240 471l56-56 184 184 184-184 56 56-240 240Z"/></svg>
       </div>
       <hr>
       <div class="cat">
-        <div class="title">Auxilio y asistencia legal</div>
+        <div class="title">Auxilio y Asistencia Legal</div>
         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M480 711 240 471l56-56 184 184 184-184 56 56-240 240Z"/></svg>
       </div>
       <hr>

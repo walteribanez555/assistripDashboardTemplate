@@ -2,13 +2,14 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { BeneficiariosService } from 'src/app/Shared/services/requests/beneficiarios.service';
-import { catchError, switchMap, throwError } from 'rxjs';
+import { Subject, catchError, switchMap, throwError } from 'rxjs';
 import { Beneficiario } from 'src/app/Shared/models/Data/Beneficiario';
 import { SiniestroService } from 'src/app/Shared/services/requests/siniestro.service';
-import { Siniestro } from 'src/app/Shared/models/Data/Siniestro';
+import { Siniestro, SiniestroResp } from 'src/app/Shared/models/Data/Siniestro';
 import Swal from 'sweetalert2';
 import { PolizasService } from 'src/app/Shared/services/requests/polizas.service';
 import { Poliza } from 'src/app/Shared/models/Data/Poliza';
+import { PolizaLocalService } from 'src/app/Shared/services/utils/poliza-local.service';
 
 
 @Component({
@@ -22,12 +23,14 @@ export class SiniestrosComponent implements OnInit{
   private beneficiariosService = inject(BeneficiariosService);
   private siniestrosService = inject(SiniestroService);
   private polizaService = inject(PolizasService);
+  private polizaLocalService = inject(PolizaLocalService);
   polizaId  : number = -1;
   loading  : boolean = false;
   poliza : Poliza | null = null;
 
   listBeneficiarios : Beneficiario[] = [];
   listSiniestros : Siniestro[] = [];
+
 
   constructor(private location: Location) {
 
@@ -71,7 +74,7 @@ export class SiniestrosComponent implements OnInit{
           ).subscribe(
             {
               next : (data) => {
-                this.loading =false
+                this.loading =false;
                 this.listSiniestros = data;
                 this.listSiniestros = this.listSiniestros.filter( siniestro => this.listBeneficiarios.some( beneficio => beneficio.beneficiario_id=== siniestro.beneficiario_id));
               },
@@ -114,6 +117,35 @@ export class SiniestrosComponent implements OnInit{
     })
 
   }
+
+  onAddSiniestro( siniestroResp : SiniestroResp){
+
+
+    const siniestroToChild : Siniestro = {
+      siniestro_id : +siniestroResp.id,
+      tipo_siniestro : siniestroResp.tipo_siniestro,
+      beneficiario_id : +siniestroResp.beneficiario_id,
+      descripcion : siniestroResp.descripcion.length>0? siniestroResp.descripcion : '0' ,
+      pais_ocurrencia : siniestroResp.pais_ocurrencia.length>0 ? siniestroResp.pais_ocurrencia : '0',
+      ciudad_ocurrencia : siniestroResp.ciudad_ocurrencia.length>0 ? siniestroResp.ciudad_ocurrencia : '0',
+      url_archivo : siniestroResp.url_archivo.length>0 ? siniestroResp.url_archivo : '0',
+      fecha_siniestro : siniestroResp.fecha_siniestro.length>0 ? siniestroResp.fecha_siniestro : '0',
+    }
+
+
+
+    this.listSiniestros.push(siniestroToChild);
+
+
+  }
+
+
+
+  loadPoliza(){
+    this.polizaLocalService.saveToLocal(this.polizaId);
+  }
+
+
 
 
 

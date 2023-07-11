@@ -1,0 +1,32 @@
+<div class="message"  >
+  <div class="icon-container">
+    <svg  *ngIf=" message.es_operador === 0; else svgPage " xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M85-545q23-143 134.5-239T480-880q75 0 141 25.5T740-784q-10 17-16.5 30.5T713-728q-46-43-105.5-67.5T480-820q-112 0-199 64T159-592q-22 5-41 16.5T85-545ZM480-80q-149 0-260.5-96.5T85-416q13 20 32 32t42 17q35 100 122.5 163.5T480-140q142 0 241-99.5T820-480q0-17-2-34t-5-34q7 2 13.5 2.5t13.5.5q9 0 17.5-1t16.5-3q3 17 4.5 34t1.5 35q0 82-31.5 155T763-197.5q-54 54.5-127 86T480-80ZM336-503l77-77-78-78-35 35 43 42-43 43 36 35Zm504-102q-31 0-53-22t-22-53q0-26 13.5-54t61.5-97q48 69 61.5 97t13.5 54q0 31-22 53t-53 22ZM625-502l36-36-43-43 42-42-35-35-78 78 78 78Zm-145 85q-26 0-51 6t-48 18l-146-84q0-16-7-29.5T208-528q-20-11-42-5.5T132-508q-11 20-5 42t26 34q14 8 28.5 7t28.5-9l125 73q-18 17-32.5 37T278-280h53q22-42 62.5-65t87.5-23q47 0 86.5 23t62.5 65h52q-25-62-80-99.5T480-417Zm0-63Z"/></svg>
+    <ng-template  #svgPage>
+      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M440-120v-60h340v-304q0-58-25-111.5T688-690q-42-41-96-65.5T480-780q-58 0-112 24.5T272-690q-42 41-67 94.5T180-484v244h-20q-33 0-56.5-23.5T80-320v-80q0-23 11-40.5t29-28.5l3-53q9-73 41.5-132t81-100q48.5-41 109-63.5T480-840q66 0 126.5 22.5t108.5 64q48 41.5 80.5 100T837-523l3 52q18 9 29 26.5t11 38.5v92q0 22-11 39t-29 26v69q0 24.75-17.625 42.375T780-120H440Zm-80-290q-12 0-21-9t-9-21.5q0-12.5 9-21t21.5-8.5q12.5 0 21 8.625T390-440q0 12-8.625 21T360-410Zm240 0q-12 0-21-9t-9-21.5q0-12.5 9-21t21.5-8.5q12.5 0 21 8.625T630-440q0 12-8.625 21T600-410Zm-359-52q-4-59 16.5-107t55-81.5Q347-684 392-702t90-18q91 0 153 57.5T711-519q-94-1-165.5-50.5T435-698q-16 81-67.5 143.5T241-462Z"/></svg>
+    </ng-template>
+
+  </div>
+  <div class="info-container">
+    <div class="field">
+      <div class="description" *ngIf=" message.es_operador === 0; else pageMessage">
+        <span class="info">{{beneficiario.primer_nombre}} </span>
+        <span class="info" *ngIf="beneficiario.segundo_nombre!=='0'">{{beneficiario.segundo_nombre}} </span>
+        <span class="info">{{beneficiario.primer_apellido}} </span>
+        <span class="info" *ngIf="beneficiario.segundo_apellido!=='0'">{{beneficiario.segundo_apellido}} </span>
+      </div>
+      <ng-template #pageMessage >Assistrip</ng-template>
+      <span style="margin: 0px 5px;" >|</span>
+      <span *ngIf="message ">{{message.fecha_mesaje  | dateOnly }}</span>
+    </div>
+    <div class="field">
+      <span  style="font-weight: 900;" >{{message.mensaje | signals_string}}</span>
+
+    </div>
+    <div class="field">
+      <span *ngIf="message.url_archivo !=='0'" class="fit-span" style="text-decoration: underline; cursor: pointer;" >{{message.url_archivo | zeroToMessage}}</span>
+
+    </div>
+  </div>
+
+</div>
+<hr>

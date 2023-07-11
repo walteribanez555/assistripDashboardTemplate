@@ -23,6 +23,7 @@ import { PreciosService } from 'src/app/Shared/services/requests/precios.service
 import { VentasService } from 'src/app/Shared/services/requests/ventas.service';
 import { dateValidator } from 'src/app/Shared/validators/date.validators';
 import { emailValidator } from 'src/app/Shared/validators/email.validators';
+import { UtilsService } from 'src/app/Shared/services/utils/utils.service';
 
 
 
@@ -137,6 +138,7 @@ export class DatosPolizasComponent implements OnInit {
     private polizasService : PolizasService,
     private beneficiarioService : BeneficiariosService,
     private polizasPlusService : ExtrasPolizasService,
+    private utilService : UtilsService,
     private router : Router
   ){
 
@@ -229,6 +231,7 @@ export class DatosPolizasComponent implements OnInit {
       data => {
         this.hasLoaded = true;
         this.listCupones = data.filter(cupon => cupon.status===1);
+        this.listCupones = this.utilService.filterCouponsByDates( this.listCupones);
         console.log(this.listCupones);
         this.precioMayores={
           precio : this.costoMayores,
@@ -436,19 +439,46 @@ export class DatosPolizasComponent implements OnInit {
   .pipe(
     switchMap((data) => {
       let cliente_id: number = 0;
+
+      const arrcantidad  :string[] =[];
+      const arrservicios : string[] =[];
+
+      if(this.datosCotizacionMenores.length > 0 && this.servicioMenores){
+        arrcantidad.push(this.datosCotizacionMenores.length.toString());
+        arrservicios.push(this.servicioMenores.servicio_id.toString());
+      }
+      if(this.datosCotizacionMayores.length > 0 && this.servicioMayores) {
+        arrcantidad.push(this.datosCotizacionMayores.length.toString());
+        arrservicios.push(this.servicioMayores.servicio_id.toString());
+      }
+
+
+      const cantidadDto = arrcantidad.join(',');
+
+      const descuentosDto = this.mapListDescuentos(this.listDescuentos, arrcantidad.length).join(',');
+
+      const tipoDescuentosDto = this.mapCantDescuentos(this.listDescuentos, arrcantidad.length).join(',');
+
+      const serviciosDto = arrservicios.join(',');
+
+
+      console.log({cantidadDto, descuentosDto, tipoDescuentosDto, serviciosDto});
+
       if (data.length > 0) {
-        console.log("Encontro cliente");
         cliente_id = data[0].cliente_id;
+
+
         return this.ventasService.postVenta(
           cliente_id,
-          this.listPolizas.length,
-          this.listDescuentos.reduce((a, b) => a + b.montoTotal, 0),
+          cantidadDto,
+          descuentosDto,
+          tipoDescuentosDto,
+          0,
+          serviciosDto,
           this.datosCotizacion.initialDate,
-          this.datosCotizacion.finalDate,
-          this.total
+          this.datosCotizacion.initialDate,
         );
       } else {
-        console.log("No encontro cliente");
         const nuevoCliente: ClientePost = {
           apellido: polizas[0].form.value.apellidos,
           nombre: polizas[0].form.value.nombres,
@@ -460,20 +490,19 @@ export class DatosPolizasComponent implements OnInit {
         // Use `switchMap` to chain the `postCliente` Observable to the `postVenta` Observable
         return this.clientesService.postCliente(nuevoCliente).pipe(
           switchMap((data) => {
-
-
-            console.log(data);
             cliente_id = data.id;
 
 
             this.dataService.titular = data;
             return this.ventasService.postVenta(
               cliente_id,
-              this.listPolizas.length,
-              this.listDescuentos.reduce((a, b) => a + b.montoTotal, 0),
+              cantidadDto,
+              descuentosDto,
+              tipoDescuentosDto,
+              0,
+              serviciosDto,
               this.datosCotizacion.initialDate,
-              this.datosCotizacion.finalDate,
-              this.total
+              this.datosCotizacion.initialDate,
             );
           })
         ).pipe(
@@ -685,6 +714,31 @@ export class DatosPolizasComponent implements OnInit {
     return {firsWord : firstWord , resOfWord : restOfString.trimEnd()}
   }
 
+
+  mapListDescuentos( descuentos : CuponAplicado[], cantidadPolizas : number) : string[]{
+    const descuentosMapped : string[] = [];
+    if(descuentos.length != cantidadPolizas ){
+      descuentosMapped.push(descuentos.reduce((a, b) => a + b.montoTotal, 0).toString());
+    }
+    for (let index = 0; index < cantidadPolizas-1; index++) {
+      descuentosMapped.push('0');
+    }
+    return descuentosMapped;
+  }
+
+  mapCantDescuentos( descuentos : CuponAplicado[] , cantidadPolizas : number){
+    const descuentosMapped : string[] = [];
+
+      for (let index = 0; index < cantidadPolizas; index++) {
+        descuentosMapped.push('0');
+      }
+
+
+      return descuentosMapped;
+
+  }
+
+
   backPrev(){
     this.router.navigateByUrl('/landing-page/cotizar');
   }
@@ -824,7 +878,9 @@ export class DatosPolizasComponent implements OnInit {
                                         montoTotal : cupon.valor* servicioDesc.cantidadPolizas,
 
                                       }
-                                  }})
+                                  }});
+
+
 
     }
 

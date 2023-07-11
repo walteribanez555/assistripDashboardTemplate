@@ -2,7 +2,7 @@
 /* You can add global styles to this file, and also import other style files */
 @font-face {
     font-family: 'Lato';
-    src: url('../src/assets/font/Raleway-Bold.ttf') format('truetype');
+    src: url('../src/assets/font/Lato-Regular.ttf') format('truetype');
   }
 
 
@@ -64,8 +64,6 @@ body {
     position: relative;
     width: 100%;
     height: 100%;
-    overflow-y: auto;
-
 
 
 }
@@ -150,5 +148,25 @@ span.number{
 
   border: solid var(--main-color) !important;
   color: var(--main-color);
+
+}
+
+
+loading-div{
+  width: 100%;
+}
+
+
+poliza-pdf{
+
+  position: absolute;
+  left: -300%;
+  top: 0;
+
+}
+
+qrcode canvas{
+  width: 100;
+  height: 100;
 
 }

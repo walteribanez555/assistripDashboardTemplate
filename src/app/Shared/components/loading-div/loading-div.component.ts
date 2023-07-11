@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'loading-div',
@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./loading-div.component.css']
 })
 export class LoadingDivComponent {
+
+  @Input() message : string = "Cargando la informacion"
 
 }

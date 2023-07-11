@@ -4,6 +4,7 @@ import { LayoutPageComponent } from './Pages/layout-page/layout-page.component';
 import { HomeComponent } from './Pages/home/home.component';
 import { CotizarComponent } from './Pages/cotizar/cotizar.component';
 import { DatosPolizasComponent } from './Pages/datos-polizas/datos-polizas.component';
+import { TuPolizaComponent } from './Pages/tu-poliza/tu-poliza.component';
 
 const routes : Routes = [
   {
@@ -21,7 +22,12 @@ const routes : Routes = [
       {
         path : 'datos-polizas',
         component : DatosPolizasComponent,
-      }
+      },
+      {
+        path : 'tu-poliza/:id',
+        component : TuPolizaComponent,
+      },
+
     ]
 
   },

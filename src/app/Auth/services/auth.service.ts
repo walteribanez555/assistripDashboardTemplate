@@ -1,16 +1,16 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable, catchError, map, of, switchMap, tap, throwError } from 'rxjs';
 
-import { AuthStatus, CheckTokenResponse, LoginResponse, User } from '../interfaces';
-import Swal from 'sweetalert2';
+import { AuthStatus, CheckTokenResponse, LoginResponse} from '../interfaces';
+import { User } from 'src/app/Shared/models/Data/User';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private readonly baseUrl: string = 'http://192.168.0.10:3000';
+  private readonly baseUrl: string = '/api-auth';
   private http = inject( HttpClient );
 
   private _currentUser = signal<User|null>(null);
@@ -19,82 +19,102 @@ export class AuthService {
 
   public currentUser = computed( () => this._currentUser() );
   public authStatus = computed( () => this._authStatus() );
-  public currentClient = computed( () => this._currentClient());
 
 
   constructor() {
-    this.checkAuthStatus().subscribe();
+    this.checkAuthStatus();
   }
 
-  private setAuthentication(user: User, token:string, identifier : string): boolean {
+  private setAuthentication( sessionToken : string  , identifier : string): boolean {
 
 
-    this._currentUser.set( user );
+    // this._currentUser.set( user );
     this._currentClient.set( identifier);
     this._authStatus.set( AuthStatus.authenticated );
-    localStorage.setItem('token', token);
-    localStorage.setItem('identifier',identifier)
+    localStorage.setItem('Authorization', sessionToken);
+    localStorage.setItem('identifier',identifier);
+
+
 
     return true;
   }
 
 
 
+  loadByDefaultUser(){
+    return this.setAuthentication("ExternalUser902010", "cliente");
 
-  login( email: string, password: string, identifier : string ): Observable<boolean> {
+  }
 
 
-    const url  = `${ this.baseUrl }/auth/login`;
-    const body = { email, password };
+  login( username: string, password: string ) {
+
+    const url  = `${ this.baseUrl }/sessions`;
+    const body = { username, password };
+
 
     return this.http.post<LoginResponse>( url, body )
       .pipe(
-        map( ({ user, token }) => this.setAuthentication( user, token, identifier )),
-        catchError( err => throwError( () => err.error.message ))
+        map( ({ sessionToken }) => {
+          this.setAuthentication( sessionToken, username );
+
+        }),
+
+        catchError( err => throwError( () => err ))
       );
     }
 
-  checkAuthStatus():Observable<boolean> {
+  checkAuthStatus():boolean{
 
-    const url   = `${ this.baseUrl }/auth/check-token`;
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('Authorization');
     const identifier = localStorage.getItem('identifier');
 
-    if ( !token ) {
+    if ( !token  || !identifier) {
       this.logout();
-      return of(false);
-    }
-
-    if( !identifier){
-      this.logout();
-      return of(false);
+      // return of(false);
     }
 
 
+    if( token && identifier){
+      return false;
+    }
 
-    const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${ token }`);
-
-
-      return this.http.get<CheckTokenResponse>(url, { headers })
-        .pipe(
-          map( ({ user, token }) => this.setAuthentication( user, token, identifier )),
-          catchError(() => {
-            this._authStatus.set( AuthStatus.notAuthenticated );
-            return of(false);
-          })
-        );
-
+    return this.loadByDefaultUser()
 
   }
 
   logout() {
-    localStorage.removeItem('token');
+    localStorage.removeItem('Authorization');
+    localStorage.removeItem('identifier');
     this._currentUser.set(null);
     this._currentClient.set(null);
     this._authStatus.set( AuthStatus.notAuthenticated );
-
   }
 
 
+  isInvited(){
+    const identifier = localStorage.getItem('identifier');
+
+    if( identifier && identifier === "cliente"){
+      return true
+    }
+
+
+    return false;
+  }
+
+
+  getToken() : string | null{
+    const token = localStorage.getItem('Authorization');
+
+
+    return token;
+
+  }
+
+  getIdentifier() : string | null{
+    const identifier = localStorage.getItem('identifier');
+
+    return identifier;
+  }
 }

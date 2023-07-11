@@ -1,3 +1,16 @@
+@keyframes displayBackground {
+
+  0% {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+}
+
+
+
 .modal-backdrop {
   width: 100vw;
   height: 100vh;
@@ -11,17 +24,28 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  animation-name: displayBackground;
+      animation-duration: 0.4s;
+      animation-timing-function:cubic-bezier(0.445, 0.05, 0.55, 0.95);
+      animation-iteration-count: 1;
 }
 
+@keyframes expandModal {
 
+  0% {
+    top: 0%;
+  }
+  100% {
+    top: 10%;
+  }
+}
 
 .modal {
   visibility: visible;
   z-index: 25;
   position: absolute;
-  left: 50%;
-  top: 50vh;
-  transform: translate(-50%, -50%);
+  left: 25%;
+  top: 10%;
   width: 40%;
   height: auto;
   background-color: white;
@@ -31,6 +55,17 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+}
+
+
+@media (min-width: 768px) {
+  .modal{
+    animation-name: expandModal;
+      animation-duration: 0.4s;
+      animation-timing-function:cubic-bezier(0.445, 0.05, 0.55, 0.95);
+      animation-iteration-count: 1;
+  }
+
 }
 
 .modal.md {
@@ -299,14 +334,43 @@ span.select {
 }
 
 
-@media (max-width:768px) {
-  .modal {
-    width: 100%;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    transform: none;
 
+@keyframes displayModal {
+
+  0% {
+    top: 90%;
+
+  }
+
+
+  100% {
+    top: 0%;
+
+  }
+
+}
+
+@media (max-height:750px) {
+  .modal{
+    height: 85%;
+  }
+}
+
+
+@media (max-width:768px) {
+  .modal-backdrop{
+    height: 90vh;
+  }
+  .modal {
+    top: 0%;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    transform: none;
+    animation-name: displayModal;
+      animation-duration: 0.4s;
+      animation-timing-function:cubic-bezier(0.445, 0.05, 0.55, 0.95);
+      animation-iteration-count: 1;
   }
   .main{
     display: block;

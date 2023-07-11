@@ -1,5 +1,5 @@
 
-export interface Cupon { 
+export interface Cupon {
     cupon_id : number,
     fecha_desde : string,
     fecha_hasta : string,
@@ -7,9 +7,9 @@ export interface Cupon {
     status: number,
     tipo_valor : number,
     valor: number,
-    
-    
-    
+    nombre : string | null
+
+
 }
 
     // "servicio_id" : 1,
@@ -26,7 +26,7 @@ export interface CuponPost extends Omit<Cupon, 'cupon_id'>{
 
 
 
-export interface CuponAplicado { 
+export interface CuponAplicado {
     cupon : Cupon,
     monto : number,
     montoTotal: number,

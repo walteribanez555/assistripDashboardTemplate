@@ -1,9 +1,11 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { Catalogo } from 'src/app/Shared/models/Data/Catalogo';
 import { cotizacionDataForm } from 'src/app/Shared/models/Pages/cotizacionDataForm.model';
 import { FormCotizarModel } from 'src/app/Shared/models/Pages/formCotizar.model';
 import { cotizacionIntefaceService } from 'src/app/Shared/services/interfaces/cotizacioninterface.service';
 import { EventService } from 'src/app/Shared/services/interfaces/event.service';
+import { CatalogosService } from 'src/app/Shared/services/requests/catalogos.service';
 import { UtilsService } from 'src/app/Shared/services/utils/utils.service';
 
 
@@ -34,6 +36,8 @@ export class CotizadorComponent implements OnInit {
   private utils : UtilsService,
 
   private eventService  : EventService,
+
+  private catalogoService : CatalogosService,
   ){
 
   }
@@ -80,6 +84,8 @@ export class CotizadorComponent implements OnInit {
   firstDate : string = "";
   limitDate : string = "";
 
+  paises : Catalogo[] =[];
+
 
 
 
@@ -87,6 +93,12 @@ export class CotizadorComponent implements OnInit {
 
     //Si hay la informacion se lo procede a guardar en este componente
     this.receivedData = this.dataService.sharedData;
+
+    this.catalogoService.getPaises().subscribe(
+      (data)=> {
+        this.paises = data.filter(item => item.status === 1);
+      });
+
 
 
 
@@ -217,11 +229,12 @@ export class CotizadorComponent implements OnInit {
 
       if (tag.length > 1 && !this.tags.includes(tag)) {
 
-          tag.split(',').forEach(tag => {
-            this.tags.push(tag);
-          });
+        tag.split(',').forEach(tag => {
+          this.tags= [tag];
+        });
 
-      }
+    }
+
 
       this.listTags = this.tags.join(', ');
     }

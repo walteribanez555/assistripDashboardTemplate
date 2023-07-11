@@ -1,8 +1,10 @@
 import { Component, ElementRef, EventEmitter, Input, Output, TemplateRef, OnInit } from '@angular/core';
 import { Expand } from 'src/app/Shared/animations/expand.animation';
 import { Cupon, CuponAplicado } from 'src/app/Shared/models/Data/Cupon';
+import { Servicio } from 'src/app/Shared/models/Data/Servicio';
 import { planbeneficio } from 'src/app/Shared/models/Pages/planbeneficio.model';
 import { CuponesService } from 'src/app/Shared/services/requests/cupones.service';
+import { UtilsService } from 'src/app/Shared/services/utils/utils.service';
 
 
 @Component({
@@ -62,7 +64,9 @@ export class ShoppingCartComponent implements OnInit {
 
   constructor(
     private elementRef: ElementRef,
-    private cuponesService : CuponesService  ) {}
+    private cuponesService : CuponesService,
+    private utilService : UtilsService,
+    ) {}
 
 
     ngOnInit(): void {
@@ -74,8 +78,7 @@ export class ShoppingCartComponent implements OnInit {
     }
 
     this.cuponesService.getCupones().subscribe((cupones) => {
-      this.listCupones = cupones.filter(cupon => cupon.status===1);
-      console.log(this.listCupones);
+      this.listCupones = this.utilService.filterCouponsByDates(cupones.filter(cupon => cupon.status===1));
       if(this.planMayores){
 
         this.precioMayores={
@@ -151,5 +154,32 @@ export class ShoppingCartComponent implements OnInit {
                                   }
                               }})
 
-}
+  }
+
+  realizarDescuento(cupones :Cupon[], servicio : Servicio, precio : number ,cantidadPolizas : number){
+    const descuentos= cupones.filter(cupon => cupon.servicio_id === servicio.servicio_id )
+                            .map(cupon => {
+                              switch (cupon.tipo_valor) {
+                                case 1:
+                                  return {
+                                    cupon : cupon,
+                                    monto : precio * (cupon.valor/100),
+                                    montoTotal : (precio * cantidadPolizas) * (cupon.valor/100),
+                                  }
+                                case 2:
+                                  return {
+                                    cupon : cupon,
+                                    monto : cupon.valor,
+                                    montoTotal : cupon.valor* (cantidadPolizas),
+                                  }
+                                default:
+                                  return {
+                                    cupon : cupon,
+                                    monto : (precio * cantidadPolizas) * (cupon.valor/100),
+                                    montoTotal : cupon.valor* cantidadPolizas,
+
+                                  }
+                              }})
+
+  }
 }

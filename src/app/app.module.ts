@@ -10,7 +10,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import { CommonModule } from '@angular/common';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common'
@@ -31,6 +31,14 @@ import { ModalService } from './Shared/components/modal/modal.service';
 import { SharedModule } from './Shared/shared.module';
 import { BeneficiariosPolizasService } from './Shared/services/requests/beneficiarios-polizas.service';
 import { PolizasVentasService } from './Shared/services/requests/polizas-ventas.service';
+import { UserService } from './Shared/services/requests/user.service';
+import { RolService } from './Shared/services/requests/rol.service';
+import { ErrorInterceptor } from './Shared/interceptors/error.interceptor';
+import { SessionInterceptor } from './Shared/interceptors/session.interceptor';
+import { TransformDataService } from './Shared/services/utils/TransformDataService.service';
+import { PolizaLocalService } from './Shared/services/utils/poliza-local.service';
+import { MensajeService } from './Shared/services/requests/mensaje.service';
+import { TokenService } from './Shared/services/utils/token.service';
 
 
 
@@ -79,6 +87,22 @@ import { PolizasVentasService } from './Shared/services/requests/polizas-ventas.
     ModalService,
     BeneficiariosPolizasService,
     PolizasVentasService,
+    UserService,
+    RolService,
+    TransformDataService,
+    PolizaLocalService,
+    MensajeService,
+    TokenService,
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass : SessionInterceptor,
+      multi : true,
+    },
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass : ErrorInterceptor,
+      multi : true,
+    }
     // {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]

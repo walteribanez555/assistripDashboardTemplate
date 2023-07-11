@@ -57,8 +57,8 @@ export class PolizasDetallesComponent implements OnInit, AfterViewInit {
 
     this.loading = true;
 
-    const idClient = this.authService.currentClient();
 
+    const idClient = this.authService.getIdentifier()
 
     if(idClient){
 
@@ -108,6 +108,7 @@ export class PolizasDetallesComponent implements OnInit, AfterViewInit {
 
 
 
+
   }
 
 
@@ -131,7 +132,6 @@ export class PolizasDetallesComponent implements OnInit, AfterViewInit {
   realizarConversion(){
 
     const DATA: any = document.getElementById('poliza-imprimir');
-    const data2: any = document.getElementById('poliza-imprimir');
 
     const doc = new jsPDF('p', 'pt', 'a4');
     const options = {
@@ -143,7 +143,6 @@ export class PolizasDetallesComponent implements OnInit, AfterViewInit {
 
 
     request.push(html2canvas(DATA, options));
-    request.push(html2canvas(data2, options));
 
     forkJoin(request).subscribe((list_canvas) => {
       list_canvas.forEach(canvas => {

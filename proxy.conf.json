@@ -9,5 +9,14 @@
       "pathRewrite": {
         "^/api": "/"
       }
+    },
+    "/api-auth/": {
+      "target": "https://5w19y9q7z5.execute-api.us-east-1.amazonaws.com",
+      "secure": true,
+      "logLevel": "debug",
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/api-auth": "/"
+      }
     }
   }

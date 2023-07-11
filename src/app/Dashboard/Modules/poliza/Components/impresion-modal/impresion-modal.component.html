@@ -1,0 +1,48 @@
+<div class="modal">
+
+  <div class="top">
+    <h2>Descargar Polizas</h2>
+
+    <button class="btn_close" (click)="close()">X</button>
+
+  </div>
+  <hr>
+  <div class="data"  *ngIf="!loading">
+    <div class="left">
+      <h2>Polizas : {{beneficiarios.length}}</h2>
+      <div class="design-poliza">
+        <div class="listPolizasToPdf" #canvaContainer *ngIf="servicio">
+
+        </div>
+
+      </div>
+
+    </div>
+    <div class="right">
+      <h2>Listado de Beneficiarios</h2>
+      <hr>
+      <div class="list-beneficiarios">
+        <beneficiario-pdf *ngFor="let beneficiario of beneficiarios" [beneficiario]="beneficiario" (onSelect)=" downloadBeneficiario($event)" ></beneficiario-pdf>
+      </div>
+      <hr>
+      <button class="btn_download" (click)="downloadAllCanvas()">
+        Descargar Todas las Polizas
+      </button>
+    </div>
+
+  </div>
+
+  <loading-div *ngIf="loading"  [message]="'Este es un proceso pesado, espere un momento por favor'"></loading-div>
+
+</div>
+
+<div class="modal-backdrop" (click)="close()"></div>
+
+
+  <div class="list-polizas" *ngIf="servicio && !loading">
+    <poliza-pdf *ngFor="let beneficiario of beneficiarios" [beneficiario]="beneficiario" [servicio]="servicio" [beneficiosMapped]="listBeneficiosMapped" [poliza]="poliza" (isLoaded)="getCanva($event)" ></poliza-pdf>
+
+  </div>
+
+
+

@@ -1,8 +1,11 @@
-<div class="container">
-    <data-siniestro *ngIf="siniestro" [siniestro]="siniestro" ></data-siniestro>
+<div class="container" *ngIf="!loading">
+    <data-siniestro *ngIf="siniestro" [siniestro]="siniestro"  (beneficiarioEmit)="haveBeneficiario($event)" ></data-siniestro>
     <div class="message-container">
-      <mensaje-form></mensaje-form>
-      <list-messages></list-messages>
+      <mensaje-form [idSiniestro]="siniestroId"  (addMessage)="onAddMessage($event)" ></mensaje-form>
+      <hr>
+      <list-messages *ngIf="siniestro && beneficiario" [siniestro]="siniestro" [beneficiario]="beneficiario" [events]="addToChildMessage.asObservable()"></list-messages>
     </div>
 
 </div>
+
+<loading-div *ngIf="loading"></loading-div>

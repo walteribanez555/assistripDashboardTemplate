@@ -49,10 +49,12 @@ export class LoginComponent {
 
   onLogin(){
 
-    if(this.loginForm.value.identifier && this.loginForm.valid)
-    this.authService.login("walteribanez555@gmail.com","Walteribane8612",this.loginForm.value.identifier)
+    console.log("Login user");
+
+    if(this.loginForm.value.identifier && this.loginForm.valid && this.loginForm.value.otp)
+    this.authService.login(this.loginForm.value.identifier,this.loginForm.value.otp)
       .subscribe(  {
-        next: () => this.router.navigateByUrl('/dashboard/polizas-detalles'),
+        next: (data) => { this.router.navigateByUrl('/dashboard/polizas-detalles')},
         error : (message)=> {
           // Swal.fire('Error',message,'error' );
         }

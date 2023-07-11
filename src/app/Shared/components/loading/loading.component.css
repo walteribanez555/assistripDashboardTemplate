@@ -12,6 +12,11 @@
   background-color: white;
 }
 
+svg{
+  width: 100px;
+  height: 100px;
+}
+
 
 
 span{
@@ -26,6 +31,16 @@ span{
     height: 90vh;
 
   }
+
+  span{
+    font-size: 12px;
+  }
+
+  svg{
+    width: 60px;
+    height: 60px;
+  }
+
 
 }
 

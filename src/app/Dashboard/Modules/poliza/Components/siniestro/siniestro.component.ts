@@ -17,7 +17,7 @@ export class SiniestroComponent implements OnInit {
 
   ngOnInit(): void {
       this.beneficiario = this.beneficiarios.filter( beneficiario => this.siniestro.beneficiario_id === beneficiario.beneficiario_id)[0];
-  }
+    }
 
 
 

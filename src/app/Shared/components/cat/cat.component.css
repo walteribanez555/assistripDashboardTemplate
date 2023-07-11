@@ -6,6 +6,7 @@ ul{
 li{
   color: var(--main-color);
   font-weight: lighter;
-  height: 30px;
+  /* height: 30px; */
   font-size: 12px;
+  padding: 10px 0px;
 }

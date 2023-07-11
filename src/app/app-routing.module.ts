@@ -16,6 +16,11 @@ import { defaultGuard } from './Auth/Guards/default.guard';
 
 const routes : Routes = [
 
+  {
+    path : '',
+    redirectTo : 'landing-page/home',
+    pathMatch : 'full'
+  },
 
   {
     path : 'landing-page',

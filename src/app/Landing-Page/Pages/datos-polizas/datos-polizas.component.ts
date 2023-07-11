@@ -717,12 +717,16 @@ export class DatosPolizasComponent implements OnInit {
 
   mapListDescuentos( descuentos : CuponAplicado[], cantidadPolizas : number) : string[]{
     const descuentosMapped : string[] = [];
+    descuentosMapped.push(descuentos.reduce((a, b) => a + b.montoTotal, 0).toString());
+
     if(descuentos.length != cantidadPolizas ){
-      descuentosMapped.push(descuentos.reduce((a, b) => a + b.montoTotal, 0).toString());
+      for (let index = 0; index < cantidadPolizas-1; index++) {
+        descuentosMapped.push('0');
+      }
     }
-    for (let index = 0; index < cantidadPolizas-1; index++) {
-      descuentosMapped.push('0');
-    }
+
+
+
     return descuentosMapped;
   }
 

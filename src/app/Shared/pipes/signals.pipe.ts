@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform, inject } from '@angular/core';
-import { TransformDataService } from '../services/utils/transform-data.service';
+import { TransformDataService } from '../services/utils/TransformDataService.service';
 
 @Pipe({
   name: 'signals_string'

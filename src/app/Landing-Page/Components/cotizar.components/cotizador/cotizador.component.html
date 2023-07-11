@@ -10,8 +10,7 @@
               <div class="select-space">
                   <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M784 936 532 684q-30 24-69 38t-83 14q-109 0-184.5-75.5T120 476q0-109 75.5-184.5T380 216q109 0 184.5 75.5T640 476q0 44-14 83t-38 69l252 252-56 56ZM380 656q75 0 127.5-52.5T560 476q0-75-52.5-127.5T380 296q-75 0-127.5 52.5T200 476q0 75 52.5 127.5T380 656Z"/></svg>
                   <select   id="">
-                      <option value="bolivia">Bolivia</option>
-                      <option value="venezuela">Venezuela</option>
+                    <option  *ngFor="let pais of paises"   value={{pais.etiqueta}} > {{pais.etiqueta}}  </option>
                   </select>
               </div>
 
@@ -27,22 +26,15 @@
                       <div class="options" >
                           <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M440 856V616H200v-80h240V296h80v240h240v80H520v240h-80Z"/></svg>
                           <select class="listado"  (change)="onSelect($event)" >
-                              <option value="pais">Añadir</option>
-                              <option value="America">America</option>
-                              <option value="Europa">Europa</option>
-                              <option value="Asia">Asia</option>
-                              <option value="Oceania">Oceania</option>
-                              <option value="Africa">Africa</option>
-                              <option value="Antartida">Antartida</option>
-                              <option value="Americaa">Americaa</option>
-                              <option value="Euro2pa">Euro2pa</option>
-                              <option value="As3ia">As4ia</option>
-                              <option value="Ocea12nia">Ocea12nia</option>
-                              <option value="A43frica">Af43rica</option>
-                              <option value="Anta34rtida">A43ntartida</option>
-
-
-
+                            <option value="pais">Seleccionar</option>
+                            <option value="Mundial">Mundial</option>
+                            <option value="America">America</option>
+                            <option value="Europa">Europa</option>
+                            <option value="Asia">Asia</option>
+                            <option value="Oceania">Oceania</option>
+                            <option value="Africa">Africa</option>
+                            <option value="Antartida">Antartida</option>
+                            <option  *ngFor="let pais of paises"   value={{pais.etiqueta}} > {{pais.etiqueta}}  </option>
                           </select>
 
                       </div>

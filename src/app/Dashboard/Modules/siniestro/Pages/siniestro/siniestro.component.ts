@@ -7,6 +7,7 @@ import { Siniestro } from 'src/app/Shared/models/Data/Siniestro';
 import { BeneficiariosService } from 'src/app/Shared/services/requests/beneficiarios.service';
 import { PolizasService } from 'src/app/Shared/services/requests/polizas.service';
 import { SiniestroService } from 'src/app/Shared/services/requests/siniestro.service';
+import { PolizaLocalService } from 'src/app/Shared/services/utils/poliza-local.service';
 
 @Component({
   templateUrl: './siniestro.component.html',
@@ -16,6 +17,7 @@ export class SiniestroComponent implements OnInit {
 
   private route = inject(ActivatedRoute);
   private siniestrosService = inject(SiniestroService);
+  private polizaLocalService = inject(PolizaLocalService);
 
   addToChildMessage: Subject<MessageResp> = new Subject<MessageResp>();
 
@@ -30,6 +32,7 @@ export class SiniestroComponent implements OnInit {
     this.loading = true;
     this.route.params.subscribe( params => {
         this.siniestroId = +params['id'];
+
         this.siniestrosService.getSiniestroById(this.siniestroId).subscribe(
           {
             next :  (data)  => { this.loading=false;  this.siniestro = data[0]},

@@ -270,10 +270,12 @@ export class DataCotizadorComponent implements OnInit, AfterViewInit {
         if (tag.length > 1 && !this.tags.includes(tag)) {
 
             tag.split(',').forEach(tag => {
-              this.tags.push(tag);
+              this.tags= [tag];
             });
 
         }
+
+
       }
     }
 

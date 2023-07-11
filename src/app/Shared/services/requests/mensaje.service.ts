@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, throwError } from 'rxjs';
-import { Siniestro, SiniestroPost, SiniestroResp } from '../../models/Data/Siniestro';
 import { Message, MessageResp } from '../../models/Data/Mensaje';
 
 @Injectable({

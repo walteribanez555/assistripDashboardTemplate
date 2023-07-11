@@ -7,16 +7,23 @@ import { AuthService } from '../services/auth.service';
 
 export const isNotAuthenticatedGuard: CanActivateFn = (route, state) => {
 
-
-  console.log("Paso por aqui igual");
-
+  console.log("not authenticated");
   const authService = inject( AuthService );
   const router      = inject( Router );
 
+  if( authService.isInvited()){
+    console.log("Invitado")
+    return true;
+  }
+
+
+
   if ( authService.authStatus() === AuthStatus.authenticated ) {
+    console.log("No invitado");
     router.navigateByUrl('/dashboard/polizas-detalles');
     return false;
   }
+
 
   return true;
 };

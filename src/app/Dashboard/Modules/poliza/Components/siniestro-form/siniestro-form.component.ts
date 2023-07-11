@@ -7,7 +7,7 @@ import { Beneficiario } from 'src/app/Shared/models/Data/Beneficiario';
 import { Poliza } from 'src/app/Shared/models/Data/Poliza';
 import { Siniestro, SiniestroPost } from 'src/app/Shared/models/Data/Siniestro';
 import { SiniestroService } from 'src/app/Shared/services/requests/siniestro.service';
-import { TransformDataService } from 'src/app/Shared/services/utils/transform-data.service';
+import { TransformDataService } from 'src/app/Shared/services/utils/TransformDataService.service';
 import Swal from 'sweetalert2';
 
 @Component({

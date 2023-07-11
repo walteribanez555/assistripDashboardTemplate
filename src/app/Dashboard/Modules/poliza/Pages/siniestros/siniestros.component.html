@@ -14,7 +14,7 @@
       <div class="listado-siniestro" *ngIf="listSiniestros.length > 0 ; else ElseBlock">
         <span>Siniestros existentes ({{listSiniestros.length }})</span>
         <div class="list">
-          <a *ngFor="let siniestro of listSiniestros"  [routerLink]="['../../../siniestro', siniestro.siniestro_id]">
+          <a *ngFor="let siniestro of listSiniestros" (click)="loadPoliza()"  [routerLink]="['../../../siniestro', siniestro.siniestro_id]">
 
             <siniestro [siniestro]="siniestro" [beneficiarios]="listBeneficiarios" ></siniestro>
           </a>

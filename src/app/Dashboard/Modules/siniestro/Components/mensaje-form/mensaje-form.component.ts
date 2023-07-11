@@ -3,7 +3,7 @@ import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
 import { catchError, throwError, timer } from 'rxjs';
 import { Message } from 'src/app/Shared/models/Data/Mensaje';
 import { MensajeService } from 'src/app/Shared/services/requests/mensaje.service';
-import { TransformDataService } from 'src/app/Shared/services/utils/transform-data.service';
+import { TransformDataService } from 'src/app/Shared/services/utils/TransformDataService.service';
 import Swal from 'sweetalert2';
 
 @Component({

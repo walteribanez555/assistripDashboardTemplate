@@ -12,6 +12,11 @@ import { SiniestroComponent } from './Components/siniestro/siniestro.component';
 import { BeneficiarioComponent } from './Components/beneficiario/beneficiario.component';
 import { PolizaDataComponent } from './Components/poliza-data/poliza-data.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ImpresionModalComponent } from './Components/impresion-modal/impresion-modal.component';
+import { PolizaPdfComponent } from './utils/pdf/poliza-pdf/poliza-pdf.component';
+import { BeneficiarioPdfComponent } from './Components/beneficiario-pdf/beneficiario-pdf.component';
+import { GeneratePdfService } from './services/generate-pdf.service';
+import { QRCodeModule } from 'angularx-qrcode';
 
 
 @NgModule({
@@ -23,6 +28,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SiniestroComponent,
     BeneficiarioComponent,
     PolizaDataComponent,
+    ImpresionModalComponent,
+    PolizaPdfComponent,
+    BeneficiarioPdfComponent,
 
   ],
   imports: [
@@ -32,7 +40,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     ReactiveFormsModule,
     FormsModule,
+    QRCodeModule,
 
+  ],
+  providers: [
+    GeneratePdfService,
   ]
 })
 export class PolizaModule { }

@@ -52,9 +52,7 @@ export class PolizasService {
 
 
   postPolizas(venta_id: number, servicio_id : number, destino : string,fecha_salida : string, fecha_retorno : string, extra:number):Observable<PolizaResp>{
-    console.log(fecha_salida, fecha_retorno);
 
-    console.log(venta_id,servicio_id, destino, fecha_salida, fecha_retorno , extra);
 
     return this.http.post<PolizaResp>(this.apiUrl, {
       venta_id,
@@ -62,7 +60,8 @@ export class PolizasService {
       destino,
       fecha_salida,
       fecha_retorno,
-      extra
+      extra,
+      status: 1,
     }).pipe(
       map( data => data),
       catchError( err => throwError( () => err.error.message) )

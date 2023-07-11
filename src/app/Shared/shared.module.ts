@@ -40,7 +40,6 @@ import { SignalsPipe } from './pipes/signals.pipe';
     TruncateDirective,
     CustomLabelDirective,
     DollarPipe,
-    ExtractDatePipe,
     DateOnlyPipe,
     TruncateDirective,
     NavbarComponent,
@@ -55,6 +54,7 @@ import { SignalsPipe } from './pipes/signals.pipe';
     ZeroToMessagePipe,
     LoadingProcessComponent,
     SignalsPipe,
+    ExtractDatePipe,
 
   ],
   imports: [
@@ -75,7 +75,6 @@ import { SignalsPipe } from './pipes/signals.pipe';
     CustomLabelDirective,
     UploadFileDirective,
     DollarPipe,
-    ExtractDatePipe,
     DateOnlyPipe,
     TruncateDirective,
     NavbarComponent,
@@ -86,6 +85,7 @@ import { SignalsPipe } from './pipes/signals.pipe';
     ZeroToMessagePipe,
     LoadingProcessComponent,
     SignalsPipe,
+    ExtractDatePipe,
 
 
   ]

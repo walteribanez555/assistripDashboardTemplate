@@ -5,8 +5,9 @@
     <div class="input-field">
         <span>Dni o Pasaporte (titular)</span>
         <input
+        style="width: 120%;"
         type="text"
-        placeholder="Ingresa tu Dni o Pasaporte en este espacio"
+        placeholder="ABC-12345T56"
         required
         formControlName="identifier"
         name="identifier">
@@ -18,10 +19,8 @@
 
   <div  *ngIf="numberForm===2" class="container" >
     <h1>Ingresa el código de verificación</h1>
-    <span>Codigo de 5 digitos enviados</span>
 
-    <ng-otp-input  [formCtrl]="loginForm.controls.otp"  [config]="{length:5}"></ng-otp-input>
-
+    <input type="text" formControlName="otp" name="otp">
 
 
     <button type="submit" class="code" [class.disabled]="!loginForm.valid">ENVIAR CÓDIGO</button>

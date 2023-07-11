@@ -282,12 +282,17 @@
                       Descuentos
                   </span>
                   <ng-container *ngFor="let descuento of listDescuentos">
+
                       <div class="item-carrito">
-                          <span class="descripcion number">{{descuento.cupon.cupon_id}} * {{descuento.monto}} </span>
+                          <span class="number" *ngIf="!descuento.cupon.nombre" >
+                            Descuento nro : {{descuento.cupon.cupon_id}}
+                          </span>
+                          <span class="number" *ngIf="descuento.cupon.nombre">{{descuento.cupon.nombre}}</span>
                           <span class="costo number" >-{{descuento.montoTotal | currency:'USD':'$':'1.2-2' }}</span>
 
                       </div>
                       <hr>
+
 
                   </ng-container>
 

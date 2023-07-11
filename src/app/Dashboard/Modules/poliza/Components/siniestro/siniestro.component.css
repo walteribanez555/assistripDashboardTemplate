@@ -33,7 +33,7 @@
   border-radius: 10;
   fill: var(--main-color);
       animation-name: colorChange;
-      animation-duration: 1s;
+      animation-duration: 3s;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
 }

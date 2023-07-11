@@ -16,11 +16,11 @@ export class LayoutPageComponent implements OnDestroy, OnInit {
 
 
   constructor(){
-    this.router.events.subscribe(event => {
-          if (event instanceof NavigationEnd) {
-            this.navigationService.setLastNavigation(event.urlAfterRedirects);
-          }
-        });
+    // this.router.events.subscribe(event => {
+    //       if (event instanceof NavigationEnd) {
+    //         this.navigationService.setLastNavigation(event.urlAfterRedirects);
+    //       }
+    //     });
   }
 
   btnClose( ){

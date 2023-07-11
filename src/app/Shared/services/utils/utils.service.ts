@@ -8,6 +8,7 @@ import { Plan } from '../../models/Data/Plan';
 import { catalogoBeneficio } from '../../models/Pages/catalogoBeneficio.model';
 import { Beneficio } from '../../models/Data/Beneficio';
 import { catalogoBeneficioData } from '../../models/Pages/catalogoBeneficioData.model';
+import { Cupon } from '../../models/Data/Cupon';
 
 @Injectable({
   providedIn: 'root'
@@ -237,6 +238,20 @@ export class UtilsService {
     })
 
     return listCatBeneficio
+
+ }
+
+ filterCouponsByDates( cupones : Cupon[]){
+
+  return cupones.filter( cupon => {
+    const fechaActual = new Date();
+
+    const fechaInicial = new Date(cupon.fecha_desde);
+    const fechaFinal = new Date(cupon.fecha_hasta);
+
+    return fechaActual>= fechaActual && fechaActual < fechaFinal
+  })
+
 
  }
 

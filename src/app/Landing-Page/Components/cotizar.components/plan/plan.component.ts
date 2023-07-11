@@ -1,5 +1,4 @@
 import { Component,EventEmitter,Input, Output} from '@angular/core';
-import { ModalService } from 'src/app/Shared/components/modal/modal.service';
 import { planbeneficio } from 'src/app/Shared/models/Pages/planbeneficio.model';
 
 
@@ -19,7 +18,6 @@ export class PlanComponent {
   @Output() showServicio = new EventEmitter<planbeneficio>();
 
   constructor(
-    private modalService: ModalService
 
 
     ) {}

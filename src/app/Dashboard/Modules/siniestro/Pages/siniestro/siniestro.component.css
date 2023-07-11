@@ -37,7 +37,7 @@ mensaje-form{
 }
 
 
-@media (max-width:1200px) {
+@media (max-width:768px) {
 
   .container{
     flex-direction: column;

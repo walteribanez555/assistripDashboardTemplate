@@ -9,6 +9,6 @@ export class ExtractDatePipe implements PipeTransform {
   constructor(private utilsService: UtilsService) { }
 
   transform(value: string): string {
-    return this.utilsService.getDate(value);
+    return value.split('T')[0].replace(/-/g, "/");
   }
 }

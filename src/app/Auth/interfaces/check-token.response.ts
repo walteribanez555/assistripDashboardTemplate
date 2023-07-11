@@ -1,4 +1,4 @@
-import { User } from "./user.interface";
+import { User } from "src/app/Shared/models/Data/User";
 
 
 

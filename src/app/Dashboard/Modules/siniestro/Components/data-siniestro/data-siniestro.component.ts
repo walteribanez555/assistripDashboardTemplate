@@ -6,6 +6,7 @@ import { Siniestro } from 'src/app/Shared/models/Data/Siniestro';
 import { BeneficiariosService } from 'src/app/Shared/services/requests/beneficiarios.service';
 import { BeneficiosService } from 'src/app/Shared/services/requests/beneficios.service';
 import { CatalogosService } from 'src/app/Shared/services/requests/catalogos.service';
+import { PolizaLocalService } from 'src/app/Shared/services/utils/poliza-local.service';
 
 @Component({
   selector: 'data-siniestro',
@@ -19,16 +20,16 @@ export class DataSiniestroComponent implements OnInit {
 
   private beneficiarioService  = inject(BeneficiariosService);
   private catalogoService = inject(CatalogosService);
+  private polizaLocalService = inject(PolizaLocalService);
    beneficiario : Beneficiario | null = null;
    tipoBeneficio : Catalogo | null = null;
 
   ngOnInit(): void {
-    console.log(this.siniestro);
-
-      this.beneficiarioService.getBeneficiarioById(this.siniestro.beneficiario_id).pipe(
+      const poliza_id = this.polizaLocalService.getFromLocal();
+      this.beneficiarioService.getBeneficiarioById(poliza_id).pipe(
         switchMap(
           data => {
-            this.beneficiario = data[0];
+            this.beneficiario = data.filter( beneficiario => beneficiario.beneficiario_id= this.siniestro.beneficiario_id )[0];
 
             this.beneficiarioEmit.emit(this.beneficiario);
 

@@ -3,6 +3,7 @@ import {  NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './Shared/pages/not-found/not-found.component';
 import { isAuthenticatedGuard, isNotAuthenticatedGuard } from './Auth/Guards';
+import { defaultGuard } from './Auth/Guards/default.guard';
 
 
 
@@ -18,6 +19,7 @@ const routes : Routes = [
 
   {
     path : 'landing-page',
+    canActivate : [ defaultGuard ],
     loadChildren : () => import('./Landing-Page/landing-page.module').then(m=> m.LandingPageModule),
   },
   {

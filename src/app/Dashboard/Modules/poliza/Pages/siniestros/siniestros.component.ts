@@ -9,6 +9,7 @@ import { Siniestro, SiniestroResp } from 'src/app/Shared/models/Data/Siniestro';
 import Swal from 'sweetalert2';
 import { PolizasService } from 'src/app/Shared/services/requests/polizas.service';
 import { Poliza } from 'src/app/Shared/models/Data/Poliza';
+import { PolizaLocalService } from 'src/app/Shared/services/utils/poliza-local.service';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class SiniestrosComponent implements OnInit{
   private beneficiariosService = inject(BeneficiariosService);
   private siniestrosService = inject(SiniestroService);
   private polizaService = inject(PolizasService);
+  private polizaLocalService = inject(PolizaLocalService);
   polizaId  : number = -1;
   loading  : boolean = false;
   poliza : Poliza | null = null;
@@ -137,6 +139,11 @@ export class SiniestrosComponent implements OnInit{
 
   }
 
+
+
+  loadPoliza(){
+    this.polizaLocalService.saveToLocal(this.polizaId);
+  }
 
 
 

@@ -44,7 +44,7 @@ export class ClientesService {
       nro_identificacion : cliente.nit_ci,
       origen : cliente.origen,
       email : cliente.email,
-      nro_contacto : cliente.nro_contacto,
+      nro_contacto : cliente.nro_contacto === "" ? "No tiene"  : cliente.nro_contacto,
       status: 1,
 
     }

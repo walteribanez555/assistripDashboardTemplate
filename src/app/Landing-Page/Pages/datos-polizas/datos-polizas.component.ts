@@ -232,7 +232,6 @@ export class DatosPolizasComponent implements OnInit {
         this.hasLoaded = true;
         this.listCupones = data.filter(cupon => cupon.status===1);
         this.listCupones = this.utilService.filterCouponsByDates( this.listCupones);
-        console.log(this.listCupones);
         this.precioMayores={
           precio : this.costoMayores,
           precioTotal : this.costoMayores * this.datosCotizacionMayores.length,

@@ -7,7 +7,6 @@ import { NavigationService } from 'src/app/Dashboard/services/navigation-service
 export const isAuthenticatedGuard: CanActivateFn = (route, state) => {
 
   const authService = inject(AuthService);
-  const navigationService = inject(NavigationService);
   const router = inject(Router);
 
 

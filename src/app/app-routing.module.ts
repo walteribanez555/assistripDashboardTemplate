@@ -21,7 +21,6 @@ const routes : Routes = [
     redirectTo : 'landing-page/home',
     pathMatch : 'full'
   },
-
   {
     path : 'landing-page',
     canActivate : [ defaultGuard ],
@@ -41,12 +40,6 @@ const routes : Routes = [
   {
     path : '404',
     component : NotFoundComponent,
-  },
-
-  {
-    path : '',
-    redirectTo : 'landing-page/home',
-    pathMatch : 'full'
   },
   {
     path : '**',

@@ -61,7 +61,7 @@ export class PolizasService {
       fecha_salida,
       fecha_retorno,
       extra,
-      status: 1,
+      status: 0,
     }).pipe(
       map( data => data),
       catchError( err => throwError( () => err.error.message) )

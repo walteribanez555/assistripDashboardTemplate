@@ -33,6 +33,7 @@ import { PolizaModalComponent } from './Components/datos-polizas.components/poli
 import { SharedModule } from '../Shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { TuPolizaComponent } from './Pages/tu-poliza/tu-poliza.component';
+import { DataPaymentComponent } from './Components/data-payment/data-payment.component';
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import { TuPolizaComponent } from './Pages/tu-poliza/tu-poliza.component';
       SelectorHeadlineComponent,
       PolizaModalComponent,
       TuPolizaComponent,
+      DataPaymentComponent,
 
 
   ],

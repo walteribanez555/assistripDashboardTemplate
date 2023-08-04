@@ -30,7 +30,8 @@
   font-weight: 600;
   color: var(--main-color);
   margin: 0px;
-  padding: 0px;
+  padding: 10px 0;
+
 }
 
 .container-about-us .information p{
@@ -38,7 +39,7 @@
   font-weight: 400;
   color: var(--main-color);
   margin: 0px;
-  padding: 0px;
+  padding: 10px 0;
 }
 
 .image-container{

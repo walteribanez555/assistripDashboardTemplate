@@ -10,10 +10,10 @@ import { Observable, map, catchError, throwError } from 'rxjs';
 export class VentasService {
 
 
-    private apiUrl  = '/api/ventas';
+    // private apiUrl  = '/api/ventas';
 
 
-    // private apiUrl = environment.apiUrl + '/ventas';
+    private apiUrl = environment.apiUrl + '/ventas';
 
 
   constructor(private http : HttpClient) {

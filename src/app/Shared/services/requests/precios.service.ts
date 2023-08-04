@@ -9,10 +9,10 @@ import { Precio } from '../../models/Data/Precio';
 })
 export class PreciosService {
 
-  private apiUrl = '/api/precios';
+  // private apiUrl = '/api/precios';
 
-  // private apiUrl = environment.apiUrl + '/precios';
-  
+  private apiUrl = environment.apiUrl + '/precios';
+
 
   constructor(private http : HttpClient) { }
 

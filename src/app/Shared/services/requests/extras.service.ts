@@ -9,8 +9,8 @@ import { Extra } from '../../models/Data/Extra';
 })
 export class ExtrasService {
 
-  private apiUrl = '/api/extras';
-  // private apiUrl = environment.apiUrl + '/extras';
+  // private apiUrl = '/api/extras';
+  private apiUrl = environment.apiUrl + '/extras';
 
 
   constructor(private http : HttpClient) { }
@@ -25,13 +25,13 @@ export class ExtrasService {
   getExtra( id : number) : Observable<Extra>{
     let params = new HttpParams;
 
-    
+
     params = params.append('id', id);
-    
+
 
     return this.http.get<Extra>(this.apiUrl,{params});
 
   }
 
-  
+
 }

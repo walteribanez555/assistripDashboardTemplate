@@ -14,7 +14,7 @@ export class PolizaPdfComponent implements AfterViewInit, OnInit{
     this.date = new Date().toLocaleString();
 
 
-    this.qrCode =` http://192.168.0.14:4200/landing-page/tu-poliza/${this.poliza.poliza_id}`
+    this.qrCode =` http://192.168.0.12:4200/landing-page/tu-poliza/${this.poliza.poliza_id}`
 
   }
 

@@ -4,13 +4,15 @@ import { Observable, catchError, map, of, switchMap, tap, throwError } from 'rxj
 
 import { AuthStatus, CheckTokenResponse, LoginResponse} from '../interfaces';
 import { User } from 'src/app/Shared/models/Data/User';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private readonly baseUrl: string = '/api-auth';
+  private readonly baseUrl: string = environment.apiBackend
+
   private http = inject( HttpClient );
 
   private _currentUser = signal<User|null>(null);
@@ -106,15 +108,11 @@ export class AuthService {
 
   getToken() : string | null{
     const token = localStorage.getItem('Authorization');
-
-
     return token;
-
   }
 
   getIdentifier() : string | null{
     const identifier = localStorage.getItem('identifier');
-
     return identifier;
   }
 }

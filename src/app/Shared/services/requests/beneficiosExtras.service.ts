@@ -10,9 +10,9 @@ import { BeneficioExtra } from '../../models/Data/BeneficioExtra.model';
 })
 export class ExtrasPolizasService {
 
-  private apiUrl  = '/api/polizasExtras';
+  // private apiUrl  = '/api/polizasExtras';
 
-  // private apiUrl = environment.apiUrl + '/polizasExtras';
+  private apiUrl = environment.apiUrl + '/polizasExtras';
 
   constructor( private http : HttpClient) {
 

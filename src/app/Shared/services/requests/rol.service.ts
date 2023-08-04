@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError } from 'rxjs';
 import { RolResp } from '../../models/Data/Rol';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,9 @@ import { RolResp } from '../../models/Data/Rol';
 export class RolService {
 
 
-  private urlLogin : string = '/api-auth/roles';
+  // private urlLogin : string = '/api-auth/roles';
 
+  private urlLogin : string = environment.apiBackend + 'roles';
 
 
   constructor(

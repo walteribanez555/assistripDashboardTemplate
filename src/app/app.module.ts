@@ -39,6 +39,7 @@ import { TransformDataService } from './Shared/services/utils/TransformDataServi
 import { PolizaLocalService } from './Shared/services/utils/poliza-local.service';
 import { MensajeService } from './Shared/services/requests/mensaje.service';
 import { TokenService } from './Shared/services/utils/token.service';
+import { RestService } from './Shared/services/requests/rest.service';
 
 
 
@@ -93,6 +94,8 @@ import { TokenService } from './Shared/services/utils/token.service';
     PolizaLocalService,
     MensajeService,
     TokenService,
+    RestService,
+
     {
       provide : HTTP_INTERCEPTORS,
       useClass : SessionInterceptor,

@@ -13,8 +13,8 @@ export class BeneficiariosService {
 
   ) { }
 
-  private apiUrl  = '/api/beneficiarios';
-  // private apiUrl = environment.apiUrl + '/beneficiarios';
+  // private apiUrl  = '/api/beneficiarios';
+  private apiUrl = environment.apiUrl + '/beneficiarios';
 
   getBeneficiario(): Observable<Beneficiario[]>{
 

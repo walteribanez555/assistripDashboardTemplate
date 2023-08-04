@@ -85,7 +85,6 @@ input#phone {
   color: var(--main-color);
   font-size: medium;
   margin-top: 10px;
-  font-weight: 600;
   border: 1px solid var(--main-color);
   border-radius: 5px;
 }
@@ -139,7 +138,7 @@ p.number,
 h3.number,
 h4.number,
 span.number{
-  font-family: 'Poppins';
+  font-family: 'Lato';
 }
 
 

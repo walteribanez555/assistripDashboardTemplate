@@ -2,15 +2,16 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { Message, MessageResp } from '../../models/Data/Mensaje';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MensajeService {
-  private apiUrl  = '/api/comunicaciones';
+  // private apiUrl  = '/api/comunicaciones';
 
 
-  // private apiUrl = environment.apiUposrl + '/siniestros';
+  private apiUrl = environment.apiUrl  + '/siniestros';
 
 
   constructor(private http : HttpClient) {

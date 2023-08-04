@@ -86,7 +86,6 @@
 .container .information-list .information .description p{
   font-size: 15px;
   color: var(--main-color);
-  font-weight: bold;
   text-align: start;
   padding: 0px 0px 20px 0px;
 }

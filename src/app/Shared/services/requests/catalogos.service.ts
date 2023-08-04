@@ -9,10 +9,10 @@ import { Catalogo } from '../../models/Data/Catalogo';
   providedIn: 'root'
 })
 export class CatalogosService {
-  
-  private apiUrl  = '/api/catalogos';
 
-  // private apiUrl = environment.apiUrl + '/catalogos';
+  // private apiUrl  = '/api/catalogos';
+
+  private apiUrl = environment.apiUrl + '/catalogos';
 
   constructor( private http : HttpClient) {  }
 
@@ -20,11 +20,11 @@ export class CatalogosService {
 
     let params = new HttpParams;
 
-    
+
     params = params.append('id',id);
 
     return this.http.get<Catalogo[]>(this.apiUrl, {params});
-    
+
 
   }
 

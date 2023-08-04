@@ -85,7 +85,6 @@ input#phone {
   color: var(--main-color);
   font-size: medium;
   margin-top: 10px;
-  font-weight: 600;
   border: 1px solid var(--main-color);
   border-radius: 5px;
 }

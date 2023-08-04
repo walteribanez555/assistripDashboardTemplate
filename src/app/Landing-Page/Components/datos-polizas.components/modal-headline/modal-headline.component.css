@@ -44,9 +44,9 @@
   visibility: visible;
   z-index: 25;
   position: absolute;
-  left: 25%;
+  left: 20%;
   top: 10%;
-  width: 40%;
+  width: 900px;
   height: auto;
   background-color: white;
   border-radius: 5px;

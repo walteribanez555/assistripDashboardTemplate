@@ -12,8 +12,8 @@ import { throwError } from 'rxjs';
 })
 export class ClientesService {
 
-  private apiUrl : string = '/api/clientes';
-  // private apiUrl = environment.apiUrl + '/clientes';
+  // private apiUrl : string = '/api/clientes';
+  private apiUrl = environment.apiUrl + '/clientes';
 
   constructor(private http: HttpClient) {
 

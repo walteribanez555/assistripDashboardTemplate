@@ -9,8 +9,8 @@ import { Cupon, CuponPost } from '../../models/Data/Cupon';
 })
 export class CuponesService {
 
-  private apiUrl = '/api/cupones'
-  // private apiUrl = environment.apiUrl + '/cupones';
+  // private apiUrl = '/api/cupones'
+  private apiUrl = environment.apiUrl + '/cupones';
 
   constructor(private http : HttpClient) { }
 
@@ -24,14 +24,14 @@ export class CuponesService {
   getCuponById(id : number): Observable<Cupon[]>{
     let params = new HttpParams;
 
-    params = params.append('id', id);    
+    params = params.append('id', id);
 
     return this.http.get<Cupon[]>(this.apiUrl, {params});
   }
 
 
 
-  
+
 
   postCupon(nuevoCupon : CuponPost) : Observable<Cupon>{
     return this.http.post<Cupon>(this.apiUrl, {
@@ -53,7 +53,7 @@ export class CuponesService {
 
     console.log(url);
 
-    params = params.append('id', id);    
+    params = params.append('id', id);
 
     return this.http.put<Cupon[]>(url,{
       servicio_id : cuponModificado.servicio_id,

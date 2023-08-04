@@ -11,7 +11,6 @@ import { Observable, catchError, throwError } from 'rxjs';
 import { errorHandler } from '../handlers/errorHandler.handlers';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { AuthService } from 'src/app/Auth/services/auth.service';
 import { TokenService } from '../services/utils/token.service';
 
 @Injectable()

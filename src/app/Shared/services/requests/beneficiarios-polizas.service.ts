@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, map, throwError } from 'rxjs';
 import { Beneficiario } from '../../models/Data/Beneficiario';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,10 @@ export class BeneficiariosPolizasService {
 
   ) { }
 
-  private apiUrl  = '/api/beneficiariosPoliza';
+  // private apiUrl  = '/api/beneficiariosPoliza';
+
+  private apiUrl = environment.apiUrl + '/beneficiariosPoliza';
+
 
 
   getBeneficiariosByPolizas( id : number): Observable<Beneficiario[]>{

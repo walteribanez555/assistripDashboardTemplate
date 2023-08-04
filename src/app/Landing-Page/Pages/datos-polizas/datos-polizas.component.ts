@@ -401,7 +401,6 @@ export class DatosPolizasComponent implements OnInit {
   comprobarDatos(polizas: any){
 
 
-    console.log(polizas);
 
     if(polizas.length!==1){
       this.showErrorMsg("Se necesita que sea un titular obligatoriamente");
@@ -454,7 +453,7 @@ export class DatosPolizasComponent implements OnInit {
 
       const cantidadDto = arrcantidad.join(',');
 
-      const descuentosDto = this.mapListDescuentos(this.listDescuentos, arrcantidad.length).join(',');
+      const descuentosDto = this.mapListDescuentos(this.listDescuentos, arrcantidad.length, this.servicioMayores, this.servicioMenores).join(',');
 
       const tipoDescuentosDto = this.mapCantDescuentos(this.listDescuentos, arrcantidad.length).join(',');
 
@@ -475,7 +474,7 @@ export class DatosPolizasComponent implements OnInit {
           0,
           serviciosDto,
           this.datosCotizacion.initialDate,
-          this.datosCotizacion.initialDate,
+          this.datosCotizacion.finalDate,
         );
       } else {
         const nuevoCliente: ClientePost = {
@@ -501,7 +500,7 @@ export class DatosPolizasComponent implements OnInit {
               0,
               serviciosDto,
               this.datosCotizacion.initialDate,
-              this.datosCotizacion.initialDate,
+              this.datosCotizacion.finalDate,
             );
           })
         ).pipe(
@@ -714,20 +713,59 @@ export class DatosPolizasComponent implements OnInit {
   }
 
 
-  mapListDescuentos( descuentos : CuponAplicado[], cantidadPolizas : number) : string[]{
-    const descuentosMapped : string[] = [];
-    descuentosMapped.push(descuentos.reduce((a, b) => a + b.montoTotal, 0).toString());
+  mapListDescuentos( descuentos : CuponAplicado[], cantidadPolizas : number, servicioMenores: Servicio | null , servicioMayores : Servicio | null) : string[]{
+    // const descuentosMapped : string[] = [];
+    // descuentosMapped.push(descuentos.reduce((a, b) => a + b.montoTotal, 0).toString());
 
-    if(descuentos.length != cantidadPolizas ){
-      for (let index = 0; index < cantidadPolizas-1; index++) {
-        descuentosMapped.push('0');
+
+    // if(descuentos.length != cantidadPolizas ){
+    //   for (let index = 0; index < cantidadPolizas-1; index++) {
+    //     descuentosMapped.push('0');
+    //   }
+    // }
+
+    if(descuentos.length ===0){
+      const descuentosAplicados : string[]=[];
+
+      if(servicioMenores){
+        descuentosAplicados.push('0');
       }
+
+      if(servicioMayores){
+        descuentosAplicados.push('0');
+      }
+
+
+      return descuentosAplicados;
+
+
     }
+
+    const descuentosMapped : string[] = this.agruparPorServicioId(descuentos).map( listDescuento => {
+      return listDescuento.reduce((accumulator, currentValue) => accumulator + currentValue.montoTotal, 0).toFixed(3);
+    })
+
 
 
 
     return descuentosMapped;
   }
+
+  agruparPorServicioId(cupones: CuponAplicado[]): CuponAplicado[][] {
+    const grupos: { [key: number]: CuponAplicado[] } = {};
+
+    cupones.forEach((cuponAplicado) => {
+      const { servicio_id } = cuponAplicado.cupon;
+      if (!grupos[servicio_id]) {
+        grupos[servicio_id] = [];
+      }
+      grupos[servicio_id].push(cuponAplicado);
+    });
+
+    return Object.values(grupos);
+  }
+
+
 
   mapCantDescuentos( descuentos : CuponAplicado[] , cantidadPolizas : number){
     const descuentosMapped : string[] = [];

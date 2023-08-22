@@ -306,128 +306,29 @@
           </ng-container>
       </div>
   </div>
-  <div class="footer-polizas">
-      <button  (click)="backPrev()" class="btn_volver"   >
-          <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path d="M480 896 160 576l320-320 42 42-248 248h526v60H274l248 248-42 42Z"/></svg>
-          Volver
-      </button>
-      <button  class="btn_guardar"  (click)="openHeadlines()">
+  <div class="btn_comprobar">
+    <button class="comprobar"  (click)="toggleShoppingCart()">
+      <i class="fa-solid fa-cart-shopping fa-2xl" style="color: white;"></i>
 
-          Comprobar
-      </button>
+    </button>
   </div>
-
-  <div class="cotizacionBottom z-index-25"  [style.height.px]="itemHeight" >
-      <div class="expandir"  *ngIf="stateBottom!=3"
-      (touchstart)="onTouchStart($event)"
-      (touchmove)="onTouchMove($event)"
-      (touchend)="onTouchEnd($event)"
-      (click)="expand()"
-
-      >
-       <button class="btn_expandir">
-           <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M280 976q-33 0-56.5-23.5T200 896q0-33 23.5-56.5T280 816q33 0 56.5 23.5T360 896q0 33-23.5 56.5T280 976Zm400 0q-33 0-56.5-23.5T600 896q0-33 23.5-56.5T680 816q33 0 56.5 23.5T760 896q0 33-23.5 56.5T680 976ZM246 336l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692 574q-11 20-29.5 31T622 616H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"/></svg>
-           <p  > <span></span>  Ver mi carrito</p>
-           <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M480 711 240 471l56-56 184 184 184-184 56 56-240 240Z"/></svg>
-       </button>
-
-      </div>
-
-      <div class="containBottom"  *ngIf="!minHeightReached"  >
-
-          <div class="loading" [@loadingAnimation]="hasLoaded ? 'hide' : 'show'">
-              <img
-              src="assets/svg/loading.svg"
-              alt=""
-              >
-              <span>Espere un momento, cargando la informacion</span>
-          </div>
-          <ng-container *ngIf="hasLoaded">
-
-              <h2>Carrito</h2>
-              <span>Cantidad de dias : {{diffDays}}</span>
-              <div class="listado-carrito">
-                  <span class="descuento">
-                      Planes
-                  </span>
-                  <ng-container *ngIf="datosCotizacionMenores.length>0">
-                      <div class="item-carrito">
-                          <span class="descripcion">{{servicioMenores?.servicio}} * {{precioMenores.cantidadPolizas}} / {{costoMenores | number:'1.0-3'}}</span>
-                          <span class="costo number" >+{{precioMenores.precioTotal | number:'1.0-3'}}...</span>
-
-                      </div>
-                  </ng-container>
-
-                  <ng-container *ngIf="datosCotizacionMayores.length>0">
-                      <div class="item-carrito">
-                          <span class="descripcion">{{servicioMayores?.servicio}} * {{precioMayores.cantidadPolizas}} / {{costoMayores | number:'1.0-3'}}</span>
-                          <span class="costo number" >+{{precioMayores.precioTotal | number:'1.0-3'}}...</span>
-
-                      </div>
-                  </ng-container>
-
-                  <hr>
-                  <span class="descuento" *ngIf="listExtras.length>0">
-                      Extras
-                  </span>
-
-                  <ng-container *ngFor="let extra of dataExtra">
-                      <div class="item-carrito">
-                          <span class="descripcion number">{{extra.extra.descripcion}}*Dias: {{diffDays}} * Costo: {{extra.costo}} * Cantidad: {{extra.cantidad}} </span>
-                          <span class="costo number" >+{{extra.costoTotal| number:'1.0-3'}}</span>
-
-                      </div>
-                      <hr>
-
-                  </ng-container>
-
-                  <span class="descuento" *ngIf="listDescuentos.length>0">
-                      Descuentos
-                  </span>
-                  <ng-container *ngFor="let descuento of listDescuentos">
-                      <div class="item-carrito">
-                          <span class="descripcion number">{{descuento.cupon.cupon_id}} * {{descuento.monto}} </span>
-                          <span class="costo number" >-{{descuento.montoTotal | number:'1.0-3'}}</span>
-
-                      </div>
-                      <hr>
-
-                  </ng-container>
-
-              </div>
-
-              <div class="total">
-                  <span>Total</span>
-                  <p class="number">${{totalEnteros}}<span class="decimal number">{{totalDecimales}}</span> <span class="type-money">USD</span></p>
-              </div>
-          </ng-container>
-      </div>
-
-
-      <div class="contain-pagar">
-
-          <button (click)="backPrev()">
-              Prev
-          </button>
-          <button class="active"   (click)="openHeadlines()">
-              Generar Polizas
-          </button>
-
-
-      </div>
-
-      <div class="BottomFooter">
-       <button  type="button" (click)="salir()">
-           <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20"><path d="M6.062 15 5 13.938 8.938 10 5 6.062 6.062 5 10 8.938 13.938 5 15 6.062 11.062 10 15 13.938 13.938 15 10 11.062Z"/></svg>
-           Salir
-       </button>
-
-      </div>
-
 
 </div>
 
 
-<!-- <data-payment></data-payment> -->
-<headline *ngIf="showHeadlines"  (closeModal)="closeHeadlines()" [listPolizas]="listPolizas" (generateSold)="comprobarDatos($event)" ></headline>
 
+
+<div class="btn_seleccionar">
+  <button class="comprobar"  (click)="openHeadlines()">
+    <i class="fa-solid fa-person-circle-check fa-2xl" style="color: white; padding: 20px 0px;"></i>
+    <span>Seleccionar titular</span>
+
+  </button>
+</div>
+
+
+
+<!-- <data-payment></data-payment> -->
+<shopping-cart-polizas [messageReady]="true"  *ngIf="shopping_cart"   (closeEvent)="toggleShoppingCart()"  (submitEvent)="closeCartOpenHeadline()" [cotizacionesMayores]="datosCotizacionMayores.length" [cotizacionesMenores]="datosCotizacionMenores.length" [dias]="diffDays" [planMayores]="servicioMayores" [planMenores]="servicioMenores" [costoMayores]="costoMayores" [costoMenores]="costoMenores"   ></shopping-cart-polizas>
+<headline *ngIf="showHeadlines"  (closeModal)="closeHeadlines()" [listPolizas]="listPolizas" (generateSold)="comprobarDatos($event)" ></headline>
+<data-payment *ngIf="makePayment && client_secret"  [amount]="amount"  [client_secret]="client_secret" [venta_id]="venta_id"   ></data-payment>

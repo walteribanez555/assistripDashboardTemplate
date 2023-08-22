@@ -34,6 +34,8 @@ import { SharedModule } from '../Shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { TuPolizaComponent } from './Pages/tu-poliza/tu-poliza.component';
 import { DataPaymentComponent } from './Components/data-payment/data-payment.component';
+import { ConfirmPaymentComponent } from './Pages/confirm-payment/confirm-payment.component';
+import { ShoppingCartPolizasComponent } from './Components/datos-polizas.components/shopping-cart-polizas/shopping-cart-polizas.component';
 
 
 @NgModule({
@@ -75,6 +77,8 @@ import { DataPaymentComponent } from './Components/data-payment/data-payment.com
       PolizaModalComponent,
       TuPolizaComponent,
       DataPaymentComponent,
+      ConfirmPaymentComponent,
+      ShoppingCartPolizasComponent,
 
 
   ],

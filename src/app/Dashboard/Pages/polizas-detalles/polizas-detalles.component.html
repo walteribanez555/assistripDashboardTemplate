@@ -9,8 +9,12 @@
         <div  *ngFor="let poliza of listPolizas" class="poliza">
             <div class="left">
                 <div class="cats">
-                    <div  class="estado vigente">
-                        Vigente
+                    <div  class="estado ">
+                      <span class="vigente" *ngIf="poliza.status ===0 ">Vigente</span>
+                      <span class="congelada" *ngIf="poliza.status ===1 ">Congelada</span>
+                      <span class="uso" *ngIf="poliza.status ===2 ">Activa</span>
+                      <span class="anulada" *ngIf="poliza.status ===3 " style="color: red; background: none;">Anulada</span>
+                      <span class="anulada" *ngIf="poliza.status ===4 ">En proceso</span>
                     </div>
                     <div class="siniestro">
                         Siniestro

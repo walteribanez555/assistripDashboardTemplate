@@ -6,6 +6,7 @@ import { error } from 'src/app/Shared/directives/custom-label.directive';
 import { Beneficiario } from 'src/app/Shared/models/Data/Beneficiario';
 import { Poliza } from 'src/app/Shared/models/Data/Poliza';
 import { Siniestro, SiniestroPost } from 'src/app/Shared/models/Data/Siniestro';
+import { CatalogosService } from 'src/app/Shared/services/requests/catalogos.service';
 import { SiniestroService } from 'src/app/Shared/services/requests/siniestro.service';
 import { TransformDataService } from 'src/app/Shared/services/utils/TransformDataService.service';
 import Swal from 'sweetalert2';
@@ -26,12 +27,14 @@ export class SiniestroFormComponent implements OnInit {
   loading : boolean = false;
   ready : boolean = false;
 
-
+  paises : string[] =[];
 
 
 
   private siniestroService  = inject(SiniestroService);
   private transformDataService = inject(TransformDataService);
+  private catalogoService = inject(CatalogosService);
+
 
 
 
@@ -41,12 +44,18 @@ export class SiniestroFormComponent implements OnInit {
     beneficio : new FormControl(null, [Validators.required]),
     descripcion : new FormControl(null),
     file  : new FormControl(null),
-
+    pais: new FormControl(null, [Validators.required]),
+    ciudad : new FormControl(null, [Validators.required]),
   })
 
 
   ngOnInit(): void {
       this.inputControl= this.siniestroForm.get('file') as FormControl<any>;
+      this.catalogoService.getPaises().subscribe( data => {
+
+        this.paises= data.map( pais => pais.etiqueta);
+
+      })
   }
 
 
@@ -84,11 +93,11 @@ export class SiniestroFormComponent implements OnInit {
     const nuevoSiniestro : SiniestroPost  = {
       tipo_siniestro : this.siniestroForm.value.beneficio,
       beneficiario_id : this.siniestroForm.value.beneficiario_id,
-      pais_ocurrencia : this.poliza.destino,
+      pais_ocurrencia : this.siniestroForm.value.pais,
       url_archivo : this.siniestroForm.value.file ? this.siniestroForm.value.file : '',
       fecha_siniestro : this.siniestroForm.value.fechaSiniestro,
       descripcion : this.siniestroForm.value.descripcion ? this.transformDataService.transformSignalstoString(this.siniestroForm.value.descripcion) : '',
-      ciudad_ocurrencia : this.siniestroForm.value.ciudad_ocurrencia ? this.siniestroForm.value.ciudad_ocurrencia : '',
+      ciudad_ocurrencia : this.siniestroForm.value.ciudad ,
     }
 
     this.siniestroService.postSiniestros(nuevoSiniestro).pipe(

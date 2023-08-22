@@ -25,6 +25,24 @@
       </select>
     </div>
     <div class="field">
+      <div class="title">
+        <span>Pais</span>
+      </div>
+      <select  formControlName="pais" name="pais">
+        <option *ngFor="let pais of paises"  [value]="pais" > {{pais}}  </option>
+      </select>
+    </div>
+    <div class="field">
+      <div class="title">
+        <span>Ciudad</span>
+      </div>
+      <input type="text" formControlName="ciudad" name="ciudad" placeholder="Introduzca la ciudad">
+
+    </div>
+
+
+
+    <div class="field">
         <div class="title">
           <span>Tipo de siniestro</span>
         </div>

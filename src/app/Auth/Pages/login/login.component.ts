@@ -1,15 +1,20 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { loadingAnimation } from 'src/app/Shared/animations/loading.animation';
+import { VentasService } from 'src/app/Shared/services/requests/ventas.service';
 
 
 @Component({
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  animations: [
+    loadingAnimation,
+  ]
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
 
   private authService  = inject(AuthService);
@@ -18,7 +23,7 @@ export class LoginComponent {
   public loginForm = new FormGroup(
     {
       identifier: new FormControl('', [Validators.required]),
-      otp : new FormControl( '', [Validators.required, Validators.minLength(5)]),
+      password : new FormControl( '', [Validators.required, Validators.minLength(5)]),
     }
   );
 
@@ -28,14 +33,24 @@ export class LoginComponent {
 
   numberForm : number = 1;
 
-  type : boolean = false;
+
+  hasLoaded: boolean = true;
+
+  showPassword: boolean = false;
+
+
 
 
   constructor() { }
+  ngOnInit(): void {
+
+
+
+  }
 
 
   togglePasswordVisibility(): void {
-    this.type = !this.type;
+    this.showPassword = !this.showPassword;
   }
 
 
@@ -50,14 +65,17 @@ export class LoginComponent {
   onLogin(){
 
     console.log("Login user");
+    this.hasLoaded = false;
 
-    if(this.loginForm.value.identifier && this.loginForm.valid && this.loginForm.value.otp)
-    this.authService.login(this.loginForm.value.identifier,this.loginForm.value.otp)
+
+    if(this.loginForm.value.identifier && this.loginForm.valid && this.loginForm.value.password)
+    this.authService.login(this.loginForm.value.identifier,this.loginForm.value.password)
       .subscribe(  {
         next: (data) => { this.router.navigateByUrl('/dashboard/polizas-detalles')},
         error : (message)=> {
           // Swal.fire('Error',message,'error' );
-        }
+        },
+        complete : () =>{this.hasLoaded =true}
       })
       else{
         Swal.fire('Oops','Se requiere rellenar el campo', 'warning');
@@ -68,58 +86,7 @@ export class LoginComponent {
 
   }
 
-  onBackToggle(){
-    this.numberForm = 1 ;
-  }
 
 
 
-  otp: string = '';
-
-  onOtpEntered(otpDigit: string): void {
-    this.otp += otpDigit;
-    if (this.otp.length < 5) {
-      this.focusNextInput();
-    } else if (this.otp.length === 5) {
-      this.verifyOTP();
-    }
-  }
-
-  onOtpBack(otpDigit : any) : void{
-    this.otp = this.otp.slice(this.otp.length-1, this.otp.length-2);
-    console.log(this.otp);
-    if (this.otp.length > 0 ) {
-
-
-      // this.focusPrevInput();
-    }
-
-  }
-
-  focusNextInput(): void {
-    const inputs = document.getElementsByTagName('input');
-    const nextInput = Array.from(inputs).find(input => input.value === '') as HTMLInputElement;
-    if (nextInput) {
-      nextInput.focus();
-    }
-  }
-
-  focusPrevInput(): void {
-    const inputs = document.getElementsByTagName('input');
-    const prevInput = Array.from(inputs).reverse().find(input => input.value === '') as HTMLInputElement;
-    if (prevInput) {
-      prevInput.focus();
-    }
-  }
-
-  verifyOTP(): void {
-    // Aquí puedes realizar la verificación del OTP ingresado
-    console.log('OTP ingresado:', this.otp);
-    // Reinicia el valor del OTP para permitir la verificación posterior
-    this.otp = '';
-
-
-
-
-  }
 }

@@ -40,6 +40,7 @@ import { PolizaLocalService } from './Shared/services/utils/poliza-local.service
 import { MensajeService } from './Shared/services/requests/mensaje.service';
 import { TokenService } from './Shared/services/utils/token.service';
 import { RestService } from './Shared/services/requests/rest.service';
+import { LocalStorageService } from './Shared/services/utils/local-storage.service';
 
 
 
@@ -95,6 +96,7 @@ import { RestService } from './Shared/services/requests/rest.service';
     MensajeService,
     TokenService,
     RestService,
+    LocalStorageService,
 
     {
       provide : HTTP_INTERCEPTORS,

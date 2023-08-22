@@ -6,15 +6,23 @@
   </div>
   <div class="space-logo" style="height: 120px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
 
-    <svg *ngIf="poliza" xmlns="http://www.w3.org/2000/svg" height="100" viewBox="0 96 960 960" width="100"><path d="m424 760 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197 859q-54-54-85.5-127T80 576q0-83 31.5-156T197 293q54-54 127-85.5T480 176q83 0 156 31.5T763 293q54 54 85.5 127T880 576q0 83-31.5 156T763 859q-54 54-127 85.5T480 976Z"/></svg>
+    <svg *ngIf="poliza && (poliza.status === 0 || poliza.status === 2) ; else alternateContentsvg" xmlns="http://www.w3.org/2000/svg" height="100" viewBox="0 96 960 960" width="100"><path d="m424 760 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197 859q-54-54-85.5-127T80 576q0-83 31.5-156T197 293q54-54 127-85.5T480 176q83 0 156 31.5T763 293q54 54 85.5 127T880 576q0 83-31.5 156T763 859q-54 54-127 85.5T480 976Z"/></svg>
+    <ng-template #alternateContentsvg>
+      <svg  xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="M479.982-280q14.018 0 23.518-9.482 9.5-9.483 9.5-23.5 0-14.018-9.482-23.518-9.483-9.5-23.5-9.5-14.018 0-23.518 9.482-9.5 9.483-9.5 23.5 0 14.018 9.482 23.518 9.483 9.5 23.5 9.5ZM453-433h60v-253h-60v253Zm27.266 353q-82.734 0-155.5-31.5t-127.266-86q-54.5-54.5-86-127.341Q80-397.681 80-480.5q0-82.819 31.5-155.659Q143-709 197.5-763t127.341-85.5Q397.681-880 480.5-880q82.819 0 155.659 31.5Q709-817 763-763t85.5 127Q880-563 880-480.266q0 82.734-31.5 155.5T763-197.684q-54 54.316-127 86Q563-80 480.266-80Zm.234-60Q622-140 721-239.5t99-241Q820-622 721.188-721 622.375-820 480-820q-141 0-240.5 98.812Q140-622.375 140-480q0 141 99.5 240.5t241 99.5Zm-.5-340Z"/></svg>
+    </ng-template>
     <svg *ngIf="!poliza" xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 -960 960 960" width="48"><path d="M479.982-280q14.018 0 23.518-9.482 9.5-9.483 9.5-23.5 0-14.018-9.482-23.518-9.483-9.5-23.5-9.5-14.018 0-23.518 9.482-9.5 9.483-9.5 23.5 0 14.018 9.482 23.518 9.483 9.5 23.5 9.5ZM453-433h60v-253h-60v253Zm27.266 353q-82.734 0-155.5-31.5t-127.266-86q-54.5-54.5-86-127.341Q80-397.681 80-480.5q0-82.819 31.5-155.659Q143-709 197.5-763t127.341-85.5Q397.681-880 480.5-880q82.819 0 155.659 31.5Q709-817 763-763t85.5 127Q880-563 880-480.266q0 82.734-31.5 155.5T763-197.684q-54 54.316-127 86Q563-80 480.266-80Zm.234-60Q622-140 721-239.5t99-241Q820-622 721.188-721 622.375-820 480-820q-141 0-240.5 98.812Q140-622.375 140-480q0 141 99.5 240.5t241 99.5Zm-.5-340Z"/></svg>
   </div>
 
   <div class="info">
     <div class="message">
-      <span *ngIf="poliza && servicio">
+      <span *ngIf="poliza && servicio && (poliza.status === 0 || poliza.status === 2); else alternateContent">
         La poliza {{polizaId}}  tiene la vigencia entre la fecha {{poliza.fecha_salida | dateOnly}} hasta la fecha {{poliza.fecha_retorno | dateOnly}} en el plan {{servicio.servicio}}
       </span>
+
+      <ng-template #alternateContent>
+        <span>La poliza {{polizaId}} se encuentra anulada o congelada, por lo cual no esta validada</span>
+      </ng-template>
+
       <span *ngIf="!poliza">
         La poliza {{polizaId}} no existe.
 

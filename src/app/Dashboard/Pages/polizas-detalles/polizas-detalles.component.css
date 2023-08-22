@@ -84,8 +84,16 @@ h1{
 
 }
 
-.estado.vigente{
-    background-color: #168E10;
+.estado span{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background: var(--main-color);
+  margin: 0px 10px;
+  border-radius: 4px;
 }
 
 .siniestro{

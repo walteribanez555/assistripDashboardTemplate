@@ -38,6 +38,8 @@ planes{
 
   planes{
     margin-top: 20vh;
+    height: fit-content;
+    padding: 0px 0px 20vh 0px;
   }
 }
 

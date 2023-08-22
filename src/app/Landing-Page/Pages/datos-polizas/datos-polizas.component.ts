@@ -24,6 +24,7 @@ import { VentasService } from 'src/app/Shared/services/requests/ventas.service';
 import { dateValidator } from 'src/app/Shared/validators/date.validators';
 import { emailValidator } from 'src/app/Shared/validators/email.validators';
 import { UtilsService } from 'src/app/Shared/services/utils/utils.service';
+import { LocalStorageService } from 'src/app/Shared/services/utils/local-storage.service';
 
 
 
@@ -128,6 +129,14 @@ export class DatosPolizasComponent implements OnInit {
   defaultEmail : string = '';
 
 
+    client_secret : string | null = null;
+    amount : number = 0;
+    makePayment : boolean =false;
+    venta_id : number = 0;
+
+  shopping_cart : boolean = false;
+
+
 
   constructor(
     private dataService: cotizacionIntefaceService,
@@ -139,7 +148,8 @@ export class DatosPolizasComponent implements OnInit {
     private beneficiarioService : BeneficiariosService,
     private polizasPlusService : ExtrasPolizasService,
     private utilService : UtilsService,
-    private router : Router
+    private router : Router,
+    private localStorageService : LocalStorageService,
   ){
 
 
@@ -270,13 +280,7 @@ export class DatosPolizasComponent implements OnInit {
          const { parteEntera, parteDecimal}   =this.dividirTotal(this.total)
 
          this.totalEnteros = parteEntera,
-         this.totalDecimales = parteDecimal
-
-
-
-
-
-
+         this.totalDecimales = parteDecimal;
 
 
 
@@ -417,7 +421,7 @@ export class DatosPolizasComponent implements OnInit {
     Swal.fire({
 
       text: 'Espere un momento mientras se procesa la informacion',
-      imageUrl: 'https://cdn.pixabay.com/animation/2022/10/11/03/16/03-16-39-160_512.gif',
+      imageUrl: 'assets/svg/loading.svg',
 
       showConfirmButton : false,
       allowOutsideClick: false,
@@ -425,7 +429,7 @@ export class DatosPolizasComponent implements OnInit {
       imageWidth: 200,
       imageHeight: 200,
       imageAlt: 'Custom image',
-    })
+    });
 
 
 
@@ -511,8 +515,10 @@ export class DatosPolizasComponent implements OnInit {
       }
     }),
     switchMap((data)=> {
-      console.log(data);
-      const venta_id = data.id;
+      this.venta_id = data.id;
+      this.client_secret = data.client_secret;
+      this.amount = data.total_pago;
+
       const requests : any[]= [];
 
 
@@ -531,7 +537,7 @@ export class DatosPolizasComponent implements OnInit {
 
       return forkJoin(
         requests.map((request)=> {
-          return this.polizasService.postPolizas(venta_id, request.servicio , this.datosCotizacion.tags.join(','), this.datosCotizacion.initialDate, this.datosCotizacion.finalDate, this.listExtras.length).pipe(
+          return this.polizasService.postPolizas(this.venta_id, request.servicio , this.datosCotizacion.tags.join(','), this.datosCotizacion.initialDate, this.datosCotizacion.finalDate, this.listExtras.length).pipe(
             map((response) => {
               return { request, response };
             })
@@ -546,6 +552,10 @@ export class DatosPolizasComponent implements OnInit {
     switchMap((data)=>{
 
       const requests : any[] = [];
+
+
+      this.localStorageService.savePolizasToUpdate(data);
+
 
 
       data.forEach(  response => {
@@ -678,8 +688,9 @@ export class DatosPolizasComponent implements OnInit {
   .subscribe({
     next: (data) => {
       Swal.close();
+      this.makePayment = true;
       this.dataService.haveData = true;
-      this.successMessage('Se ha registrado la venta correctamente');
+
     },
     error: (error) => {
       console.log(error);
@@ -999,6 +1010,16 @@ export class DatosPolizasComponent implements OnInit {
           poliza.form.get('email').setValue(this.defaultEmail);
         });
       }
+    }
+
+    toggleShoppingCart() {
+      this.shopping_cart = !this.shopping_cart;
+
+    }
+
+    closeCartOpenHeadline(){
+      this.toggleShoppingCart();
+      this.openHeadlines();
     }
 
 }

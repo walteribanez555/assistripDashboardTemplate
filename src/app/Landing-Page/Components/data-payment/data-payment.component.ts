@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { RestService } from 'src/app/Shared/services/requests/rest.service';
@@ -19,13 +19,14 @@ declare global {
 })
 export class DataPaymentComponent implements OnInit {
   private readonly STRIPE!: any; //TODO: window.Stripe
-  private elementStripe!: any;
-  cardNumber: any;
-  cardCvv: any;
-  cardExp: any;
+
   form: FormGroup = new FormGroup({})
-  id!: string;
-  orderData!: any;
+  element : any;
+  emailAddress = '';
+  @Input() amount! :number;
+  @Input()  client_secret! : string;
+  @Input() venta_id! : number;
+  isChecking : boolean = false;
 
   constructor(private fb: FormBuilder,
               private cd: ChangeDetectorRef,
@@ -34,156 +35,89 @@ export class DataPaymentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id') || '';
 
     this.form = this.fb.group({
       amount: ['', [Validators.required, Validators.min(1), Validators.max(100000)]],
       cardNumber: [false, [Validators.required, Validators.requiredTrue]], //TODO true | false
       cardCvv: [false, [Validators.required, Validators.requiredTrue]],//TODO true | false
       cardExp: [false, [Validators.required, Validators.requiredTrue]],//TODO true | false
+      paymentelement: [false, [Validators.required, Validators.requiredTrue]],
+
     })
 
-    this.loadDetail();
+    // this.loadDetail();
     this.createStripeElement()
   }
 
-  loadDetail(): void {
-    this.restService.getOrderDetail(this.id).subscribe(({data}) => {
-      this.orderData = data;
-      if (data.status.includes('succe')) {
-        this.form.disable()
-        Swal.fire({
-          title: 'error',
-          icon : 'error',
-
-        })
-      }
-      this.form.patchValue({
-        amount: data.amount
-      })
-    })
-  }
 
   private createStripeElement = () => {
-    const style = {
-      width : '100%',
-      base: {
-        color: '#000000',
-        fontWeight: 400,
-        fontFamily: '\'Poppins\', sans-serif',
-        fontSize: '20px',
-        '::placeholder': {
-          color: '#E3E2EC',
-        },
-      },
-      invalid: {
-        color: '#dc3545',
-      },
+    this.form.patchValue({
+      amount: parseFloat(this.amount.toFixed(2))
+    })
+
+    const appearance = {
+      theme: 'stripe',
+      cssSrc: 'https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,300&display=swap',
+
+    };
+    this.element =  this.STRIPE.elements({ appearance, clientSecret: this.client_secret});
+
+    const linkAuthenticationElement = this.element.create("linkAuthentication");
+    linkAuthenticationElement.mount("#link-authentication-element");
+
+
+    linkAuthenticationElement.on('change', (event : any) => {
+      this.emailAddress = event.value.email;
+    });
+
+    const paymentElementOptions = {
+      layout: "tabs",
     };
 
-    //TODO: SDK de Stripe inicia la generacion de elementos
-    this.elementStripe = this.STRIPE.elements({
-      fonts: [
-        {
-          cssSrc:
-            'https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap',
-        },
-      ],
-    });
-
-    //TODO: SDK Construimos los inputs de tarjeta, cvc, fecha con estilos
-    const cardNumber = this.elementStripe.create('cardNumber', {
-      placeholder: '4242 4242 4242 4242',
-      style,
-      classes: {
-        base: 'input-stripe-custom'
-      },
-    });
-    const cardExp = this.elementStripe.create('cardExpiry', {
-      placeholder: 'MM/AA',
-      style,
-      classes: {
-        base: 'input-stripe-custom'
-      },
-    });
-    const cardCvc = this.elementStripe.create('cardCvc', {
-      placeholder: '000',
-      style,
-      classes: {
-        base: 'input-stripe-custom'
-      },
-    });
-
-    //TODO: SDK Montamos los elementos en nuestros DIV identificados on el #id
-    cardNumber.mount('#card');
-    cardExp.mount('#exp');
-    cardCvc.mount('#cvc');
-
-    this.cardNumber = cardNumber;
-    this.cardExp = cardExp;
-    this.cardCvv = cardCvc;
-
-    //TODO: Escuchamos los eventos del SDK
-    this.cardNumber.addEventListener('change', this.onChangeCard.bind(this));
-    this.cardExp.addEventListener('change', this.onChangeExp.bind(this));
-    this.cardCvv.addEventListener('change', this.onChangeCvv.bind(this));
+    const paymentElement = this.element.create("payment", paymentElementOptions);
+    paymentElement.mount("#payment-element");
 
   }
 
   async initPay(): Promise<any> {
-    try {
-      this.form.disable();
-      //TODO: SDK de Stripe genera un TOKEN para la intencion de pago!
-      const {token} = await this.STRIPE.createToken(this.cardNumber)
 
-      //TODO: Enviamos el token a nuesta api donde generamos (stripe) un metodo de pago basado en el token
-      //TODO: tok_23213
-      const {data} = await this.restService.sendPayment(token.id, this.id)
+    Swal.fire({
 
-      //TODO: Nuestra api devolver un "client_secret" que es un token unico por intencion de pago
-      //TODO: SDK de stripe se encarga de verificar si el banco necesita autorizar o no
-      this.STRIPE.handleCardPayment(data.client_secret)
-        .then(async () => {
+      text: 'Espere un momento mientras se procesa la informacion',
+      imageUrl: 'assets/svg/loading.svg',
 
-          //TODO: 👌 Money Money!!!
-           Swal.fire({
-          title: 'Transferencia realizada con exito',
-          icon : 'success',
+      showConfirmButton : false,
+      allowOutsideClick: false,
 
-        })
+      imageWidth: 200,
+      imageHeight: 200,
+      imageAlt: 'Custom image',
+    });
 
-          //TODO: Enviamos el id "localizador" de nuestra orden para decirle al backend que confirme con stripe si es verdad!
-          await this.restService.confirmOrder(this.id)
-        })
-        .catch(() => {
-          Swal.fire({
-            title: 'Error',
-            icon : 'error',
 
-          })
-        })
-    } catch (e) {
-      Swal.fire({
-        title: 'Error',
-        icon : 'error',
+  const { error } = await this.STRIPE.confirmPayment({
+    elements : this.element,
+    confirmParams: {
+      return_url: `http://192.168.0.18:4200/#/landing-page/confirm-payment/${this.venta_id}`,
 
-      })
+    },
+  });
+
+  this.isChecking = false;
+
+
+    if (error.type === "card_error" || error.type === "validation_error") {
+      this.showMessage(error.message);
+    } else {
+      this.showMessage("An unexpected error occurred.");
     }
 
   }
 
-  //TODO: Manejadores de validacion de input de stripe
 
-  onChangeCard({error}: any) {
-    this.form.patchValue({cardNumber: !error});
-  }
 
-  onChangeCvv({error}: any) {
-    this.form.patchValue({cardCvv: !error});
-  }
-
-  onChangeExp({error}: any) {
-    this.form.patchValue({cardExp: !error});
+  showMessage(messageText : string) {
+    console.log(messageText);
   }
 
 }

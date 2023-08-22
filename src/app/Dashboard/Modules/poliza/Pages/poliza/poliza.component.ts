@@ -106,15 +106,15 @@ export class PolizaComponent implements OnInit {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         this.location.back();
-
       }
     })
-
   }
+
 
   toggleButtonModal(){
     this.openModal = true;
   }
+
 
   closeCart(): void{
     this.openModal = false;

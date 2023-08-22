@@ -13,7 +13,7 @@ export class VentasService {
     // private apiUrl  = '/api/ventas';
 
 
-    private apiUrl = environment.apiUrl + '/ventas';
+    private apiUrl = environment.apiUrl + 'ventas';
 
 
   constructor(private http : HttpClient) {
@@ -22,6 +22,7 @@ export class VentasService {
 
 
    postVenta(cliente_id : number,cantidad : string,descuento : string, tipo_descuento : string,plus : number, servicio_id : string ,fechaSalida : string, fechaRegreso : string ) : Observable<VentaResp>{
+
 
 
 
@@ -38,7 +39,7 @@ export class VentasService {
       fecha_salida : fechaSalida,
       fecha_retorno : fechaRegreso,
       servicio_id,
-      status:1
+      status:2
     }).pipe(
       map(
         data => data,
@@ -54,6 +55,14 @@ export class VentasService {
 
       return this.http.get<Venta[]>(this.apiUrl);
 
+    }
+
+
+    updateVenta( id : number , status : number){
+      const urlPut = `${this.apiUrl}?id=${id}`;
+      return this.http.put(urlPut,{
+        status : status
+      })
     }
 
 

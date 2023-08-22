@@ -205,3 +205,10 @@ selector-headline{
   width: 100%;
 }
 
+@media (max-width: 768px) {
+  .data span{
+    font-size: 12px;
+  }
+
+}
+

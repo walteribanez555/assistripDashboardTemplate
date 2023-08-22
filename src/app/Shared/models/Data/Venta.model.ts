@@ -14,9 +14,11 @@ export interface Venta {
     fecha_retorno : string,
     servicio_id : number,
     status : number
+    total_pago : number;
 
 }
 
 export interface VentaResp extends Omit<Venta, 'venta_id'>{
   id : number,
+  client_secret : string,
 }

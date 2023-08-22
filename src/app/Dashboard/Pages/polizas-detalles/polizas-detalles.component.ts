@@ -85,18 +85,53 @@ export class PolizasDetallesComponent implements OnInit, AfterViewInit {
            return forkJoin(requests);
           }
          ),
+        switchMap(
+          data => {
+
+
+            const requests : any[] = [];
+            data.forEach( (response : Poliza[]) => {
+              if(response.length > 0){
+
+
+                response.forEach( item => {
+                  if( item.status === 0) {
+
+                    const salida = new Date(item.fecha_salida);
+
+                    const fechaActual = new Date();
+                    const fechaAyer = new Date(fechaActual);
+                    fechaAyer.setDate(fechaActual.getDate() - 1);
+                    item.status = 2;
+
+                    if (salida < fechaAyer){
+                      requests.push( this.polizasService.putPolizas(item.poliza_id, item.fecha_salida.split('T')[0], item.fecha_retorno.split('T')[0], 2))
+                    }
+                  }
+                })
+
+                this.listPolizas = [ ...this.listPolizas, ...response]
+              }
+
+
+            });
+
+            this.listPolizas = this.listPolizas.reverse();
+
+
+            this.loading= false;
+
+
+
+            return forkJoin(requests);
+
+          }
+        )
      ).subscribe(
        data => {
-        data.forEach( response => {
-          if(response.length > 0){
-            this.listPolizas = [ ...this.listPolizas, ...response]
-          }
-
-        });
 
 
-         this.listPolizas = this.listPolizas.reverse();
-         this.loading= false;
+
 
        }
      )

@@ -5,6 +5,7 @@ import { HomeComponent } from './Pages/home/home.component';
 import { CotizarComponent } from './Pages/cotizar/cotizar.component';
 import { DatosPolizasComponent } from './Pages/datos-polizas/datos-polizas.component';
 import { TuPolizaComponent } from './Pages/tu-poliza/tu-poliza.component';
+import { ConfirmPaymentComponent } from './Pages/confirm-payment/confirm-payment.component';
 
 const routes : Routes = [
   {
@@ -27,6 +28,10 @@ const routes : Routes = [
         path : 'tu-poliza/:id',
         component : TuPolizaComponent,
       },
+      {
+        path : 'confirm-payment/:id',
+        component : ConfirmPaymentComponent,
+      }
 
     ]
 

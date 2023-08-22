@@ -1,39 +1,56 @@
-<form   (ngSubmit)="onLogin()"  [formGroup]="loginForm">
-  <div class="container" *ngIf="numberForm===1">
-    <h1>Iniciar sesion</h1>
-
-    <div class="input-field">
-        <span>Dni o Pasaporte (titular)</span>
-        <input
-        style="width: 120%;"
-        type="text"
-        placeholder="ABC-12345T56"
-        required
-        formControlName="identifier"
-        name="identifier">
-    </div>
-
-    <button  (click)="nextStep()"  [class.disabled]="loginForm.get('identifier')?.errors" >ENVIAR CÓDIGO</button>
-
+<div class="container">
+  <div class="img">
+      <img src="assets/images/fondo_login.png" alt="">
   </div>
 
-  <div  *ngIf="numberForm===2" class="container" >
-    <h1>Ingresa el código de verificación</h1>
+  <form class="login" [formGroup]="loginForm">
 
-    <input type="text" formControlName="otp" name="otp">
+      <h1>Mi Assistrip</h1>
+
+      <input
+           class="email"
+           type="text"
+           placeholder="Ingreso"
+           required
+           formControlName="identifier"
+           name="identifier">
+
+      <div class="password">
+          <input
+           [type]="showPassword ? 'text' : 'password'"
+           placeholder="Contraseña"
+           required
+           formControlName="password"
+           name="password"
+           class="input_password"
+           >
+           <button class="icon" (click)="togglePasswordVisibility()">
+              <svg *ngIf="showPassword" xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 96 960 960" width="20"><path d="M480 744q70 0 119-49t49-119q0-70-49-119t-119-49q-70 0-119 49t-49 119q0 70 49 119t119 49Zm0-72q-40 0-68-28t-28-68q0-40 28-68t68-28q40 0 68 28t28 68q0 40-28 68t-68 28Zm0 192q-142.596 0-259.798-78.5T48 576q55-131 172.202-209.5T480 288q142.596 0 259.798 78.5T912 576q-55 131-172.202 209.5T480 864Zm0-288Zm0 216q112 0 207-58t146-158q-51-100-146-158t-207-58q-112 0-207 58T127 576q51 100 146 158t207 58Z"/></svg>
+              <svg *ngIf="!showPassword"  xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 96 960 960" width="20"><path d="m637 631-62-62q4-38-23-65.5T487 480l-62-62q13-5 27-7.5t28-2.5q70 0 119 49t49 119q0 14-2.5 28t-8.5 27Zm133 133-52-52q36-28 65.5-61.5T833 576q-49-101-144.5-158.5T480 360q-26 0-51 3t-49 10l-58-58q38-15 77.5-21t80.5-6q143 0 261.5 77.5T912 576q-22 57-58.5 103.5T770 764Zm-2 202L638 836q-38 14-77.5 21t-80.5 7q-143 0-261.5-77.5T48 576q22-57 58-104t84-85L90 287l51-51 678 679-51 51ZM241 439q-35 28-65 61.5T127 576q49 101 144.5 158.5T480 792q26 0 51-3.5t50-9.5l-45-45q-14 5-28 7.5t-28 2.5q-70 0-119-49t-49-119q0-14 3.5-28t6.5-28l-81-81Zm287 89Zm-96 96Z"/></svg>
+
+            </button>
+      </div>
 
 
-    <button type="submit" class="code" [class.disabled]="!loginForm.valid">ENVIAR CÓDIGO</button>
-
-    <button class="backBtn" (click)="onBackToggle()"   >
-      <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M222-255q63-44 125-67.5T480-346q71 0 133.5 23.5T739-255q44-54 62.5-109T820-480q0-145-97.5-242.5T480-820q-145 0-242.5 97.5T140-480q0 61 19 116t63 109Zm257.814-195Q422-450 382.5-489.686q-39.5-39.686-39.5-97.5t39.686-97.314q39.686-39.5 97.5-39.5t97.314 39.686q39.5 39.686 39.5 97.5T577.314-489.5q-39.686 39.5-97.5 39.5Zm.654 370Q398-80 325-111.5q-73-31.5-127.5-86t-86-127.266Q80-397.532 80-480.266T111.5-635.5q31.5-72.5 86-127t127.266-86q72.766-31.5 155.5-31.5T635.5-848.5q72.5 31.5 127 86t86 127.032q31.5 72.532 31.5 155T848.5-325q-31.5 73-86 127.5t-127.032 86q-72.532 31.5-155 31.5ZM480-140q55 0 107.5-16T691-212q-51-36-104-55t-107-19q-54 0-107 19t-104 55q51 40 103.5 56T480-140Zm0-370q34 0 55.5-21.5T557-587q0-34-21.5-55.5T480-664q-34 0-55.5 21.5T403-587q0 34 21.5 55.5T480-510Zm0-77Zm0 374Z"/></svg>
-      <span>Seleccionar otro pasaporte o dni</span>
-    </button>
-    <!-- <button class="code">OBTENER OTRO CODIGO</button> -->
-
-  </div>
-
-</form>
 
 
 
+      <button class="submit" [class.required]="loginForm.valid"  type="submit"  (click)="onLogin()" >
+          <span  >Ingresar</span>
+
+      </button>
+
+      <div class="loading" [@loadingAnimation]="hasLoaded ? 'hide' : 'show'">
+          <img
+          src="assets/svg/loading.svg"
+          alt=""
+          >
+          <span>Espere un momento, cargando la informacion</span>
+      </div>
+
+
+
+
+  </form>
+
+</div>

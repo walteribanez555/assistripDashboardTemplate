@@ -103,7 +103,6 @@ hr{
   display: flex;
   justify-content: center;
   margin: auto;
-  padding: 2rem 0;
   height: 100%;
   width: 100%;
 }
@@ -112,7 +111,7 @@ hr{
 .checkout-in {
   margin: .5rem;
   width: 100%;
-  padding: 2rem;
+
   background-color: white;
   border-radius: 3rem;
 }
@@ -196,9 +195,58 @@ hr {
   border: none;
 }
 .currency{
-  position: absolute;
-  right: 0;
+  padding: 0px 20px;
 }
+
+
+.paymentbtn{
+  width: 100%;
+  margin: 20px 0px ;
+  padding: 10px 20px;
+  font-size: 15px;
+  border: none;
+  background-color: var(--main-color);
+  border-radius: 4px;
+  font-style: 'Lato';
+  color: white;
+  cursor: pointer;
+}
+
+
+ .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.logo {
+  transition: scale 0.3s ease;
+  color: var(--main-color);
+
+}
+
+.logo:hover {
+  scale: 1.15;
+}
+
+.logo  h1{
+  font-size: 45px;
+  text-align: center;
+}
+h1 .trip{
+  font-weight: bold;
+  font-size: 52.5px;
+  margin-left: -5px;
+
+}
+h1 .com{
+  color: #DF085A;
+  font-size: 20px;
+}
+
+a{
+  text-decoration: none;
+}
+
 
 
 @media (max-width:768px){
@@ -220,6 +268,6 @@ hr {
   }
 
   .checkout-in{
-    padding: 30px 0;
+    padding: 10px 0;
   }
 }

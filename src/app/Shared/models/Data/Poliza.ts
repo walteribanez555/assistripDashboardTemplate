@@ -11,7 +11,7 @@
 //     "fecha_emision": "2023-03-08T23:36:28.000Z"
 // }
 
-export interface Poliza { 
+export interface Poliza {
     poliza_id: number,
     venta_id: number,
     servicio_id : number,
@@ -22,12 +22,13 @@ export interface Poliza {
     nro_dias: number,
     extra: number,
     fecha_emision : string,
+    status : number,
 }
 
 
 export interface PolizaResp extends Omit<Poliza, 'poliza_id'>{
     id : number;
-    
+
 }
 
 

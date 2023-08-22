@@ -1,145 +1,154 @@
 .container {
-  width: 100vw;
-  height: 90vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding-top: 10vh;
+  width: 100%;
+  height: 100vh;
+  overflow-y: hidden;
+
 }
 
 
+.img{
+  width: 100%;
+  height: 100vh;
 
-
-
-
-
-h1{
-  text-align: center;
-  font-size: 3rem;
-  font-weight: 700;
-  color: var(--main-color);
 }
 
-.input-field{
+img{
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.login {
   display: flex;
   flex-direction: column;
-  margin: 1rem 0;
   align-items: center;
   justify-content: center;
-
+  position: absolute;
+  width: 472px;
+  height: 100vh;
+  right: 0;
+  top: 0px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.9) 100%);
+  backdrop-filter: blur(17px);
 }
 
-span {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--main-color);
-  margin: 10px 10px 10px 10px;
-}
 
-
-
-input{
+.email{
+  margin: 20px;
   width: 80%;
-  height: 5rem;
-  border: 1px solid var(--main-color);
+  height: 50px;
   border-radius: 2px;
-  padding: 30px;
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--main-color);
-  text-align: center;
-
-}
-
-button{
-  width: fit-content;
-  height: 3rem;
   padding: 10px;
-  border: 1px solid var(--main-color);
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+}
+
+
+
+.password{
+  position : relative;
+  width: 80%;
+  display: block;
+  margin: 20px;
+
+}
+
+.password input {
+  height: 50px;
+  width: 100%;
+  padding: 0 15px;
   border-radius: 2px;
-  background-color: var(--main-color);
-  color: white;
-  transition: 0.3s ease-in-out;
-  cursor: pointer;
-}
+  font-size: 20px;
 
-button.disabled{
-  background-color: var(--grey);
-  color: var(--text-color);
-  opacity: 0.5;
-  border: 1px solid var(--text-color);
-  transition: 0.3s ease-in-out;
-  cursor: not-allowed;
 }
 
 
-
-button:hover{
-  transition: 0.3s ease-in-out;
-}
-
-
-button.disabled{
-  scale: 1.00;
-}
-
-
-
-.backBtn{
+.password .icon {
+  position:  absolute;
+  right: 20px;
+  top: 15px;
   background: none;
-  color: var(--main-color);
   border: none;
+}
+
+
+
+
+
+
+
+
+
+
+.submit {
+
+  width: 80%;
+  height: 50px;
+  border-radius: 2px;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--main-color);
+  background-color: white;
+  border : none;
   cursor: pointer;
-  margin: 30px 0px 0px 0px;
-  fill: var(--main-color);
+  transition: all 0.3s ease-in-out;
+}
+
+
+.submit.required{
+  background-color: var(--main-color);
+  border : none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  color: white;
+  transition: all 0.3s ease-in-out;
+}
+
+.submit.required{
+  transition: all 0.3s ease-in-out;
+  scale: 1.05;
+}
+
+
+.loading {
+  margin-top: 20px;
+  position: relative;
+  width: 100%;
   height: fit-content;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  transition: all 0.25s ease-in-out;
+  align-items: center;
 }
 
-.backBtn:hover{
-  background-color: gainsboro;
-  transition:  all 0.25s ease-in-out;
-  border: 0.5px solid var(--main-color);
-  scale: 1;
+.loading img {
+  width: 60px;
+  height: 60px;
 }
 
-.backBtn svg{
-  fill: var(--main-color);
-}
+@media screen and (max-width: 768px){
+
+  .container {
+      width: 100%;
+      height: 100vh;
+      overflow-y: hidden;
+
+  }
 
 
-button.code{
-  margin-top: 60px;
-  border-radius: 2px;
-}
-
-
-button svg{
-  fill: white;
-}
-
-
-
-@media screen and (max-width: 768px) {
-
-
-      h1{
-          font-size: 2rem;
-      }
-
-      input{
-          width: 80%;
-          font-size: 15px;
-          padding: 10px;
-          text-align: center;
-      }
-
-
+  .login {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.9) 100%);
+      backdrop-filter: blur(17px);
+    }
 
 
 }

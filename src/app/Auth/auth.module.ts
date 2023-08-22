@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './Pages/login/login.component';
 import { SharedModule } from '../Shared/shared.module';
 import { NgOtpInputModule } from 'ng-otp-input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -27,7 +28,7 @@ import { NgOtpInputModule } from 'ng-otp-input';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    NgOtpInputModule
+    NgOtpInputModule,
   ]
 })
 export class AuthModule{}

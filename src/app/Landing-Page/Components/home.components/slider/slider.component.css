@@ -112,7 +112,7 @@ svg#next {
 .image-container .carousel {
   display: flex;
   height: 100%;
-  width: 100%;
+  width: 25%;
   transition: all 0.4s ease;
 }
 

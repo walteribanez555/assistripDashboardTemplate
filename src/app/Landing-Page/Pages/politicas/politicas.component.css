@@ -1,0 +1,39 @@
+.container{
+  display: flex;
+  width: 100%;
+  height: fit-content;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10vh;
+  justify-content: center;
+
+}
+
+.politica{
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+
+h1{
+  font-size: 18px;
+  margin: 20px;
+}
+
+p{
+  width: 50%;
+
+}
+
+
+@media (max-width:768px) {
+  p{
+    width: 100%;
+    padding: 10px;
+  }
+
+}

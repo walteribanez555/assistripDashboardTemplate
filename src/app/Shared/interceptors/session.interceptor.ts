@@ -10,7 +10,6 @@ export class SessionInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    console.log("Entro al interceptor");
     const token = this.tokenService.getToken();
     if (token) {
       const requestWithToken = req.clone({

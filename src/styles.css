@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 /* You can add global styles to this file, and also import other style files */
 @font-face {
-    font-family: 'Lato';
-    src: url('../src/assets/font/Lato-Regular.ttf') format('truetype');
+    font-family: 'Monserrat';
+    src: url('../src/assets/font/Montserrat-Light.ttf') format('truetype');
   }
 
 
@@ -58,7 +58,7 @@ html{
 body {
 
 
-    font-family: "Roboto", sans-serif;
+    font-family: "Monserrat", sans-serif;
     background-color: var(--body-bg);
     color: var(--text-color);
     position: relative;
@@ -138,7 +138,7 @@ p.number,
 h3.number,
 h4.number,
 span.number{
-  font-family: 'Lato';
+  font-family: 'Monserrat';
 }
 
 

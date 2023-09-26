@@ -6,6 +6,7 @@ import { CotizarComponent } from './Pages/cotizar/cotizar.component';
 import { DatosPolizasComponent } from './Pages/datos-polizas/datos-polizas.component';
 import { TuPolizaComponent } from './Pages/tu-poliza/tu-poliza.component';
 import { ConfirmPaymentComponent } from './Pages/confirm-payment/confirm-payment.component';
+import { PoliticasComponent } from './Pages/politicas/politicas.component';
 
 const routes : Routes = [
   {
@@ -31,6 +32,10 @@ const routes : Routes = [
       {
         path : 'confirm-payment/:id',
         component : ConfirmPaymentComponent,
+      },
+      {
+        path : 'politicas',
+        component : PoliticasComponent,
       }
 
     ]

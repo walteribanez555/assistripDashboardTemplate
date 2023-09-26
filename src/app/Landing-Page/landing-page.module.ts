@@ -36,6 +36,7 @@ import { TuPolizaComponent } from './Pages/tu-poliza/tu-poliza.component';
 import { DataPaymentComponent } from './Components/data-payment/data-payment.component';
 import { ConfirmPaymentComponent } from './Pages/confirm-payment/confirm-payment.component';
 import { ShoppingCartPolizasComponent } from './Components/datos-polizas.components/shopping-cart-polizas/shopping-cart-polizas.component';
+import { PoliticasComponent } from './Pages/politicas/politicas.component';
 
 
 @NgModule({
@@ -79,6 +80,7 @@ import { ShoppingCartPolizasComponent } from './Components/datos-polizas.compone
       DataPaymentComponent,
       ConfirmPaymentComponent,
       ShoppingCartPolizasComponent,
+      PoliticasComponent,
 
 
   ],

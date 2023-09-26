@@ -135,6 +135,10 @@ h1{
 
 @media (max-width: 768px){
 
+  .beneficiarios{
+    padding-bottom: 50px;
+  }
+
   .container{
       padding: 10px;
   }

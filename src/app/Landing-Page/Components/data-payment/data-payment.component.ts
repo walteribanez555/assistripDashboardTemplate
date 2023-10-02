@@ -98,7 +98,7 @@ export class DataPaymentComponent implements OnInit {
   const { error } = await this.STRIPE.confirmPayment({
     elements : this.element,
     confirmParams: {
-      return_url: `http://192.168.0.18:4200/#/landing-page/confirm-payment/${this.venta_id}`,
+      return_url: `https://www.assistrip.com/landing-page/confirm-payment/${this.venta_id}`,
 
     },
   });

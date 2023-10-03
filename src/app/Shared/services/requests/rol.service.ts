@@ -12,7 +12,7 @@ export class RolService {
 
   // private urlLogin : string = '/api-auth/roles';
 
-  private urlLogin : string = environment.apiBackend + 'roles';
+  private urlLogin : string = environment.apiBackend + '/roles';
 
 
   constructor(

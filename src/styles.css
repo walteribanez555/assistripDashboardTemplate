@@ -11,6 +11,9 @@
   src: url('../src/assets/font/Poppins-Bold.ttf') format('truetype');
 }
 
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.snow.css';
+
 
 :root {
     --body-bg: #fafafb;

@@ -1,35 +1,64 @@
-<section class="wrapper">
-  <svg xmlns="http://www.w3.org/2000/svg" (click)="sliderLeft()" class="button prev" height="24" viewBox="0 96 960 960" width="24"  id="prev"><path d="M400 976 0 576l400-400 71 71-329 329 329 329-71 71Z"/></svg>
-  <div class="container slider">
-      <div class="image-container"  [style.transform]="'translateX(' + slider_translate + '%)'" >
-          <div class="carousel">
-            <img src="../../../assets/images/3.jpg" alt="" />
-            <img src="../../../assets/images/4.jpg" alt="" />
-            <img src="../../../assets/images/6.jpg" alt="" />
-            <img src="../../../assets/images/7.jpg" alt="" />
+
+<div class="title" style="display: flex; align-items: center; justify-content: center;margin-top: 20px;">
+  <h2>
+    Coberturas
+  </h2>
+</div>
+
+<section class="product">
+  <div class="container-fluid">
+    <div class="slider-wrap">
+      <div class="slider-main n-mobile" [@scrollAnimation]="scrollState">
+        <div class="item"  *ngFor="let slide of slides">
+          <div class="img">
+            <img [src]="slide.url" >
+
+
+          </div>
+          <div class="description">
+            <p >{{slide.title}}</p>
+
+            <div class="content-description" style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 50px;">
+              <i class="fa-solid fa-shield-heart fa-2xl" style="color: #ffffff;"></i>
+
+              <p class="info-description">{{slide.description}}</p>
+            </div>
+
+
 
           </div>
         </div>
-  </div>
 
-  <div class="container information">
-      <div class="information">
-          <p>Cobertura Covid19</p>
+
 
       </div>
+      <div class="slider-main mobile" >
+        <div class="item"  *ngFor="let slide of slides">
+          <div class="img">
+            <img [src]="slide.url" >
+
+
+          </div>
+          <div class="description">
+            <p >{{slide.description}}</p>
+
+
+          </div>
+        </div>
+
+
+
+      </div>
+      <div class="button-area">
+        <button type="button" appPrev class="Prev">
+          <i class="fa-solid fa-caret-left fa-2xl"></i>
+        </button>
+        <button type="button" appNext class="Next">
+          <i class="fa-solid fa-caret-right fa-2xl"></i>
+        </button>
+      </div>
+
+
+    </div>
   </div>
-
-  <svg xmlns="http://www.w3.org/2000/svg" (click)="sliderRight()" class="button" height="24" viewBox="0 96 960 960" width="24" id="next"><path d="m321 976-71-71 329-329-329-329 71-71 400 400-400 400Z"/></svg>
-
-
-
-
-
-
 </section>
-<div class="list-position">
-  <div class="position"   [class.active]="slider_translate===0"  (click)=" setSliderTranslate(0)"  ></div>
-  <div class="position" [class.active]="slider_translate===-25" (click)=" setSliderTranslate(-25)"  ></div>
-  <div class="position" [class.active]="slider_translate===-50"   (click)=" setSliderTranslate(-50)" ></div>
-  <div class="position"  [class.active]="slider_translate===-75" (click)=" setSliderTranslate(-75)"  ></div>
-</div>

@@ -45,7 +45,6 @@ export class AuthService {
 
   loadByDefaultUser(){
     return this.setAuthentication("ExternalUser902010", "cliente");
-
   }
 
 

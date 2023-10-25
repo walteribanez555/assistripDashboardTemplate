@@ -12,7 +12,6 @@ export const isAuthenticatedGuard: CanActivateFn = (route, state) => {
 
 
   if(authService.isInvited()){
-    console.log("Invitado nomas");
     router.navigateByUrl('/auth/login');
 
     return false;
@@ -20,13 +19,6 @@ export const isAuthenticatedGuard: CanActivateFn = (route, state) => {
 
 
   if(authService.authStatus() === AuthStatus.authenticated) {
-    console.log("Autenticado nomas")
-
-    // if(navigationService.checkLastNavigation()){
-    //   const url = navigationService.navigation();
-
-    //   // router.navigateByUrl( url ? url : 'dashboard/polizas-detalles' );
-    // }
 
     return true;
   }
@@ -34,15 +26,12 @@ export const isAuthenticatedGuard: CanActivateFn = (route, state) => {
 
 
   if(authService.authStatus() === AuthStatus.checking ){
-    return false;
+
+    return true;
   }
 
 
 
-
-  // const url = state.url;
-  // localStorage.setItem('path', url);
-  console.log("Llego hasta por aca sin hacer nada");
   router.navigateByUrl('/auth/login');
 
 

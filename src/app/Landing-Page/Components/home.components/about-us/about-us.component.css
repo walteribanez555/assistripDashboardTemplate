@@ -40,6 +40,8 @@
   color: var(--main-color);
   margin: 0px;
   padding: 10px 0;
+  text-align: center;
+  justify-content: center;
 }
 
 .image-container{

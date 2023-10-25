@@ -1,183 +1,244 @@
 
-.wrapper {
-  padding: 20px;
-  display: flex;
-  width: 100%;
-  height: fit-content;
-  background: #fff;
-  align-items: center;
-  justify-content: center;
+.product {
+  padding: 20px 0;
+}
+
+.slider-wrap{
+  margin : 0px 20px 0px 20px;
   position: relative;
-
-  border-radius: 12px;
-}
-
-
-.list-position{
-  width: 100%;
-  height: fit-content;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
-
-.position{
-  height: 5px;
-  width: 50px;
-  background: var(--main-color);
-  margin: 0px 20px 20px 10px;
-  border-radius: 50px;
-}
-
-.position.active{
-  background : #DF085A;
-}
-
-.wrapper .container {
-  height: 50vh;
   overflow: hidden;
+  height: 350px;
+  white-space: nowrap;
 }
 
-.container.slider{
-  width: 60%;
-  border-radius: 18px 0px 0px 18px;
-
+.slider-main {
+  position: absolute;
+  width: 200%;
 }
 
-.container.information {
-  background-color: var(--main-color);
-  border-radius: 0px 18px 18px 0px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 40%;
-  padding-right: 40px;
+.item {
+  display: inline-block;
+  height: 300px;
+  margin: 20px 12px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.5);
+  overflow: hidden;
+  transition: .5s;
+  position: relative;
+  white-space :initial;
+}
+
+
+.description{
+  padding: 10px;
+}
+
+p{
   color: white;
-
+  font-size: 24px;
 }
 
-.container.information .information{
-  font-size: 35px;
-  font-weight: 500;
-  padding: 0px 20px 0px 20px;
-}
-
-.wrapper svg.button {
+.text{
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
-  height: 36px;
-  width: 36px;
-  background-color: white;
-  border: 1px solid var(--main-color);
-  border-radius: 50%;
-  text-align: center;
-  line-height: 36px;
+  left: 50%;
+  transform:  translate(-50%, -50%);
   color: #fff;
-  font-size: 15px;
-  transition: all 0.3s linear;
-  z-index: 100;
-  cursor: pointer;
-}
+  font-size: 24px;
+  font-weight: bolder;
 
-svg.button:active {
-  transform: scale(0.94) translateY(-50%);
-}
-
-svg#prev {
-  left: 25px;
-  padding-left: 10px;
-}
-
-svg#next {
-  right: 25px;
-}
-
-
-
-.container .image-container {
-  height: 100%;
-  width: 400%;
-  overflow: hidden;
-  margin: 0px;
-  padding: 0px;
-  border-radius: 18px 0px 0px 18px;
-  transform: translateX(-25%);
-  transition: all 0.4s ease;
-  animation: slide-in 1s ease;
-}
-
-.image-container .carousel {
-  display: flex;
-  height: 100%;
-  width: 25%;
-  transition: all 0.4s ease;
-}
-
-.carousel img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-}
-
-.container-procedimiento{
-  display: flex;
-  width: 100%;
-  height: 50vh;
-  padding: 10px 20px 10px 20px;
-  flex-direction: row;
 
 }
 
-.container-procedimiento .container {
+.img{
+  height: 300px;
+  width: 300px;
+  background-color: #fff;
+  border-radius: 10px 10px 0 0;
+
+}
+.item .description{
+  height: 50px;
+  width: 300px;
+  box-sizing: border-box;
+  position: absolute;
+  background-color: #34189A;
+  border-radius: 0 0 10px 10px;
+  padding: 10px;
+  color: #fff;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  width: 100%;
-  border-radius: 10px;
+  align-items: center;
+  justify-content: start;
+  transition: .5s;
+  bottom: 0;
+
 }
+
+.item .description p.info-description {
+    display: block;
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 100;
+    word-wrap: wrap;
+    word-break: break-all;
+}
+
+.item .description i{
+  visibility: hidden;
+}
+
+
+img{
+  /* height: 100%; */
+  width: 300px;
+  height: 300px;
+  border-radius: 10px 10px 0px 0px;
+  object-fit : cover;
+}
+
+
+.title{
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.item .description .info-description{
+  visibility: hidden;
+  transition: .5s;
+}
+
+.item:hover{
+  transition: .5s;
+}
+
+.item:hover .description {
+  height: 300px;
+  border-radius: 10px;
+  max-width: 300px;
+
+
+  transition: .5s;
+}
+
+.item:hover .description .info-description{
+  visibility: visible;
+  transition: .5s;
+}
+
+
+.item:hover .description i {
+  margin-top: 20px;
+  visibility: visible;
+  margin-bottom: 20px;
+}
+
+.Prev{
+  position: absolute;
+  left: 33px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.Next{
+  position: absolute;
+  right: 0%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+}
+
+
+button{
+  border: none;
+  background: #716e6e;
+  padding: 20px;
+  border-radius: 10px;
+  transition: 2 all ease-in-out;
+}
+
+button i{
+  color: #fff;
+  transition: 2 all ease-in-out;
+}
+
+
+/*
+p.title{
+  font-size: 16px;
+  font-weight: 600;
+}
+
+p.info{
+  font-size: 12px;
+} */
+
+
+.mobile{
+  display: none;
+}
+
+@media (min-width:768px) {
+
+  .mobile{
+    display: none;
+  }
+
+  .n-mobile{
+    display: block;
+  }
+
+
+  /* button{
+    border: none;
+    background: #716e6e;
+    padding: 20px;
+    border-radius: 10px;
+    transition: 2 all ease-in-out;
+  }
+
+  button i{
+    color: #fff;
+    transition: 2 all ease-in-out;
+  }
+   */
+  button:hover{
+    background: #34189A;
+    transition: 2 all ease-in-out;
+  }
+
+  button:hover i {
+    color: #fff;
+    transition: 2 all ease-in-out;
+  }
+
+}
+
+
+
+
 
 
 @media (max-width:768px) {
 
-  .controls .arrow{
-    position: absolute;
-    top: 250%;
-    cursor: pointer;
+
+  .n-mobile{
+    display: none;
   }
 
-  .container.slider{
-    width: 100%;
-    border-radius: 18px 18px 18px 18px;
+  .mobile{
+    display: block;
   }
 
-  .container.information{
-    background: none;
-    position: absolute;
-    border-radius: 18px 18px 18px 18px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 0px;
-}
+  .item{
+    margin: 20px 12px;
+    width: 100% -40px;
+  }
 
-  .container.information .information{
-    background-color: rgba(52, 24, 154, 0.7);
-    margin: 10px 20px 10px 20px;
-    width: 100%;
-    height: 100%;
-    border-radius: 18px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 60px 10px 50px;
-    font-size: 20px;
-    font-weight: bold;
+  .Next{
+    right: -5%;
   }
 
 }

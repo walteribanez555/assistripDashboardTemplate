@@ -37,6 +37,9 @@ import { DataPaymentComponent } from './Components/data-payment/data-payment.com
 import { ConfirmPaymentComponent } from './Pages/confirm-payment/confirm-payment.component';
 import { ShoppingCartPolizasComponent } from './Components/datos-polizas.components/shopping-cart-polizas/shopping-cart-polizas.component';
 import { PoliticasComponent } from './Pages/politicas/politicas.component';
+import { NextDirective } from './directives/next.directive';
+import { PrevDirective } from './directives/prev.directive';
+import { QuillModule } from 'ngx-quill';
 
 
 @NgModule({
@@ -81,6 +84,8 @@ import { PoliticasComponent } from './Pages/politicas/politicas.component';
       ConfirmPaymentComponent,
       ShoppingCartPolizasComponent,
       PoliticasComponent,
+      NextDirective,
+      PrevDirective,
 
 
   ],
@@ -96,6 +101,7 @@ import { PoliticasComponent } from './Pages/politicas/politicas.component';
     NgxIntlTelInputModule,
     SharedModule,
     RouterModule,
+    QuillModule,
 
 
 

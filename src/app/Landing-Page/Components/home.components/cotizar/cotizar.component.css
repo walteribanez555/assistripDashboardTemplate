@@ -105,8 +105,9 @@
 }
 
 .description p {
-  font-size: 20px;
-  font-weight: normal;
+  font-size: 34px;
+  font-weight: bold;
+  text-align: end;
 }
 
 .container-slider{
@@ -163,6 +164,7 @@
 
   .description p {
     font-size:  20px;
+    text-align: center;
   }
 
   .parallax-container {

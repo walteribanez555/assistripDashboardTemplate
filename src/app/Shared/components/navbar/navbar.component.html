@@ -9,7 +9,7 @@
 
           <div class="routes">
               <ul class="links">
-                  <li><a href="#about-us">Sobre nosotros</a></li>
+                  <li><a [routerLink]="'/landing-page/blogs'">Blog</a></li>
                   <li><a href="#help">Ayuda</a></li>
               </ul>
 
@@ -27,7 +27,7 @@
 
 
       <div class="dropdown_menu "  [class.open]="isDropDownOpen">
-              <li><a href="#about-us">Sobre nosotros</a></li>
+              <li><a [routerLink]="'/landing-page/blogs'">Blog</a></li>
               <li><a href="#help">Ayuda</a></li>
 
               <a  class="assistrip_btn" routerLink="/dashboard/polizas-detalles" >

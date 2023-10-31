@@ -1,0 +1,8 @@
+.animate-class {
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.animate-class.animate {
+  opacity: 1;
+}

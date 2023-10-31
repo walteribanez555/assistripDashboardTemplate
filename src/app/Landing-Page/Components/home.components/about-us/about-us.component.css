@@ -1,7 +1,6 @@
 
 .container-about-us{
   display: flex;
-  height: 50vh;
   flex-direction: row;
   align-items: center;
   justify-content: center;

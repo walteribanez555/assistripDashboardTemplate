@@ -1,64 +1,34 @@
-
-<div class="title" style="display: flex; align-items: center; justify-content: center;margin-top: 20px;">
-  <h2>
+<div class="title" style="display: flex; align-items: center; justify-content: center;">
+  <h2 style="color:#df085a ; font-weight: bold;">
     Coberturas
   </h2>
 </div>
 
 <section class="product">
-  <div class="container-fluid">
-    <div class="slider-wrap">
-      <div class="slider-main n-mobile" [@scrollAnimation]="scrollState">
-        <div class="item"  *ngFor="let slide of slides">
-          <div class="img">
-            <img [src]="slide.url" >
+  <div class="container-item">
+    <div class="item" *ngFor="let slide of slides">
+      <div class="img">
+        <img [src]="slide.url">
+      </div>
+      <div class="description">
+        <p>{{slide.title}}</p>
+
+        <svg  xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="M419-80q-28 0-52.5-12T325-126L107-403l19-20q20-21 48-25t52 11l74 45v-328q0-17 11.5-28.5T340-760q17 0 29 11.5t12 28.5v472l-97-60 104 133q6 7 14 11t17 4h221q33 0 56.5-23.5T720-240v-160q0-17-11.5-28.5T680-440H461v-80h219q50 0 85 35t35 85v160q0 66-47 113T640-80H419ZM167-620q-13-22-20-47.5t-7-52.5q0-83 58.5-141.5T340-920q83 0 141.5 58.5T540-720q0 27-7 52.5T513-620l-69-40q8-14 12-28.5t4-31.5q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 17 4 31.5t12 28.5l-69 40Zm335 280Z"/></svg>
 
 
-          </div>
-          <div class="description">
-            <p >{{slide.title}}</p>
+        <div class="content-description"
+          style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 50px;">
+          <i class="fa-solid fa-shield-heart fa-2xl" style="color: #ffffff;"></i>
 
-            <div class="content-description" style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-top: 50px;">
-              <i class="fa-solid fa-shield-heart fa-2xl" style="color: #ffffff;"></i>
-
-              <p class="info-description">{{slide.description}}</p>
-            </div>
-
-
-
-          </div>
+          <p class="info-description">{{slide.description}}</p>
         </div>
 
-
-
-      </div>
-      <div class="slider-main mobile" >
-        <div class="item"  *ngFor="let slide of slides">
-          <div class="img">
-            <img [src]="slide.url" >
-
-
-          </div>
-          <div class="description">
-            <p >{{slide.description}}</p>
-
-
-          </div>
-        </div>
-
-
-
-      </div>
-      <div class="button-area">
-        <button type="button" appPrev class="Prev">
-          <i class="fa-solid fa-caret-left fa-2xl"></i>
-        </button>
-        <button type="button" appNext class="Next">
-          <i class="fa-solid fa-caret-right fa-2xl"></i>
-        </button>
       </div>
 
 
     </div>
+
+
+
   </div>
 </section>

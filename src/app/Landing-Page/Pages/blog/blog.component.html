@@ -1,0 +1,24 @@
+<section>
+  <div class="container">
+    <div></div>
+    <div class="content">
+      <div class="toContent">
+        <div [innerHTML]="htmlContent" style="width: 100%;height: fit-content;" ></div>
+      </div>
+
+
+      <div class="icon"   >
+        <!-- <i class="fa-solid fa-share-nodes fa-lg" style="color: #ffffff;"></i> -->
+        <app-popup  [message]="message" (click)="takeLink()"   [duration]="7000" ></app-popup>
+
+      </div>
+
+
+    </div>
+    <div></div>
+  </div>
+
+
+
+  <footer style="margin-top: 50px;"></footer>
+</section>

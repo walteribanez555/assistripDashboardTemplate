@@ -157,6 +157,10 @@ export class DatosPolizasComponent implements OnInit {
 
   }
 
+  getActivePolizas() : boolean {
+    return this.listPolizas.every( poliza => poliza.form.valid);
+  }
+
 
   ngOnInit(): void {
     this.datosCotizacion  = this.dataService.sharedData;
@@ -200,6 +204,10 @@ export class DatosPolizasComponent implements OnInit {
     // this.fechaLimite = nuevaFecha.toISOString().split('T')[0];
 
     this.fechaLimite = this.setFechaLimite(this.datosCotizacion.finalDate);
+
+
+
+
 
 
     this.datosCotizacionMenores.forEach(element => {
@@ -287,6 +295,11 @@ export class DatosPolizasComponent implements OnInit {
       }
     )
 
+
+
+    if(this.listPolizas.length==1) {
+      this.listPolizas[0].titular = true;
+    }
 
 
 
@@ -410,6 +423,9 @@ export class DatosPolizasComponent implements OnInit {
       this.showErrorMsg("Se necesita que sea un titular obligatoriamente");
       return;
     }
+
+
+
 
 
     if(!this.listPolizas.every( poliza => poliza.form.valid)){
@@ -1019,7 +1035,13 @@ export class DatosPolizasComponent implements OnInit {
 
     closeCartOpenHeadline(){
       this.toggleShoppingCart();
-      this.openHeadlines();
+
+      if(this.listPolizas.length>1){
+        this.openHeadlines();
+        return;
+      }
+
+      this.comprobarDatos(this.listPolizas);
     }
 
 }

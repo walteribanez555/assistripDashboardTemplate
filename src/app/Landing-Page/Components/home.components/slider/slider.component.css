@@ -16,21 +16,66 @@
   width: 200%;
 }
 
+.container-item {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes moveUpDown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(20px); /* Ajusta la distancia que deseas que se mueva hacia abajo */
+  }
+}
+
+@keyframes moveUpDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+
+
 .item {
   display: inline-block;
   height: 300px;
-  margin: 20px 12px;
+  margin: 20px 50px;
   border-radius: 10px;
   box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.5);
+  width: 25%;
   overflow: hidden;
   transition: .5s;
   position: relative;
   white-space :initial;
+
 }
+
+
+
 
 
 .description{
   padding: 10px;
+}
+
+.description svg{
+  position: absolute;
+  top: 5;
+  right: 0;
+  margin: 5px;
+  fill: white;
+  visibility: visible ;
 }
 
 p{
@@ -51,15 +96,15 @@ p{
 }
 
 .img{
-  height: 300px;
-  width: 300px;
+  height: 100%;
+  width: 100%;
   background-color: #fff;
   border-radius: 10px 10px 0 0;
 
 }
 .item .description{
-  height: 50px;
-  width: 300px;
+  height: 80px;
+  width: 100%;
   box-sizing: border-box;
   position: absolute;
   background-color: #34189A;
@@ -77,7 +122,7 @@ p{
 
 .item .description p.info-description {
     display: block;
-    width: 300px;
+    width: 100%;
     padding: 10px;
     font-size: 16px;
     text-align: center;
@@ -93,8 +138,8 @@ p{
 
 img{
   /* height: 100%; */
-  width: 300px;
-  height: 300px;
+  width: 100%;
+  height: 100%;
   border-radius: 10px 10px 0px 0px;
   object-fit : cover;
 }
@@ -114,16 +159,20 @@ img{
   transition: .5s;
 }
 
-.item:hover .description {
-  height: 300px;
+.item:hover .description,
+.item:active .description {
+  height: 100%;
   border-radius: 10px;
-  max-width: 300px;
+  max-width: 100%;
 
 
   transition: .5s;
 }
 
-.item:hover .description .info-description{
+
+.item:hover .description .info-description,
+.item:active .description .info-description
+{
   visibility: visible;
   transition: .5s;
 }
@@ -190,6 +239,10 @@ p.info{
     display: block;
   }
 
+  .description svg{
+    visibility: hidden;
+  }
+
 
   /* button{
     border: none;
@@ -214,6 +267,11 @@ p.info{
     transition: 2 all ease-in-out;
   }
 
+  .item{
+  animation:  moveUpDown 2s infinite;
+
+  }
+
 }
 
 
@@ -224,21 +282,16 @@ p.info{
 @media (max-width:768px) {
 
 
-  .n-mobile{
-    display: none;
-  }
 
-  .mobile{
-    display: block;
-  }
+
+
 
   .item{
-    margin: 20px 12px;
-    width: 100% -40px;
+    margin: 10px 5px;
+    width: 90%;
+
   }
 
-  .Next{
-    right: -5%;
-  }
+
 
 }

@@ -207,8 +207,12 @@ button{
 
 
 .pay-button{
-    background-image: linear-gradient(to right, #1D0F9F, #DF085A);
+    /* background-image: linear-gradient(to right, #1D0F9F, #DF085A); */
     color: white;
+}
+
+.pay-button.active{
+  background-image: linear-gradient(to right, #1D0F9F, #DF085A);
 }
 
 .out-button{

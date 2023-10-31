@@ -29,10 +29,7 @@ export class SliderComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    interval(10000).subscribe(() => {
-      console.log("Animacion comienza");
-      this.scrollToNext();
-    });
+
   }
 
   scrollToNext() {
@@ -70,31 +67,7 @@ export class SliderComponent implements OnInit {
       title: 'Retraso de Vuelo',
       description: 'Evita preocupaciones por retrasos en tus vuelos con nuestra cobertura que compensa los inconvenientes.'
     },
-    {
-      url: 'assets/images/3.jpg',
-      title: 'Cobertura Covid-19',
-      description: 'Asegura tu salud con nuestra cobertura especializada para situaciones relacionadas con el Covid-19.'
-    },
-    {
-      url: 'assets/images/mascotas.jpg',
-      title: 'Protección para Mascotas',
-      description: 'Protege a tus queridas mascotas con nuestra cobertura de mascotas, que cubre enfermedades y accidentes.'
-    },
-    {
-      url: 'assets/images/deportes.jpg',
-      title: 'Deportes Amateur',
-      description: 'Disfruta de tus actividades deportivas favoritas con la seguridad de estar protegido en caso de lesiones.'
-    },
-    {
-      url: 'assets/images/equipaje.jpg',
-      title: 'Pérdida de Equipaje',
-      description: 'Viaja tranquilo sabiendo que estamos aquí para ayudarte en caso de pérdida de equipaje durante tus viajes.'
-    },
-    {
-      url: 'assets/images/perdidaviaje.jpg',
-      title: 'Retraso de Vuelo',
-      description: 'Evita preocupaciones por retrasos en tus vuelos con nuestra cobertura que compensa los inconvenientes.'
-    }
+
   ];
 
 }

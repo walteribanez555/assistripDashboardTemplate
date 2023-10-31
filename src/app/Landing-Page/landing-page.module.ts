@@ -40,6 +40,11 @@ import { PoliticasComponent } from './Pages/politicas/politicas.component';
 import { NextDirective } from './directives/next.directive';
 import { PrevDirective } from './directives/prev.directive';
 import { QuillModule } from 'ngx-quill';
+import Counter from './counter';
+import { ImgSliderComponent } from './Components/img-slider/img-slider.component';
+import { BlogsComponent } from './Pages/blogs/blog.component';
+import { BlogCardComponent } from './Components/blog/blog_card/blog.component';
+import { BlogComponent } from './Pages/blog/blog.component';
 
 
 @NgModule({
@@ -86,6 +91,10 @@ import { QuillModule } from 'ngx-quill';
       PoliticasComponent,
       NextDirective,
       PrevDirective,
+      ImgSliderComponent,
+      BlogsComponent,
+      BlogCardComponent,
+      BlogComponent,
 
 
   ],
@@ -101,7 +110,16 @@ import { QuillModule } from 'ngx-quill';
     NgxIntlTelInputModule,
     SharedModule,
     RouterModule,
-    QuillModule,
+    QuillModule.forRoot({
+      customModules: [{
+        implementation: Counter,
+        path: 'modules/counter'
+      }],
+      customOptions: [{
+        import: 'formats/font',
+        whitelist: ['mirza', 'roboto', 'aref', 'serif', 'sansserif', 'monospace']
+      }]
+    }),
 
 
 

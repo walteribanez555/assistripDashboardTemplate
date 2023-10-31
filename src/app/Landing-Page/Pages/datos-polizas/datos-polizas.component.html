@@ -303,11 +303,53 @@
                   <span>Total</span>
                   <p class="number">${{totalEnteros}}<span class="decimal number">{{totalDecimales}}</span> <span class="type-money">USD</span></p>
               </div>
+
+              <div *ngIf="listPolizas.length>1; else isOnlyOne" >
+
+                <div class="btn_select">
+                  <button class="select-titular"  [class.active]="getActivePolizas()"  (click)="openHeadlines()">
+                    <i class="fa-solid fa-person-circle-check fa-2xl" style="color: white; padding: 20px 0px;"></i>
+                    <span style="color: white;">Seleccionar titular</span>
+
+                  </button>
+                </div>
+                <span
+                style="display: flex;
+                width: 100%;
+                text-align: center;
+                color: red;"
+                *ngIf="!getActivePolizas()" >
+                Se requiere que se completen los detalles correspondientes de cada persona
+                </span>
+
+              </div>
+
+              <ng-template #isOnlyOne >
+                <div class="btn_select">
+                  <button class="select-titular" [class.active]="getActivePolizas()"  (click)="comprobarDatos(listPolizas)" style="padding: 20px;" >
+                    <i class="fa-solid fa-cart-shopping fa-2xl" style="color: white;"></i>
+
+                  </button>
+                </div>
+
+                <span
+                style="display: flex;
+                width: 100%;
+                text-align: center;
+                color: red;"
+                *ngIf="!getActivePolizas()" >
+                Se requiere que se completen los detalles correspondientes de cada persona
+                </span>
+
+
+              </ng-template>
+
+
           </ng-container>
       </div>
   </div>
-  <div class="btn_comprobar">
-    <button class="comprobar"  (click)="toggleShoppingCart()">
+  <div class="btn_float">
+    <button class="float"  (click)="toggleShoppingCart()">
       <i class="fa-solid fa-cart-shopping fa-2xl" style="color: white;"></i>
 
     </button>
@@ -318,17 +360,10 @@
 
 
 
-<div class="btn_seleccionar">
-  <button class="comprobar"  (click)="openHeadlines()">
-    <i class="fa-solid fa-person-circle-check fa-2xl" style="color: white; padding: 20px 0px;"></i>
-    <span>Seleccionar titular</span>
-
-  </button>
-</div>
 
 
 
 <!-- <data-payment></data-payment> -->
-<shopping-cart-polizas [messageReady]="true"  *ngIf="shopping_cart"   (closeEvent)="toggleShoppingCart()"  (submitEvent)="closeCartOpenHeadline()" [cotizacionesMayores]="datosCotizacionMayores.length" [cotizacionesMenores]="datosCotizacionMenores.length" [dias]="diffDays" [planMayores]="servicioMayores" [planMenores]="servicioMenores" [costoMayores]="costoMayores" [costoMenores]="costoMenores"   ></shopping-cart-polizas>
+<shopping-cart-polizas [messageReady]="true"  *ngIf="shopping_cart"   (closeEvent)="toggleShoppingCart()"  (submitEvent)="closeCartOpenHeadline()" [cotizacionesMayores]="datosCotizacionMayores.length" [cotizacionesMenores]="datosCotizacionMenores.length" [dias]="diffDays" [planMayores]="servicioMayores" [planMenores]="servicioMenores" [costoMayores]="costoMayores" [costoMenores]="costoMenores" [listPolizas]="listPolizas"   ></shopping-cart-polizas>
 <headline *ngIf="showHeadlines"  (closeModal)="closeHeadlines()" [listPolizas]="listPolizas" (generateSold)="comprobarDatos($event)" ></headline>
 <data-payment *ngIf="makePayment && client_secret"  [amount]="amount"  [client_secret]="client_secret" [venta_id]="venta_id"   ></data-payment>

@@ -7,6 +7,8 @@ import { DatosPolizasComponent } from './Pages/datos-polizas/datos-polizas.compo
 import { TuPolizaComponent } from './Pages/tu-poliza/tu-poliza.component';
 import { ConfirmPaymentComponent } from './Pages/confirm-payment/confirm-payment.component';
 import { PoliticasComponent } from './Pages/politicas/politicas.component';
+import { BlogsComponent } from './Pages/blogs/blog.component';
+import { BlogComponent } from './Pages/blog/blog.component';
 
 const routes : Routes = [
   {
@@ -36,6 +38,14 @@ const routes : Routes = [
       {
         path : 'politicas',
         component : PoliticasComponent,
+      },
+      {
+        path : 'blogs',
+        component : BlogsComponent,
+      },
+      {
+        path : 'blog/:id',
+        component : BlogComponent,
       }
 
     ]

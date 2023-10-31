@@ -20,11 +20,26 @@ export class ShoppingCartPolizasComponent implements  OnInit {
   @Input() cotizacionesMayores : number = 0;
   @Input() dias : number = 0;
   @Input() messageReady : boolean = false;
+  @Input()  listPolizas : any[] = [];
   listCupones : Cupon[] = [];
   listDescuentos : CuponAplicado[] =[] ;
   loading : boolean = false;
   totalBruto = 0 ;
   total = 0;
+
+
+  getTypeShop() : boolean{
+
+    return this.listPolizas.length>1;
+  }
+
+
+  isCompletePolizas() : boolean{
+
+    console.log(this.listPolizas.every( poliza => poliza.form.valid));
+
+    return this.listPolizas.every( poliza => poliza.form.valid);
+  }
 
 
 

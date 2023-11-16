@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { RestService } from 'src/app/Shared/services/requests/rest.service';
@@ -26,7 +26,9 @@ export class DataPaymentComponent implements OnInit {
   @Input() amount! :number;
   @Input()  client_secret! : string;
   @Input() venta_id! : number;
+  @Output() closeModal = new EventEmitter();
   isChecking : boolean = false;
+  private elementRef = inject(ElementRef);
 
   constructor(private fb: FormBuilder,
               private cd: ChangeDetectorRef,
@@ -119,5 +121,11 @@ export class DataPaymentComponent implements OnInit {
   showMessage(messageText : string) {
     console.log(messageText);
   }
+
+  close(): void {
+    this.elementRef.nativeElement.remove();
+    this.closeModal.emit();
+  }
+
 
 }

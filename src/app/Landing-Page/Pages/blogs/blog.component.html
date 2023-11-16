@@ -6,12 +6,8 @@
       <h2 class="title">BLOG</h2>
 
       <div class="list-blogs">
-        <blog></blog>
-        <blog></blog>
-        <blog></blog>
-        <blog></blog>
-        <blog></blog>
-        <blog></blog>
+        <blog  *ngFor="let card of blogs" [blog]="card" ></blog>
+
 
 
 

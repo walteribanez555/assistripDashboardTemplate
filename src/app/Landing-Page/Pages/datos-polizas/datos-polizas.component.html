@@ -366,4 +366,4 @@
 <!-- <data-payment></data-payment> -->
 <shopping-cart-polizas [messageReady]="true"  *ngIf="shopping_cart"   (closeEvent)="toggleShoppingCart()"  (submitEvent)="closeCartOpenHeadline()" [cotizacionesMayores]="datosCotizacionMayores.length" [cotizacionesMenores]="datosCotizacionMenores.length" [dias]="diffDays" [planMayores]="servicioMayores" [planMenores]="servicioMenores" [costoMayores]="costoMayores" [costoMenores]="costoMenores" [listPolizas]="listPolizas"   ></shopping-cart-polizas>
 <headline *ngIf="showHeadlines"  (closeModal)="closeHeadlines()" [listPolizas]="listPolizas" (generateSold)="comprobarDatos($event)" ></headline>
-<data-payment *ngIf="makePayment && client_secret"  [amount]="amount"  [client_secret]="client_secret" [venta_id]="venta_id"   ></data-payment>
+<data-payment *ngIf="makePayment && client_secret"  (closeModal)="closePayment()"  [amount]="amount"  [client_secret]="client_secret" [venta_id]="venta_id"   ></data-payment>

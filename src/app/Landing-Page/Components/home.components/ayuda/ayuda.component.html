@@ -1,4 +1,4 @@
-<!--
+
   <div class="container-ayuda" id="help" >
     <div class="spacing"></div>
 
@@ -16,67 +16,27 @@
       <h2 style="color: #DF085A;">Blog</h2>
       <hr style="border-color: #DF085A; width: 100%;">
 
-      <div class="card">
+      <div class="card"  *ngFor="let card of blogs.slice(0, 3)">
         <div class="img-card">
-          <img src="../../../../../assets/images/3.jpg" alt="">
+          <img [src]="card.img_url" alt="">
 
         </div>
         <div class="descp-card">
           <div class="content">
-            <p class="title">DESCUENTO EN TU PROXIMO VIAJE</p>
+            <p class="title">{{card.titulo}}</p>
             <hr style=" border-color: #DF085A;">
-            <p class="description">Tenemos una grandiosa oferta para todos los detalles que veras mas adelante.</p>
+            <p class="description">{{card.descripcion}}</p>
           </div>
 
           <div class="icon">
-            <p>01/01/2024</p>
+            <p>{{card.fecha_post.split('T')[0]}}</p>
             <img src="../../../../../assets/images/logo-icon-2.png" >
           </div>
         </div>
 
 
       </div>
-      <div class="card">
-        <div class="img-card">
-          <img src="../../../../../assets/images/3.jpg" alt="">
 
-        </div>
-        <div class="descp-card">
-          <div class="content">
-            <p class="title">DESCUENTO EN TU PROXIMO VIAJE</p>
-            <hr style=" border-color: #DF085A;">
-            <p class="description">Tenemos una grandiosa oferta para todos los detalles que veras mas adelante.</p>
-          </div>
-
-          <div class="icon">
-            <p>01/01/2024</p>
-            <img src="../../../../../assets/images/logo-icon-2.png" >
-          </div>
-        </div>
-
-
-      </div>
-      <div class="card"  [routerLink]="'../blog/1'">
-        <div class="img-card">
-          <img src="../../../../../assets/images/3.jpg" alt="">
-
-        </div>
-        <div class="descp-card">
-          <div class="content">
-            <p class="title">DESCUENTO EN TU PROXIMO VIAJE</p>
-            <hr style=" border-color: #DF085A;">
-            <p class="description">Tenemos una grandiosa oferta para todos los detalles que veras mas adelante.</p>
-          </div>
-
-          <div class="icon">
-            <p>01/01/2024</p>
-            <img src="../../../../../assets/images/logo-icon-2.png" >
-          </div>
-        </div>
-
-
-
-      </div>
 
       <div class="bottom">
         <a [routerLink]="'../blogs'" href="" style="color: #DF085A; text-decoration: underline; font-weight: bold;" >Ver mas</a>
@@ -91,4 +51,4 @@
   </div>
 
 
- -->
+

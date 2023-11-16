@@ -1013,6 +1013,10 @@ export class DatosPolizasComponent implements OnInit {
       this.showHeadlines = false;
     }
 
+    closePayment(){
+      this.makePayment = false;
+    }
+
 
     showEvent( ) {
       console.log(this.similarEmail);

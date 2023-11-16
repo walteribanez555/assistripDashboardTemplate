@@ -41,6 +41,7 @@ import { MensajeService } from './Shared/services/requests/mensaje.service';
 import { TokenService } from './Shared/services/utils/token.service';
 import { RestService } from './Shared/services/requests/rest.service';
 import { LocalStorageService } from './Shared/services/utils/local-storage.service';
+import { BlogService } from './Shared/services/requests/blog.service';
 
 
 
@@ -97,6 +98,7 @@ import { LocalStorageService } from './Shared/services/utils/local-storage.servi
     TokenService,
     RestService,
     LocalStorageService,
+    BlogService,
 
     {
       provide : HTTP_INTERCEPTORS,

@@ -1,8 +1,8 @@
-<div class="card"  [routerLink]="'../blog/1'">
+<div class="card"  [routerLink]="'../blog/'+blog.blog_id">
 
 
   <div class="img-container">
-    <img src="../../../../../assets/images/3.jpg" alt="">
+    <img [src]="blog.img_url" alt="">
 
   </div>
 
@@ -12,7 +12,7 @@
       <div class="author">
 
         <p>Assistrip.com</p>
-        <p class="date" >17/01/2002</p>
+        <p class="date" >{{blog.fecha_post.split('T')[0]}}</p>
 
       </div>
 
@@ -21,10 +21,10 @@
 
 
     <p class="title">
-      Hola Mundo
+      {{blog.titulo}}
     </p>
     <p class="description">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo autem iure vel suscipit quod quae aperiam aspernatur sed culpa. Ex totam omnis et, accusantium repudiandae beatae perspiciatis necessitatibus tenetur...
+      {{blog.descripcion}}
     </p>
 
 

@@ -1,10 +1,10 @@
-<div class="modal-backdrop"></div>
+<div class="modal-backdrop"  (click)="close()"></div>
 
 <div class="modal">
   <div class="top">
     <div class="top-info">
       <span>Ingrese los datos para la finalizar la compra</span>
-      <span style="cursor: pointer;"  >X</span>
+      <span style="cursor: pointer;" (click)="close()" >X</span>
     </div>
     <hr >
   </div>

@@ -25,7 +25,8 @@ export class DataPaymentComponent implements OnInit {
   emailAddress = '';
   @Input() amount! :number;
   @Input()  client_secret! : string;
-  @Input() venta_id! : number;
+  // @Input() venta_id! : number;
+  @Input() respString! : string;
   @Output() closeModal = new EventEmitter();
   isChecking : boolean = false;
   private elementRef = inject(ElementRef);
@@ -100,7 +101,7 @@ export class DataPaymentComponent implements OnInit {
   const { error } = await this.STRIPE.confirmPayment({
     elements : this.element,
     confirmParams: {
-      return_url: `https://www.assistrip.com/landing-page/confirm-payment/${this.venta_id}`,
+      return_url: `https://www.assistrip.com/landing-page/confirm-payment?result=${this.respString}`,
 
     },
   });

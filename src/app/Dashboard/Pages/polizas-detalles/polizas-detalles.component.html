@@ -3,18 +3,18 @@
 
 
 <div class="container">
-    <h1>Historial de las polizas</h1>
+    <h1>Historial de los Vouchers</h1>
 
     <div *ngIf="listPolizas.length>0" class="listPolizas">
         <div  *ngFor="let poliza of listPolizas" class="poliza">
             <div class="left">
                 <div class="cats">
                     <div  class="estado ">
-                      <span class="vigente" *ngIf="poliza.status ===0 ">Vigente</span>
-                      <span class="congelada" *ngIf="poliza.status ===1 ">Congelada</span>
-                      <span class="uso" *ngIf="poliza.status ===2 ">Activa</span>
-                      <span class="anulada" *ngIf="poliza.status ===3 " style="color: red; background: none;">Anulada</span>
-                      <span class="anulada" *ngIf="poliza.status ===4 ">En proceso</span>
+                      <span class="vigente" *ngIf="poliza.status ===2 ">Vigente</span>
+                      <span class="congelada" *ngIf="poliza.status ===4 ">Congelada</span>
+                      <span class="uso" *ngIf="poliza.status ===3 ">Activa</span>
+                      <span class="anulada" *ngIf="poliza.status ===6 " style="color: red; background: none;">Anulada</span>
+                      <span class="anulada" *ngIf="poliza.status ===1 ">En proceso</span>
                     </div>
                     <div class="siniestro">
                         Siniestro
@@ -22,12 +22,12 @@
                 </div>
                 <div class="fields">
                     <div class="field">
-                        <span class="title">Nro Poliza</span>
+                        <span class="title">Nro Voucher</span>
                         <span>{{poliza.poliza_id }}</span>
                     </div>
                     <div class="field">
                         <span class="title">Fecha de emision</span>
-                        <span>{{poliza.fecha_emision | dateOnly }}</span>
+                        <span>{{poliza.fecha_venta| dateOnly }}</span>
                     </div>
                     <div class="field">
                         <span class="title">Destino</span>

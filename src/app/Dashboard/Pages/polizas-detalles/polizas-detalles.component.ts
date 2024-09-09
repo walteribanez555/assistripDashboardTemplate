@@ -11,6 +11,9 @@ import { VentasService } from 'src/app/Shared/services/requests/ventas.service';
 import { ClientesService } from 'src/app/Shared/services/requests/clientes.service';
 import { Venta } from 'src/app/Shared/models/Data/Venta.model';
 import { PolizasVentasService } from 'src/app/Shared/services/requests/polizas-ventas.service';
+import cli from '@angular/cli';
+import { ReportesService } from 'src/app/Shared/services/requests/reportes.service';
+import { Reporte } from 'src/app/Shared/models/Data/Reporte.model';
 
 
 
@@ -23,7 +26,7 @@ export class PolizasDetallesComponent implements OnInit, AfterViewInit {
   private authService = inject(AuthService);
 
   listIdPolizas: number[] = [];
-  listPolizas: Poliza[] = [];
+  listPolizas: Reporte[] = [];
   nombre : string = "Mireya Alejandra Barriga Lopez";
   titular : ClienteResp | null = null;
   loading : boolean = false;
@@ -34,12 +37,10 @@ export class PolizasDetallesComponent implements OnInit, AfterViewInit {
 
 
   constructor(
-    private polizasService : PolizasService,
     private router : Router,
     private cdRef: ChangeDetectorRef,
-    private ventasService : VentasService,
-    private clienteService : ClientesService,
-    private polizasVentasService : PolizasVentasService,
+    private reporteService : ReportesService,
+
 
 
   ){
@@ -57,85 +58,103 @@ export class PolizasDetallesComponent implements OnInit, AfterViewInit {
 
     this.loading = true;
 
-
-    const idClient = this.authService.getIdentifier()
-
-    if(idClient){
-
-      this.clienteService.getClienteById(idClient).pipe(
-       switchMap(
-           data => {
-
-             this.cliente = data[0]
-
-             return this.ventasService.getVentas()
-
-           }
-         ),
-       switchMap(
-         data => {
-
-           this.listVentas = data.filter( venta => venta.cliente_id === this.cliente?.cliente_id);
-           const requests : any[] = [];
-
-           this.listVentas.forEach(venta => {
-              requests.push(this.polizasVentasService.getPolizasByVentas(venta.venta_id));
-           });
-
-           return forkJoin(requests);
-          }
-         ),
-        switchMap(
-          data => {
+    const client = this.authService.getClient();
 
 
-            const requests : any[] = [];
-            data.forEach( (response : Poliza[]) => {
-              if(response.length > 0){
+    if(client) {
+      this.reporteService.getByClientId(client).subscribe({
+        next : (resp) => {
+          console.log({resp});
+          this.listPolizas = resp;
+          this.loading = false;
+        },
+        error : (err) => {
+          console.log({err});
+          this.loading = false;
+        }
 
-
-                response.forEach( item => {
-                  if( item.status === 0) {
-
-                    const salida = new Date(item.fecha_salida);
-
-                    const fechaActual = new Date();
-                    const fechaAyer = new Date(fechaActual);
-                    fechaAyer.setDate(fechaActual.getDate() - 1);
-                    item.status = 2;
-
-                    if (salida < fechaAyer){
-                      requests.push( this.polizasService.putPolizas(item.poliza_id, item.fecha_salida.split('T')[0], item.fecha_retorno.split('T')[0], 2))
-                    }
-                  }
-                })
-
-                this.listPolizas = [ ...this.listPolizas, ...response]
-              }
-
-
-            });
-
-            this.listPolizas = this.listPolizas.reverse();
-
-
-            this.loading= false;
-
-
-
-            return forkJoin(requests);
-
-          }
-        )
-     ).subscribe(
-       data => {
-
-
-
-
-       }
-     )
+      })
     }
+
+
+    // const idClient = this.authService.getIdentifier()
+
+    // if(idClient){
+
+    //   this.clienteService.getClienteById(idClient).pipe(
+    //    switchMap(
+    //        data => {
+
+    //          this.cliente = data[0]
+
+    //          return this.ventasService.getVentas()
+
+    //        }
+    //      ),
+    //    switchMap(
+    //      data => {
+
+    //        this.listVentas = data.filter( venta => venta.cliente_id === this.cliente?.cliente_id);
+    //        const requests : any[] = [];
+
+    //        this.listVentas.forEach(venta => {
+    //           requests.push(this.polizasVentasService.getPolizasByVentas(venta.venta_id));
+    //        });
+
+    //        return forkJoin(requests);
+    //       }
+    //      ),
+    //     switchMap(
+    //       data => {
+
+
+    //         const requests : any[] = [];
+    //         data.forEach( (response : Poliza[]) => {
+    //           if(response.length > 0){
+
+
+    //             response.forEach( item => {
+    //               if( item.status === 0) {
+
+    //                 const salida = new Date(item.fecha_salida);
+
+    //                 const fechaActual = new Date();
+    //                 const fechaAyer = new Date(fechaActual);
+    //                 fechaAyer.setDate(fechaActual.getDate() - 1);
+    //                 item.status = 2;
+
+    //                 if (salida < fechaAyer){
+    //                   requests.push( this.polizasService.putPolizas(item.poliza_id, item.fecha_salida.split('T')[0], item.fecha_retorno.split('T')[0], 2))
+    //                 }
+    //               }
+    //             })
+
+    //             this.listPolizas = [ ...this.listPolizas, ...response]
+    //           }
+
+
+    //         });
+
+    //         this.listPolizas = this.listPolizas.reverse();
+
+
+    //         this.loading= false;
+
+
+
+    //         return forkJoin(requests);
+
+    //       }
+    //     )
+    //  ).subscribe(
+    //    data => {
+
+
+
+
+    //    }
+    //  )
+    // }
 
 
 

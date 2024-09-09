@@ -9,6 +9,7 @@ import { ConfirmPaymentComponent } from './Pages/confirm-payment/confirm-payment
 import { PoliticasComponent } from './Pages/politicas/politicas.component';
 import { BlogsComponent } from './Pages/blogs/blog.component';
 import { BlogComponent } from './Pages/blog/blog.component';
+import { ExtrasPageComponent } from './Pages/extrasPage/extrasPage.component';
 
 const routes : Routes = [
   {
@@ -24,6 +25,10 @@ const routes : Routes = [
         component : CotizarComponent,
       },
       {
+        path: 'extras',
+        component: ExtrasPageComponent,
+      },
+      {
         path : 'datos-polizas',
         component : DatosPolizasComponent,
       },
@@ -32,21 +37,21 @@ const routes : Routes = [
         component : TuPolizaComponent,
       },
       {
-        path : 'confirm-payment/:id',
+        path : 'confirm-payment',
         component : ConfirmPaymentComponent,
       },
       {
         path : 'politicas',
         component : PoliticasComponent,
       },
-      {
-        path : 'blogs',
-        component : BlogsComponent,
-      },
-      {
-        path : 'blog/:id',
-        component : BlogComponent,
-      }
+      // {
+      //   path : 'blogs',
+      //   component : BlogsComponent,
+      // },
+      // {
+      //   path : 'blog/:id',
+      //   component : BlogComponent,
+      // }
 
     ]
 

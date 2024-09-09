@@ -42,6 +42,7 @@ import { TokenService } from './Shared/services/utils/token.service';
 import { RestService } from './Shared/services/requests/rest.service';
 import { LocalStorageService } from './Shared/services/utils/local-storage.service';
 import { BlogService } from './Shared/services/requests/blog.service';
+import { ReportesService } from './Shared/services/requests/reportes.service';
 
 
 
@@ -99,6 +100,7 @@ import { BlogService } from './Shared/services/requests/blog.service';
     RestService,
     LocalStorageService,
     BlogService,
+    ReportesService,
 
     {
       provide : HTTP_INTERCEPTORS,

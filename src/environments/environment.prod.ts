@@ -10,7 +10,7 @@
 
 export const environment = {
   production : true,
-  apiUrl: 'https://4mqhnktou8.execute-api.us-east-1.amazonaws.com',
+  apiUrl: 'https://z1rlqbo0tl.execute-api.us-east-1.amazonaws.com',
   apiBackend : 'https://nv101ison4.execute-api.us-east-1.amazonaws.com',
   stripe_pk : 'pk_live_51Mz1YlETw1bi8nWN6SIQ1jAtVxlD9MquyQVDHRjtN1nBBGnk30boCCeI6Bh7STzGQcvErsb0Xk6nV3HxdSQ7G5Wz00I5tuLl1r',
   apiNotificationsService : 'https://fbnode-production.up.railway.app/api',

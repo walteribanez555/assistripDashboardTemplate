@@ -515,7 +515,7 @@ export class PlanesComponent implements AfterViewInit,OnInit  {
     if(this.minPlanes>1){
       if( this.servicioMayores && this.servicioMenores){
         this.guardarData();
-        this.router.navigateByUrl('/landing-page/datos-polizas');
+        this.router.navigateByUrl('/landing-page/extras');
       }
       else{
         this.errorMessage("Falta elegir planes");
@@ -523,7 +523,7 @@ export class PlanesComponent implements AfterViewInit,OnInit  {
    }else{
     if((this.servicioMenores && !this.servicioMayores) || (!this.servicioMenores && this.servicioMayores) ){
       this.guardarData();
-      this.router.navigateByUrl('/landing-page/datos-polizas');
+      this.router.navigateByUrl('/landing-page/extras');
     }else{
       this.errorMessage("No ha seleccionado un plan");
 

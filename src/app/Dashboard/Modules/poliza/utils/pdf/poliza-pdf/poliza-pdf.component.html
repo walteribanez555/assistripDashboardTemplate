@@ -18,14 +18,14 @@ ESPAÑA -->
 
       <div class="items">
         <div class="saludo">
-          <h1>Póliza de Asistencia</h1>
+          <h1>Voucher de Asistencia</h1>
         </div>
         <div class="qr_space">
           <div class="qr" >
             <qrcode [qrdata]="qrCode" [width]="100"   (qrCodeURL)="onLoadedQr($event)" ></qrcode>
           </div>
           <div class="message">
-            Verifica los datos de tu Póliza
+            Verifica los datos de tu Voucher
           </div>
         </div>
       </div>
@@ -88,7 +88,7 @@ ESPAÑA -->
               Retorno
             </span>
             <span>
-              Nro. Póliza
+              Nro. Voucher
             </span>
             <span>
               Dias
@@ -131,7 +131,7 @@ ESPAÑA -->
           </div>
           <div class="description">
             <span>CERTIFICAMOS QUE:</span>
-            <span>ESTÁ PROTEGIDO POR LA PÓLIZA DE ASISTENCIA DE VIAJES</span>
+            <span>ESTÁ PROTEGIDO POR EL VOUCHER DE ASISTENCIA DE VIAJES</span>
           </div>
           <div class="beneficios">
             <div class="beneficio" *ngFor="let beneficio of beneficiosMapped">
@@ -198,9 +198,17 @@ ESPAÑA -->
                   Whatsapp Mundial
                 </span>
                 <span class="description">
-                  +1-305-280-8950
+                  +1 (217) 291 9160
                 </span>
 
+              </div>
+              <div class="contacto">
+                <div class="title">
+                  Llamada
+                </div>
+                <span class="description">
+                  +1 (305) 307 0765
+                </span>
               </div>
               <div class="whatsappLogo">
                 <img src="../../../../../../../assets/svg/whatsapp-svgrepo-com.svg" width="40" height="40"  alt="">

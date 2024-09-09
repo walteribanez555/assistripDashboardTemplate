@@ -1,0 +1,36 @@
+<div class="page-component">
+  <div class="title">
+    <h1>Extras</h1>
+  </div>
+
+
+  <span>¿Deseas agregar Algun extra?</span>
+
+
+  <div class="list-extras">
+    <div class="extra"    *ngFor="let extra of extras"  [class.selected]="extra.isSelected"   >
+      <div class="extra-info">
+        <h2>{{extra.beneficio}}</h2>
+      </div>
+      <div class="extra-price">
+        <span>{{extra.cobertura ?? 'incluido'}}</span>
+      </div>
+      <div class="extra-button">
+        <button  (click)="selectItem(extra)" >{{ extra.isSelected ? 'seleccionado' : 'seleccionar'}}</button>
+      </div>
+    </div>
+
+    <span  *ngIf="extras.length === 0">
+      No hay extras disponibles
+    </span>
+
+  </div>
+
+
+  <div class="list-buttons">
+    <!-- <button (click)="back()" >Atras</button> -->
+    <button (click)="next()" >Siguiente</button>
+  </div>
+
+
+</div>

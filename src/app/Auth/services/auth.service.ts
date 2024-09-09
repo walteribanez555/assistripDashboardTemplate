@@ -30,11 +30,16 @@ export class AuthService {
   private setAuthentication( sessionToken : string  , identifier : string): boolean {
 
 
+
+    const client =  identifier.split('_')[0];
+    const office_id = identifier.split('_')[1];
     // this._currentUser.set( user );
     this._currentClient.set( identifier);
     this._authStatus.set( AuthStatus.authenticated );
     localStorage.setItem('Authorization', sessionToken);
     localStorage.setItem('identifier',identifier);
+    localStorage.setItem('client',client);
+    localStorage.setItem('office_id',office_id);
 
 
 
@@ -113,5 +118,10 @@ export class AuthService {
   getIdentifier() : string | null{
     const identifier = localStorage.getItem('identifier');
     return identifier;
+  }
+
+  getClient() : string | null{
+    const client = localStorage.getItem('client');
+    return client;
   }
 }

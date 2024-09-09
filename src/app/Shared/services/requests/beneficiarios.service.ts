@@ -52,10 +52,10 @@ export class BeneficiariosService {
 
     return this.http.post<BeneficiarioResp>(this.apiUrl, {
       poliza_id,
-      primer_apellido,
-      segundo_apellido,
-      primer_nombre,
-      segundo_nombre,
+      primer_apellido : primer_apellido+ ' ' + segundo_apellido,
+      segundo_apellido : ' ',
+      primer_nombre : primer_nombre + ' ' + segundo_nombre,
+      segundo_nombre : ' ',
       nro_identificacion: identifier,
       fecha_nacimiento,
       sexo,

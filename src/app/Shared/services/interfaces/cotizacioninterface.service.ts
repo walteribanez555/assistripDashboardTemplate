@@ -4,6 +4,7 @@ import { Servicio } from '../../models/Data/Servicio';
 import { cotizacionDataForm } from '../../models/Pages/cotizacionDataForm.model';
 import { ExtraForm } from '../../models/Pages/extra.model';
 import { Cliente, ClienteResp } from '../../models/Data/Cliente';
+import { Plan } from '../../models/Data/Plan';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,11 @@ export class cotizacionIntefaceService {
   cotizacionMayores :cotizacionDataForm[] = [];
 
   listExtras : ExtraForm[]= [];
+
+
+
+
+  extrasSelected : Plan[] = [];
 
 
 

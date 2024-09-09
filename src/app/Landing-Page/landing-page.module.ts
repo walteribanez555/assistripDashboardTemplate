@@ -45,6 +45,7 @@ import { ImgSliderComponent } from './Components/img-slider/img-slider.component
 import { BlogsComponent } from './Pages/blogs/blog.component';
 import { BlogCardComponent } from './Components/blog/blog_card/blog.component';
 import { BlogComponent } from './Pages/blog/blog.component';
+import { ExtrasPageComponent } from './Pages/extrasPage/extrasPage.component';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { BlogComponent } from './Pages/blog/blog.component';
     HomeComponent,
     CotizarComponent,
     DatosPolizasComponent,
+    ExtrasPageComponent,
 
     ///Components
     FooterComponent,

@@ -1,4 +1,5 @@
 import { Component, Output,Input, EventEmitter } from '@angular/core';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'cotizados',
@@ -18,6 +19,19 @@ export class CotizadosComponent {
 
 
   plusMenores(cantidad : number) {
+
+    if(this.cantMayores > 0){
+
+      console.log("Invalido");
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Solo puedes agregar un grupo por cotizacion',
+      });
+      return;
+    }
+
+
     if(this.cantMenores<=0 && cantidad==3){
       return
     }
@@ -27,6 +41,18 @@ export class CotizadosComponent {
   }
 
   plusMayores(cantidad : number) {
+    if(this.cantMenores > 0){
+      console.log("Invalido");
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Solo puedes agregar un grupo por cotizacion',
+      });
+      return;
+    }
+
+
     if(this.cantMayores<=0 && cantidad==4){
       return
     }

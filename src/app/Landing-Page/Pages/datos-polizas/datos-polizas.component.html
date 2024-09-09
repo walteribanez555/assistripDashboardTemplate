@@ -2,7 +2,7 @@
   <div class="main-polizas">
       <div class="cotizaciones">
           <h2>
-              Detalles para las polizas
+              Detalles para los Vouchers
           </h2>
 
           <div class="select-mail">
@@ -31,7 +31,7 @@
 
                                           </ng-template>
                                           <div class="data-cliente">
-                                              <span>Poliza 1</span>
+                                              <span>Voucher</span>
                                               <span class="detalle-poliza">Dato personales completos</span>
                                           </div>
 
@@ -271,8 +271,8 @@
 
                   <ng-container *ngFor="let extra of dataExtra">
                       <div class="item-carrito">
-                          <span class="descripcion number">{{extra.extra.descripcion}}*Dias: {{diffDays}} * Costo: {{extra.costo}} * Cantidad: {{extra.cantidad}} </span>
-                          <span class="costo number" >+{{extra.costoTotal| currency:'USD':'$':'1.2-2' }}</span>
+                          <span class="descripcion number">{{extra.extra.beneficio}}-Cantidad: {{extra.cantidad}} </span>
+                          <span class="costo number" >+{{extra.costoTotal | currency:'USD':'$':'1.2-2' }}</span>
 
                       </div>
                       <hr>
@@ -366,4 +366,4 @@
 <!-- <data-payment></data-payment> -->
 <shopping-cart-polizas [messageReady]="true"  *ngIf="shopping_cart"   (closeEvent)="toggleShoppingCart()"  (submitEvent)="closeCartOpenHeadline()" [cotizacionesMayores]="datosCotizacionMayores.length" [cotizacionesMenores]="datosCotizacionMenores.length" [dias]="diffDays" [planMayores]="servicioMayores" [planMenores]="servicioMenores" [costoMayores]="costoMayores" [costoMenores]="costoMenores" [listPolizas]="listPolizas"   ></shopping-cart-polizas>
 <headline *ngIf="showHeadlines"  (closeModal)="closeHeadlines()" [listPolizas]="listPolizas" (generateSold)="comprobarDatos($event)" ></headline>
-<data-payment *ngIf="makePayment && client_secret"  (closeModal)="closePayment()"  [amount]="amount"  [client_secret]="client_secret" [venta_id]="venta_id"   ></data-payment>
+<data-payment *ngIf="makePayment && client_secret"  (closeModal)="closePayment()"  [amount]="amount"  [client_secret]="client_secret" [respString]="stringResp"   ></data-payment>

@@ -66,12 +66,25 @@ export class PolizasService {
       fecha_salida,
       fecha_retorno,
       extra,
-      status: 4,
+      status: 1,
+      nro_poliza : 1,
+      multiviaje : 1,
+      fecha_caducidad: this.getExpirationDate(fecha_salida),
+      username : 'web'
     }).pipe(
       map( data => data),
       catchError( err => throwError( () => err.error.message) )
     )
 
+  }
+
+  getExpirationDate(fecha_retorno : string){
+    const inputDate = new Date(fecha_retorno);
+
+    // Add one year to the date
+    const oneYearLater = new Date(inputDate);
+    oneYearLater.setFullYear(inputDate.getFullYear() + 1);
+    return oneYearLater.toISOString().split('T')[0];
   }
 
 

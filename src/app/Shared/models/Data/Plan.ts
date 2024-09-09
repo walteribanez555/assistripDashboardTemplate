@@ -1,10 +1,13 @@
-export interface Plan{
-    cobertura: number | null,
-    moneda: string | null,
-    complemento : string | null,
-    tipo_beneficio : number,
-    beneficio : string,
-    color : string,
-    icono : string
 
+export interface Plan {
+  cobertura:      number;
+  moneda:         string;
+  complemento:    string;
+  extra:          number;
+  tipo_beneficio: number;
+  beneficio:      string;
+  incremento:     number;
+  color:          string;
+  icono:          string;
+  beneficio_id:   number;
 }

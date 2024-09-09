@@ -5,6 +5,10 @@
     <h4 class="number">{{plan.precio | currency:'USD':'$':'1.2-2'}}</h4>
     <p class="price">(Por Persona)</p>
 
+      <a [href]="'https://assistrip.com/assets/pdf/'+ plan.serv?.img + '.pdf'"  target="_blank" >
+        <span>Informacion - pdf</span>
+      </a>
+
       <button *ngIf="plan.serv"  (click)="togglePlan(plan)">
         <span >Seleccionar plan</span>
         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="m321 976-71-71 329-329-329-329 71-71 400 400-400 400Z"/></svg>
@@ -21,11 +25,6 @@
     <div class="info " [class.sticky]="isSticky" (click)="openModal()">
       <div class="cat"  >
         <div class="title">Beneficios medicos</div>
-        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M480 711 240 471l56-56 184 184 184-184 56 56-240 240Z"/></svg>
-      </div>
-      <hr>
-      <div class="cat">
-        <div class="title">Repatriacion y traslado sanitario</div>
         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 96 960 960" width="24"><path d="M480 711 240 471l56-56 184 184 184-184 56 56-240 240Z"/></svg>
       </div>
       <hr>

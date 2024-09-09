@@ -152,13 +152,9 @@ export class UtilsService {
 
 
     const rangoPrecio =  precios.find(precio => {
-
-
       if((+precio.servicio_id === +servicio_id)  && this.betweenTheRange(precio.limite_inferior, precio.limite_superior, diffd)){
         return true;
       }
-
-
       return false;
     });
 
@@ -179,7 +175,7 @@ export class UtilsService {
       precio=this.ecuacionCurva(rangoPrecio, diffDays)*1 * diffDays*1;
     }
     if(rangoPrecio.tipo_ecuacion*1 ===2){
-      precio = this.ecuacionRecta(rangoPrecio, diffDays)*1 *diffDays*1;
+      precio = rangoPrecio.intercepto;
     }
 
     return precio;

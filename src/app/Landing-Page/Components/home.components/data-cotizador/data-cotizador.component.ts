@@ -323,6 +323,7 @@ export class DataCotizadorComponent implements OnInit, AfterViewInit {
 
 
 
+
       if(!this.formData.initialDate || !this.formData.finalDate || !this.formData.origen || this.listCotizaciones.length<1 ){
         this.errorMessage();
         return;

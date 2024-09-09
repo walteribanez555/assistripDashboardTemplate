@@ -112,6 +112,14 @@ export class CotizadorComponent implements OnInit {
 
   //Volver a cargar la vista con la informacion actualizada
   reloadView(){
+
+    if(this.cantMenores > 0 && this.cantMayores >0){
+
+
+      return;
+    }
+
+
     const cotizarForm : FormCotizarModel = {
       initialDate: this.formData.initialDate,
       finalDate: this.formData.finalDate,
@@ -124,10 +132,7 @@ export class CotizadorComponent implements OnInit {
 
     this.dataService.sharedData = cotizarForm;
 
-
     this.eventService.reloadPage();
-
-
 
    }
 
@@ -157,6 +162,8 @@ export class CotizadorComponent implements OnInit {
 
     this.cantMenores = listado.filter(cotizacion => cotizacion.age && cotizacion.age<75).length
     this.cantMayores = listado.filter(cotizacion => cotizacion.age && cotizacion.age>=75).length
+
+
 
    }
 

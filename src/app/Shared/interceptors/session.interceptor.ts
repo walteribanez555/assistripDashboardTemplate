@@ -11,15 +11,22 @@ export class SessionInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     const token = this.tokenService.getToken();
-    if (token) {
+    if (!token) {
+      const requestWithDefaultToken = req.clone({
+        headers: new HttpHeaders({
+          Authorization: 'ExternalUser902010',
+          schema: 'assist_trip',
+        }),
+      });
+      return next.handle(requestWithDefaultToken);
+    } else {
       const requestWithToken = req.clone({
         headers: new HttpHeaders({
-          Authorization: token
-        })
+          Authorization: token,
+          schema: 'assist_trip',
+        }),
       });
       return next.handle(requestWithToken);
-    } else {
-      return next.handle(req);
     }
   }
 }

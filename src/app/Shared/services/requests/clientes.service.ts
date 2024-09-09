@@ -46,6 +46,7 @@ export class ClientesService {
       email : cliente.email,
       nro_contacto : cliente.nro_contacto === "" ? "No tiene"  : cliente.nro_contacto,
       status: 1,
+      contacto : cliente.nombre + " " + cliente.apellido,
 
     }
 
